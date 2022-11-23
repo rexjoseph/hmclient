@@ -193,7 +193,9 @@ const CartListImageWrapper = styled.div`
   width: 100px;
 `
 
-const CartListImageHolder = styled.div``
+const CartListImageHolder = styled.div`
+  cursor: pointer;
+`
 
 const CartListImage = styled.img`
   display: block;
@@ -450,7 +452,7 @@ const Cart = () => {
                       <CartListItem>
                         <CartListImageLink>
                           <CartListImageWrapper>
-                            <CartListImageHolder>
+                            <CartListImageHolder onClick={() => navigate(`/product/${item.id}`)}>
                               <CartListImage src={item.image} />
                             </CartListImageHolder>
                           </CartListImageWrapper>

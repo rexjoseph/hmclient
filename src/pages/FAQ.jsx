@@ -1,8 +1,15 @@
-import React from 'react'
+import Accordion from "../components/Accordion"
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
+
 
 const FAQ = () => {
   return (
-    <div>FAQ</div>
+    <div>
+      <Navbar />
+      <Accordion />
+      <Footer />
+    </div>
   )
 }
 

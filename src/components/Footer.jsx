@@ -15,6 +15,7 @@ const Wrapper = styled.footer`
   // padding: 0 0 83px;
   position: relative;
   width: 100%;
+  clear: both;
 `
 
 const ContentWrap = styled.div`
@@ -67,14 +68,14 @@ const Heading = styled.h2`
   font-weight: 400;
 
   @media (max-width: 519px) {
-    font-size: 36px;
+    font-size: 32px;
     letter-spacing: -1.6px;
     line-height: 1.08
   }
 `
 
 const Paragraph = styled.p`
-  font-size: 18px;
+  font-size: 13px;
   margin-top: 12px
   margin: 0 0 12px;
 `
@@ -218,7 +219,7 @@ const Footer = () => {
             </LinkBody>
             <LinkBodyOne>
               <LinkHolder>
-                <LinkA>FAQs</LinkA>
+                <LinkA onClick={() => navigate('/faq')}>FAQs</LinkA>
               </LinkHolder>
               <LinkHolder>
                 <LinkA onClick={() => navigate('/refunds')}>Refunds</LinkA>

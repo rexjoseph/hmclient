@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useDispatch } from 'react-redux';
-import {addToCart} from '../redux/cartRedux';
+// import { useDispatch } from 'react-redux';
+// import {addToCart} from '../redux/cartRedux';
 import { useNavigate } from 'react-router-dom'
 
 const QuickAddDiv = styled.button`
@@ -25,7 +25,7 @@ const List = styled.li`
   margin: 0;
   padding: 0 18px;
   width: 33.3333333333%;
-  cursor: pointer;
+  // cursor: pointer;
 
   @media (max-width: 960px) {
     width: 50%;
@@ -47,6 +47,7 @@ const ImageHolder = styled.div`
   display: block;
   margin-bottom: 4px;
   position: relative;
+  cursor: pointer;
 `
 
 const ProductTitle = styled.span`
@@ -90,6 +91,7 @@ const Image = styled.img`
   top: 0;
   opacity: 1;
   transition: none;
+  object-fit: cover;
 `
 
 // const QuickAddButton = styled.button`
@@ -140,17 +142,17 @@ const PriceSpan = styled.span`
 `
 
 const Product = ({item}) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const navigate = useNavigate()
 
   return (
-    <List onClick={() => navigate(`/product/${item._id}`)}>
+    <List>
       <ListWrapper>
         <ImageHolder>
           <BadgeHolder>
             <Badge>New</Badge>
           </BadgeHolder>
-          <ImageDiv>
+          <ImageDiv onClick={() => navigate(`/product/${item._id}`)}>
             <Image src={item.image[0]} />
           </ImageDiv>
           {/* <button onClick={() => dispatch(addToCart({

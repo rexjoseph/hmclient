@@ -1,11 +1,11 @@
 import React from 'react'
 import './Navbar.css'
 import {useSelector} from 'react-redux'
-import {useNavigate} from 'react-router-dom'
+// import {useNavigate} from 'react-router-dom'
 
 const Navbar = () => {
   const cart = useSelector((state) => state.cart);
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const getTotalQuantity = () => {
     let total = 0

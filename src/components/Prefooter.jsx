@@ -2,6 +2,8 @@ import styled from "styled-components"
 import Check from "./Check"
 import Leaf from "./Leaf"
 import Heart from "./Heart"
+import {useNavigate} from 'react-router-dom'
+
 
 const Wrapper = styled.section`
   background: #000;
@@ -92,6 +94,8 @@ const Link = styled.a`
 `
 
 const Prefooter = () => {
+  const navigate = useNavigate()
+
   return (
     <Wrapper>
       <Container>
@@ -114,7 +118,7 @@ const Prefooter = () => {
             <Paragraph>
             Everything we create has an impact on both people and the environment. Find out more about this in our Flight Plan.
             </Paragraph>
-            <Link>View Our Flight Plan</Link>
+            <Link onClick={() => navigate('/sustainability')}>View Our Flight Plan</Link>
           </Column>
           <Column>
             <Icon>

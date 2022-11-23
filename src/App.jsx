@@ -14,6 +14,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Contact from "./pages/Contact";
 import { useSelector } from 'react-redux';
+import FAQ from "./pages/FAQ";
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
       <Route path="/terms-of-use" element={<Terms />}/>
       <Route path="/privacy-policy" element={<Privacy />}/>
       <Route path="/contact" element={<Contact />}/>
+      <Route path="/faq" element={<FAQ />}/>
     </Routes>
   )
 };
