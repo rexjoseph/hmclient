@@ -1,0 +1,184 @@
+import styled from "styled-components";
+import { useDispatch } from 'react-redux';
+import {addToCart} from '../redux/cartRedux';
+import { useNavigate } from 'react-router-dom'
+
+const QuickAddDiv = styled.button`
+  visibility: hidden;
+  background: #fff;
+  bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 12px;
+  min-height: 48px;
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: auto;
+  transition: all .1s ease;
+  z-index: 1;
+`
+
+const List = styled.li`
+  list-style: none;
+  margin: 0;
+  padding: 0 18px;
+  width: 33.3333333333%;
+  cursor: pointer;
+
+  @media (max-width: 960px) {
+    width: 50%;
+    padding: 0 6px;
+  }
+
+  &:hover ${QuickAddDiv} {
+    visibility: visible;
+    transition: all .1s ease;
+  }
+`
+
+const ListWrapper = styled.div`
+  padding-bottom: 44px;
+  position: relative;
+`
+
+const ImageHolder = styled.div`
+  display: block;
+  margin-bottom: 4px;
+  position: relative;
+`
+
+const ProductTitle = styled.span`
+  &:hover {
+    color: var(--brand-blue);
+  }
+`
+
+const ImageDiv = styled.div`
+  text-decoration: none;
+  background: #f1f1f1;
+  display: block;
+  padding: 0 0 133.3333333333%;
+`
+
+const BadgeHolder = styled.div`
+  background-color: var(--brand-blue);
+  color: #fff;
+  display: inline-block;
+  font-size: 13px;
+  height: 21px;
+  left: 0;
+  line-height: 21px;
+  margin: 6px;
+  padding: 0 6px;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+`
+const Badge = styled.span`
+  color: rgb(255, 255, 255);
+`
+
+const Image = styled.img`
+  aspect-ratio: 900 / 1200;
+  max-height: 100%;
+  pointer-events: none;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  opacity: 1;
+  transition: none;
+`
+
+// const QuickAddButton = styled.button`
+//   background: transparent;
+//   border: none;
+//   color: #202020;
+//   font-family: inherit;
+//   font-size: 13px;
+//   height: 48px;
+//   margin: 0;
+//   padding: 0;
+//   width: 100%;
+// `
+
+// const QuickAddWrapper = styled.div`
+
+// `
+
+const InfoHolder = styled.div`
+  position: relative;
+`
+
+const TitleWrapper = styled.h3`
+  font-size: 16px;
+  letter-spacing: -.65px;
+  line-height: 1.5;
+  margin: 10px auto;
+  padding: 0;
+  position: relative;
+  text-align: left;
+`
+
+const LinkA = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+`
+
+const MoreInfo = styled.div`
+  color: #737373;
+  font-size: 13px;
+  margin: 2px 0 0;
+`
+
+const PriceDiv = styled.div``
+
+const PriceSpan = styled.span`
+  font-size: 13px;
+`
+
+const Product = ({item}) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  return (
+    <List onClick={() => navigate(`/product/${item._id}`)}>
+      <ListWrapper>
+        <ImageHolder>
+          <BadgeHolder>
+            <Badge>New</Badge>
+          </BadgeHolder>
+          <ImageDiv>
+            <Image src={item.image[0]} />
+          </ImageDiv>
+          {/* <button onClick={() => dispatch(addToCart({
+                id: item._id, title: item.title, image: item.image[0], price: item.price
+              }))}>Add to cart</button> */}
+          {/* <QuickAddWrapper>
+            <QuickAddDiv>
+              <QuickAddButton>
+                <FontAwesomeIcon icon={faPlus} />&nbsp;Quick Add
+              </QuickAddButton>
+            </QuickAddDiv>
+          </QuickAddWrapper> */}
+        </ImageHolder>
+
+        <InfoHolder>
+          <TitleWrapper>
+            <LinkA>
+              <ProductTitle>{item.title}</ProductTitle>
+              <MoreInfo>{item.color.length}&nbsp; colors available</MoreInfo>
+              <PriceDiv>
+                <PriceSpan>${item.price}</PriceSpan>
+              </PriceDiv>
+            </LinkA>
+          </TitleWrapper>
+        </InfoHolder>
+      </ListWrapper>
+    </List>
+  )
+}
+
+export default Product
