@@ -8,6 +8,7 @@ import { incrementQuantity, decrementQuantity, removeItem} from '../redux/cartRe
 import { useDispatch } from 'react-redux'
 import Prefooter from "../components/Prefooter";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
 
 const CartPageWrapper = styled.div`
 
@@ -96,6 +97,32 @@ const BackNavLink = styled.a`
   }
 `
 
+const ShippingNotification = styled.div``
+const Shipping = styled.div`
+  background-color: #F1F1F1;
+  margin-bottom: 38px;
+  padding: 14px 0;
+  width: 100%;
+`
+const ShippingHeader = styled.h2`
+  font-size: 24px;
+  letter-spacing: -.65px;
+  margin-bottom: 4px;
+  text-align: center;
+  width: 100%;
+`
+const ShippingSpan = styled.span`
+  color: #737373;
+  display: flex;
+  justify-content: center;
+  font-size: 13px;
+  letter-spacing: .1px;
+  margin: 0 auto;
+  max-width: 320px;
+  text-align: center;
+  width: 100%;
+`
+
 const CartHeader = styled.header`
   font-size: 24px;
   line-height: normal;
@@ -134,6 +161,7 @@ const CartHeaderSpan = styled.span`
   font-size: 16px;
   line-height: inherit;
   margin-left: 12px;
+  font-weight: 600;
 `
 
 const CartUl = styled.ul`
@@ -234,6 +262,7 @@ const CartListPrice = styled.div`
   text-align: right;
   position: absolute;
   right: 0;
+  font-weight: 600;
 `
 
 const CartListPriceItem = styled.div`
@@ -372,6 +401,10 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    document.title = `Your Shopping Cart — Hashingmart`
+  }, [])
+
   const getTotal = () => {
     let totalQuantity = 0
     let totalPrice = 0
@@ -399,6 +432,12 @@ const Cart = () => {
                     </BackNavLink>
                   </BackNavDiv>
                 </BackNav>
+                <ShippingNotification>
+                  <Shipping>
+                    <ShippingHeader>Free Shipping on all orders</ShippingHeader>
+                    <ShippingSpan>Free Returns on all orders within the U.S.</ShippingSpan>
+                  </Shipping>
+                </ShippingNotification>
                 <CartHeader>
                   <CartHeaderColumn>
                     <CartHeaderH1>Your Bag</CartHeaderH1>
@@ -445,7 +484,7 @@ const Cart = () => {
                         </CartListDetail>
                       </CartListItem>
                       <CartListButton onClick={() => dispatch(removeItem(item.id))}>
-                        <svg aria-hidden="true" height="36" viewBox="0 0 36 36" width="36" role="presentation"><title>Close "X" Icon</title><path d="M19.414 18l4.243 4.243a1 1 0 0 1-1.414 1.414L18 19.414l-4.243 4.243a1 1 0 0 1-1.414-1.414L16.586 18l-4.243-4.243a1 1 0 0 1 1.414-1.414L18 16.586l4.243-4.243a1 1 0 0 1 1.414 1.414L19.414 18z" fillRule="evenodd"></path></svg>
+                        <svg aria-hidden="true" height="36" viewBox="0 0 36 36" width="36" role="presentation"><path d="M19.414 18l4.243 4.243a1 1 0 0 1-1.414 1.414L18 19.414l-4.243 4.243a1 1 0 0 1-1.414-1.414L16.586 18l-4.243-4.243a1 1 0 0 1 1.414-1.414L18 16.586l4.243-4.243a1 1 0 0 1 1.414 1.414L19.414 18z" fillRule="evenodd"></path></svg>
                       </CartListButton>
                     </CartList>
                   ))}

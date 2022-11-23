@@ -479,13 +479,13 @@ const Product = () => {
     getProduct()
   }, [id])
 
-  const handleClick = () => {
-    dispatch(addToCart({id, quantity, color, size}))
-  }
+  // const handleClick = () => {
+  //   dispatch(addToCart({id, quantity, color, size}))
+  // }
 
   useEffect(() => {
-    document.title = `Product page — Hashingmart`
-  }, [])
+    document.title = `${product.title} — Hashingmart`
+  }, [product.title])
 
   useEffect(() => {
     window.scrollTo(0, 0);

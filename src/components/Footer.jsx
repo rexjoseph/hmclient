@@ -1,5 +1,7 @@
 import {useNavigate} from 'react-router-dom'
 import styled from "styled-components"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faFacebookSquare, faTiktok, faTwitter } from "@fortawesome/free-brands-svg-icons"
 
 const Wrapper = styled.footer`
   bottom: 0;
@@ -153,6 +155,12 @@ const SocialIconLi = styled.li`
   padding: 0;
   width: 20px;
   list-style-type: none;
+  font-size: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: var(--brand-blue);
+  }
 `
 
 const Footer = () => {
@@ -164,10 +172,26 @@ const Footer = () => {
           <Heading>Drive The Impact</Heading>
           <Paragraph>Exclusive offers, a heads up on new things, innovations, and sightings of Hashingmart in the wild. Oh, we have cute poodles, too. #hashingmart</Paragraph>
           <SocialIconUl>
-            <SocialIconLi></SocialIconLi>
-            <SocialIconLi></SocialIconLi>
-            <SocialIconLi></SocialIconLi>
-            <SocialIconLi></SocialIconLi>
+            <a href="https://instagram.com/hashingmart" target={"blank"}>
+              <SocialIconLi>
+                <FontAwesomeIcon icon={faInstagram} />
+              </SocialIconLi>
+            </a>
+            <a href="https://facebook.com/hashingmartofficial" target={"blank"}>
+              <SocialIconLi>
+                <FontAwesomeIcon icon={faFacebookSquare} />
+              </SocialIconLi>
+            </a>
+            <a href="https://tiktok.com/@hashingmart" target={"blank"}>
+              <SocialIconLi>
+                <FontAwesomeIcon icon={faTiktok} />
+              </SocialIconLi>
+            </a>
+            <a href="https://twitter.com/hashingmart" target={"blank"}>
+              <SocialIconLi>
+                <FontAwesomeIcon icon={faTwitter} />
+              </SocialIconLi>
+            </a>
           </SocialIconUl>
         </Content>
         <Content>
