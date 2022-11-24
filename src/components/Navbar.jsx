@@ -1,11 +1,14 @@
-import React from 'react'
-import './Navbar.css'
-import {useSelector} from 'react-redux'
-// import {useNavigate} from 'react-router-dom'
+import { useRef } from "react";
+import { useSelector } from "react-redux";
+import "./Navbar.css"
 
-const Navbar = () => {
+function Navbar() {
   const cart = useSelector((state) => state.cart);
-  // const navigate = useNavigate()
+  const navRef = useRef()
+
+  const showNavbar = () => {
+    navRef.current.classList.toggle('active');
+  }
 
   const getTotalQuantity = () => {
     let total = 0
@@ -17,11 +20,11 @@ const Navbar = () => {
 
   return (
     <div className='page-header'>
-      <div className='nav-container'>
+      <div className='nav-container' ref={navRef}>
         <nav>
           <ul className='mobile-nav'>
             <li>
-              <div className='menu-icon-container'>
+              <div onClick={showNavbar} className='menu-icon-container'>
                 <div className='menu-icon'>
                   <span className='line-1'></span>
                   <span className='line-2'></span>

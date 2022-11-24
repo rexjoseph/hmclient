@@ -98,6 +98,7 @@ nav .desktop-nav li a:hover {
 
   .nav-container.active .desktop-nav {
     height: 100vh;
+    padding-top: 8rem;
   }
 
   .nav-container .desktop-nav li {
@@ -167,6 +168,24 @@ nav .desktop-nav li a:hover {
 
   nav .menu-icon .line-2 {
     top: 4px;
+  }
+
+  .nav-container.active nav .menu-icon-container .menu-icon .line-1 {
+    top: 0;
+    transform: rotateZ(45deg);
+    transition-property: top, transform;
+    transition-delay: 0ms, 160ms;
+    -o-transition-duration: 200ms;
+    transition-duration: 200ms;
+  }
+
+  .nav-container.active nav .menu-icon-container .menu-icon .line-2 {
+    top: 0;
+    transform: rotateZ(-45deg);
+    transition-property: top, transform;
+    transition-delay: 0ms, 160ms;
+    -o-transition-duration: 200ms;
+    transition-duration: 200ms;
   }
 
 }
