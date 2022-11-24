@@ -28,6 +28,7 @@ const App = () => {
       <Route path="/cart" element={<Cart />}/>
       <Route path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
       <Route path="/register" element={ user ? <Navigate to="/" /> : <Register />} />
+      <Route path="/account" element={ user ? <Navigate to="/account" /> : <Login />} />
       <Route path="/sustainability" element={<Sustainability />}/>
       <Route path="/company" element={<Company />}/>
       <Route path="/shipping" element={<Shipping />}/>

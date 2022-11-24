@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux'
 
 const Container = styled.div`
   background-color: #f7f7f7;
-  width: 100vw;
+  width: 100%;
   margin: 0;
   padding: 5rem;
 
@@ -29,6 +29,7 @@ const RegisterTitle = styled.h1`
   font-weight: 600;
   font-size: 2.4rem;
   text-transform: uppercase;
+  padding-top: 4rem;
 `
 
 const RegisterParagraph = styled.p`

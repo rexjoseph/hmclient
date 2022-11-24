@@ -40,7 +40,7 @@ const Accordion = () => {
     <div className="container">
       <div className="accordion__titlediv">
         <span className="accordion__title">Frequently asked questions</span>
-        <h1>Let's answer some of your questions</h1>
+        <h1 className="accordion__h1">Let's answer some of your questions</h1>
       </div>
       <div className="accordion__faq">
         {dataCollection.map((item, index) => (

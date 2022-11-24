@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Carousel from 'react-elastic-carousel';
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import ProdAccordion from "../components/ProdAccordion";
 
 const ProductPageWrapper = styled.div`
   margin-top: 8rem;
@@ -421,7 +422,6 @@ const PDescriptionTitle = styled.p`
 `
 
 const PDescriptionDesc = styled.div`
-  padding :9px 0px 24px;
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: 0.5px;
@@ -493,6 +493,7 @@ const Product = () => {
   const [size, setSize] = useState("");
   const dispatch = useDispatch()
   const {pathname} = useLocation()
+  const [active, setActive] = useState("Details")
 
   useEffect(() => {
     const getProduct = async () => {
@@ -650,8 +651,30 @@ const Product = () => {
                     
                     <PDescripton>
                       <PDescriptionWrap>
-                        <PDescriptionTitle>Details</PDescriptionTitle>
-                        <PDescriptionDesc>{product.description}</PDescriptionDesc>
+                        <ProdAccordion 
+                            title="Details" 
+                            active={active} 
+                            setActive={setActive}
+                            content={product.description}
+                          />
+                        <ProdAccordion 
+                          title="Sustainability" 
+                          active={active} 
+                          setActive={setActive}
+                          content="ZQ merino wool heel lining. Castor bean oil-based insole foam. Bio-based nylon eyelets"
+                        />
+                        <ProdAccordion 
+                          title="Care Guide" 
+                          active={active} 
+                          setActive={setActive}
+                          content="Handy tips: Don’t put them in the dryer. They’ll go back to their original shape in no time. You can hand wash your laces and insoles on their own."
+                        />
+                        <ProdAccordion 
+                          title="Shipping & Returns" 
+                          active={active} 
+                          setActive={setActive}
+                          content="Free shipping on all orders, and our 30 days, no questions asked return policy. Lightly used essentials get ReHashed."
+                        />
                       </PDescriptionWrap>
                     </PDescripton>
                   </DetailWrapper>

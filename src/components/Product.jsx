@@ -64,7 +64,7 @@ const ImageDiv = styled.div`
 `
 
 const BadgeHolder = styled.div`
-  background-color: var(--brand-blue);
+  background-color: var(--color-primary);
   color: #fff;
   display: inline-block;
   font-size: 13px;
