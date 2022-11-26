@@ -79,3 +79,8 @@ body {
 a {
   color: var(--color-primary);
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-secondary) !important;
+}

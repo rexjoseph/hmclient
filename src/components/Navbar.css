@@ -1,10 +1,14 @@
 .page-header {
   position: fixed;
-  top: 0;
+  top: calc(1 * (0.4rem + 3rem));
   left: 0;
   right: 0;
   z-index: 300;
-  transition: all 0.4s;
+  transition: all 0.1s ease-in;
+}
+
+.page-header.scrolled {
+  top: 0;
 }
 
 .nav-container {
@@ -64,6 +68,7 @@ nav .desktop-nav li a:hover {
   height: 44px;
   width: 20px;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 .desktop-nav li {
@@ -191,9 +196,7 @@ nav .desktop-nav li a:hover {
 }
 
 .bag-icon {
-  color: var(--color-secondary);
-  background: var(--color-danger);
-  border-radius: 15px;
+  color: var(--color-primary);
   font-size: 10px;
   font-weight: 700;
   min-width: 1rem;
@@ -201,88 +204,7 @@ nav .desktop-nav li a:hover {
   text-align: center;
   white-space: nowrap;
   position: absolute;
-  /* right: 4.5%; */
-
-  @media (max-width: 500px) {
-    font-weight: 600;
-    /* right: -23%; */
-    top: 6%;
-  }
-}
-
-/* // const Left = styled.div``
-const DekstopNavBag = styled.a`
-  position: relative;
-  cursor: pointer;
-`
-
-const BadgeSpan = styled.span`
-  color: #fff;
-  background: var(--color-danger);
-  border-radius: 15px;
-  font-size: 10px;
-  font-weight: 700;
-  min-width: 1rem;
-  padding: 1px 5px;
-  position: absolute;
-  right: -30%;
-  top: -70%;
-`
-
-const NavigationHeader = styled.div`
-  position: fixed;
+  top: 33%;
   left: 0;
   right: 0;
-  z-index: 300;
-  transition: all 0.4s;
-  top: 0;
-`
-const NavContainer = styled.div`
-  background: #fff;
-  border-bottom: 1px solid var(--line-divider);
-  height: 54px;
-  z-index: 300;
-`
-const Nav = styled.nav`
-  max-width: 1250px;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 8px;
-`
-const DesktopNavUl = styled.ul`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  list-style: none;
-`
-const DesktopNavLi = styled.li`
-  transition: all 400ms ease;
-  // padding: 15px 0;
-`
-
-const DesktopNavLogo = styled.a`
-  background: url("../../logo.png");
-  display: block;
-  background-position: center;
-  height: 54px;
-  width: 140px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  cursor: pointer;
-`
-
-const DekstopNavLink = styled.a`
-  color: #555;
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: 400;
-  transition: opacity 400ms;
-  cursor: pointer;
-
-
-  &:hover {
-    opacity: 1;
-    color: var(--brand-blue);
-    text-decoration: underline;
-  }
-` */
+}

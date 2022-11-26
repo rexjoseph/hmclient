@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faChevronLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../components/Navbar";
 import {useSelector} from 'react-redux'
 import { useNavigate } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import Prefooter from "../components/Prefooter";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
+import Announcement from "../components/Announcement";
 
 const CartPageWrapper = styled.div`
 
@@ -16,6 +17,10 @@ const CartPageWrapper = styled.div`
 
 const PDPContainer = styled.div`
   margin-top: 100px;
+
+  @media (max-width: 769px) {
+    margin-top: 80px;
+  }
 `
 
 const PDP = styled.div`
@@ -67,9 +72,9 @@ const CartColumn2 = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 36px;
+  padding: 24px;
   width: 40%;
-  max-height: 400px;
+  // max-height: 400px;
 
   @media (max-width: 767px) {
     width: 100%;
@@ -80,7 +85,7 @@ const CartColumn2 = styled.div`
 const BackNav = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 52px;
+  margin-bottom: 34px;
 `
 
 const BackNavDiv = styled.div``
@@ -103,6 +108,10 @@ const Shipping = styled.div`
   margin-bottom: 38px;
   padding: 14px 0;
   width: 100%;
+
+  @media (max-width: 769px) {
+    display: none;
+  }
 `
 const ShippingHeader = styled.h2`
   font-size: 24px;
@@ -245,6 +254,12 @@ const CartListLiSpan = styled.span`
   font-size: 13px;
   letter-spacing: .1px;
   color: #737373;
+`
+
+const CartListLiSpanBlack = styled.span`
+  font-size: 13px;
+  letter-spacing: .1px;
+  color: var(--color-primary);
 `
 
 const CartListQuantity = styled.div`
@@ -393,14 +408,28 @@ const CheckoutButton = styled.button`
 const AmountContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  background: #f1f1f1;
+  border-radius: 18px;
+  cursor: pointer;
 `
 const ProductAmount = styled.div`
   font-size: 1.3rem;
   margin: 5px;
 `
 
+const PaymentMethods = styled.div`
+  display: flex;
+  gap: 2rem;
+  padding: 24px 0 12px;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const PaymentMethodDivs = styled.div``
+
 const Cart = () => {
-  const cart = useSelector((state) => state.cart)
+  const cart = useSelector((state) => state.carts.cart)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -421,6 +450,7 @@ const Cart = () => {
 
   return (
     <CartPageWrapper>
+      <Announcement />
       <Navbar />
       <PDPContainer>
         <PDP>
@@ -430,7 +460,7 @@ const Cart = () => {
                 <BackNav>
                   <BackNavDiv>
                     <BackNavLink onClick={() => navigate('/products')}>
-                      Continue Shopping
+                      <FontAwesomeIcon icon={faChevronLeft} /> &nbsp;Continue Shopping
                     </BackNavLink>
                   </BackNavDiv>
                 </BackNav>
@@ -468,7 +498,7 @@ const Cart = () => {
                               <CartListLiSpan>{item.color.toUpperCase()}</CartListLiSpan>
                             </CartListLi>
                             <CartListLi>
-                              <CartListLiSpan>{item.size}</CartListLiSpan>
+                              <CartListLiSpanBlack>{item.size}</CartListLiSpanBlack>
                             </CartListLi>
                           </CartListUl>
                           <CartListQuantity>
@@ -506,8 +536,28 @@ const Cart = () => {
                         <CardFormTotalSpan>${getTotal().totalPrice}</CardFormTotalSpan>
                       </CardFormTotal>
                       <CheckoutButtonWrapper>
-                        <CheckoutButton>Continue to Checkout</CheckoutButton>
+                        <CheckoutButton>
+                          Continue to Checkout&nbsp;
+                          <FontAwesomeIcon icon={faArrowRight} />
+                        </CheckoutButton>
                       </CheckoutButtonWrapper>
+                      <PaymentMethods>
+                        <PaymentMethodDivs>
+                          <svg width="38" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3Z" fill="#1C1C1E"></path><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32Z" fill="#fff"></path><path d="M15 19a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" fill="#EC001B"></path><path d="M23 19a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" fill="#01A2E5"></path><path d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7 0 2.3 1.2 4.5 3 5.7 1.8-1.2 3-3.3 3-5.7Z" fill="#7375CF"></path></svg>
+                        </PaymentMethodDivs>
+                        <PaymentMethodDivs>
+                          <svg width="38" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3Z" fill="#1C1C1E"></path><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32Z" fill="#fff"></path><path d="M15 19a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" fill="#EB001B"></path><path d="M23 19a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z" fill="#F79E1B"></path><path d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7 0 2.3 1.2 4.5 3 5.7 1.8-1.2 3-3.3 3-5.7Z" fill="#FF5F00"></path></svg>
+                        </PaymentMethodDivs>
+                        <PaymentMethodDivs>
+                          <svg width="38" height="24" fill="none" xmlns="http://www.w3.org/2000/svg"><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3Z" fill="#1C1C1E"></path><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32Z" fill="#fff"></path><path d="M28.3 10.1H28c-.4 1-.7 1.5-1 3h1.9c-.3-1.5-.3-2.2-.6-3Zm2.9 5.9h-1.7c-.1 0-.1 0-.2-.1l-.2-.9-.1-.2h-2.4c-.1 0-.2 0-.2.2l-.3.9c0 .1-.1.1-.1.1h-2.1l.2-.5L27 8.7c0-.5.3-.7.8-.7h1.5c.1 0 .2 0 .2.2l1.4 6.5c.1.4.2.7.2 1.1.1.1.1.1.1.2Zm-13.4-.3.4-1.8c.1 0 .2.1.2.1.7.3 1.4.5 2.1.4.2 0 .5-.1.7-.2.5-.2.5-.7.1-1.1-.2-.2-.5-.3-.8-.5-.4-.2-.8-.4-1.1-.7-1.2-1-.8-2.4-.1-3.1.6-.4.9-.8 1.7-.8 1.2 0 2.5 0 3.1.2h.1c-.1.6-.2 1.1-.4 1.7-.5-.2-1-.4-1.5-.4-.3 0-.6 0-.9.1-.2 0-.3.1-.4.2-.2.2-.2.5 0 .7l.5.4c.4.2.8.4 1.1.6.5.3 1 .8 1.1 1.4.2.9-.1 1.7-.9 2.3-.5.4-.7.6-1.4.6-1.4 0-2.5.1-3.4-.2-.1.2-.1.2-.2.1Zm-3.5.3c.1-.7.1-.7.2-1 .5-2.2 1-4.5 1.4-6.7.1-.2.1-.3.3-.3H18c-.2 1.2-.4 2.1-.7 3.2-.3 1.5-.6 3-1 4.5 0 .2-.1.2-.3.2l-1.7.1ZM5 8.2c0-.1.2-.2.3-.2h3.4c.5 0 .9.3 1 .8l.9 4.4c0 .1 0 .1.1.2 0-.1.1-.1.1-.1l2.1-5.1c-.1-.1 0-.2.1-.2h2.1c0 .1 0 .1-.1.2l-3.1 7.3c-.1.2-.1.3-.2.4-.1.1-.3 0-.5 0H9.7c-.1 0-.2 0-.2-.2L7.9 9.5c-.2-.2-.5-.5-.9-.6-.6-.3-1.7-.5-1.9-.5L5 8.2Z" fill="#142688"></path></svg>
+                        </PaymentMethodDivs>
+                        <PaymentMethodDivs>
+                          <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-american_express"><g fill="none"><path fill="#000" d="M35,0 L3,0 C1.3,0 0,1.3 0,3 L0,21 C0,22.7 1.4,24 3,24 L35,24 C36.7,24 38,22.7 38,21 L38,3 C38,1.3 36.6,0 35,0 Z" opacity=".07"></path><path fill="#006FCF" d="M35,1 C36.1,1 37,1.9 37,3 L37,21 C37,22.1 36.1,23 35,23 L3,23 C1.9,23 1,22.1 1,21 L1,3 C1,1.9 1.9,1 3,1 L35,1"></path><path fill="#FFF" d="M8.971,10.268 L9.745,12.144 L8.203,12.144 L8.971,10.268 Z M25.046,10.346 L22.069,10.346 L22.069,11.173 L24.998,11.173 L24.998,12.412 L22.075,12.412 L22.075,13.334 L25.052,13.334 L25.052,14.073 L27.129,11.828 L25.052,9.488 L25.046,10.346 L25.046,10.346 Z M10.983,8.006 L14.978,8.006 L15.865,9.941 L16.687,8 L27.057,8 L28.135,9.19 L29.25,8 L34.013,8 L30.494,11.852 L33.977,15.68 L29.143,15.68 L28.065,14.49 L26.94,15.68 L10.03,15.68 L9.536,14.49 L8.406,14.49 L7.911,15.68 L4,15.68 L7.286,8 L10.716,8 L10.983,8.006 Z M19.646,9.084 L17.407,9.084 L15.907,12.62 L14.282,9.084 L12.06,9.084 L12.06,13.894 L10,9.084 L8.007,9.084 L5.625,14.596 L7.18,14.596 L7.674,13.406 L10.27,13.406 L10.764,14.596 L13.484,14.596 L13.484,10.661 L15.235,14.602 L16.425,14.602 L18.165,10.673 L18.165,14.603 L19.623,14.603 L19.647,9.083 L19.646,9.084 Z M28.986,11.852 L31.517,9.084 L29.695,9.084 L28.094,10.81 L26.546,9.084 L20.652,9.084 L20.652,14.602 L26.462,14.602 L28.076,12.864 L29.624,14.602 L31.499,14.602 L28.987,11.852 L28.986,11.852 Z"></path></g></svg>
+                        </PaymentMethodDivs>
+                        <PaymentMethodDivs>
+                          <svg class="icon icon--full-color" width="38" height="24" role="img" aria-labelledby="pi-jcb" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill-rule="nonzero"><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" opacity=".07"></path><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF"></path></g><path d="M11.5 5H15v11.5a2.5 2.5 0 0 1-2.5 2.5H9V7.5A2.5 2.5 0 0 1 11.5 5z" fill="#006EBC"></path><path d="M18.5 5H22v11.5a2.5 2.5 0 0 1-2.5 2.5H16V7.5A2.5 2.5 0 0 1 18.5 5z" fill="#F00036"></path><path d="M25.5 5H29v11.5a2.5 2.5 0 0 1-2.5 2.5H23V7.5A2.5 2.5 0 0 1 25.5 5z" fill="#2AB419"></path><path d="M10.755 14.5c-1.06 0-2.122-.304-2.656-.987l.78-.676c.068 1.133 3.545 1.24 3.545-.19V9.5h1.802v3.147c0 .728-.574 1.322-1.573 1.632-.466.144-1.365.221-1.898.221zm8.116 0c-.674 0-1.388-.107-1.965-.366-.948-.425-1.312-1.206-1.3-2.199.012-1.014.436-1.782 1.468-2.165 1.319-.49 3.343-.261 3.926.27v.972c-.572-.521-1.958-.898-2.919-.46-.494.226-.737.917-.744 1.448-.006.56.245 1.252.744 1.497.953.467 2.39.04 2.919-.441v1.01c-.358.255-1.253.434-2.129.434zm8.679-2.587c.37-.235.582-.567.582-1.005 0-.438-.116-.687-.348-.939-.206-.207-.58-.469-1.238-.469H23v5h3.546c.696 0 1.097-.23 1.315-.415.283-.25.426-.53.426-.96 0-.431-.155-.908-.737-1.212zm-1.906-.281h-1.428v-1.444h1.495c.956 0 .944 1.444-.067 1.444zm.288 2.157h-1.716v-1.513h1.716c.986 0 1.083 1.513 0 1.513z" fill="#FFF" fill-rule="nonzero"></path></g></svg>
+                        </PaymentMethodDivs>
+                      </PaymentMethods>
                     </CartFormCard>
                   </CartForm>
                 </CartSummaryWrapper>

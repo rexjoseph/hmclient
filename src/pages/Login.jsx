@@ -2,17 +2,18 @@ import { useState } from "react"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import { login } from "../redux/apiCalls"
-import { useDispatch } from "react-redux"
-import {useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import Announcement from "../components/Announcement"
 
 const Container = styled.div`
   background-color: #f7f7f7;
   width: 100%;
   margin: 0;
-  padding: 5rem;
+  // padding: 5rem;
 
   @media (max-width: 768px) {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 `
 
@@ -24,6 +25,7 @@ const SignUpWrapper = styled.div`
 
 const RegisterWrapper = styled.div`
   display: block;
+  margin-top: 4rem;
 `
 const RegisterTitle = styled.h1`
   font-weight: 600;
@@ -115,19 +117,21 @@ const Error = styled.span`
   color: red;
 `
 
-const Register = () => {
+const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
   const {isFetching, error} = useSelector(state => state.user)
+  const navigate = useNavigate()
 
   const handleClick = (e) => {
     e.preventDefault()
-    login(dispatch, {email, password});
+    login(dispatch, { email, password });
   }
 
   return (
     <Container>
+      <Announcement />
       <Navbar />
       <SignUpWrapper>
         <RegisterWrapper>
@@ -139,12 +143,14 @@ const Register = () => {
               <RegisterFormInput type="email" onChange={(e) => setEmail(e.target.value)} />
               <RegisterFormLabel htmlFor="Password">Password</RegisterFormLabel>
               <RegisterFormInput type="password" onChange={(e) => setPassword(e.target.value)} />
-              <RegisterFormButton onClick={handleClick} disabled={isFetching} >Sign In</RegisterFormButton>
+              <RegisterFormButton onClick={handleClick} disabled={isFetching}>
+                Sign In
+              </RegisterFormButton>
               {error && <Error>Invalid login credentials</Error>}
-              <RecoverLink>
+              <RecoverLink> 
                 Forgot Password?
               </RecoverLink>
-              <RecoverLink>
+              <RecoverLink onClick={() => navigate('/register')}>
                 Create Account
               </RecoverLink>
             </RegisterForm>
@@ -155,4 +161,4 @@ const Register = () => {
   )
 }
 
-export default Register
+export default Login

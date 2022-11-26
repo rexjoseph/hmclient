@@ -1,14 +1,15 @@
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
+import Announcement from "../components/Announcement"
 
 const Container = styled.div`
   background-color: #f7f7f7;
   width: 100%;
   margin: 0;
-  padding: 5rem;
+  // padding: 5rem;
 
   @media (max-width: 768px) {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 `
 
@@ -20,6 +21,7 @@ const SignUpWrapper = styled.div`
 
 const RegisterWrapper = styled.div`
   display: block;
+  margin-top: 4rem;
 `
 const RegisterTitle = styled.h1`
   font-weight: 600;
@@ -104,6 +106,7 @@ const RegisterLegalLink = styled.a`
 const Register = () => {
   return (
     <Container>
+      <Announcement />
       <Navbar />
       <SignUpWrapper>
         <RegisterWrapper>
@@ -112,11 +115,11 @@ const Register = () => {
           <RegisterParagraph>Registering makes checkout fast and easy and saves your order information in your account.</RegisterParagraph>
           <RegisterFormDiv>
             <RegisterForm>
-              <RegisterFormLabel htmlFor="FirstName">First Name</RegisterFormLabel>
+              <RegisterFormLabel htmlFor="firstName">First Name</RegisterFormLabel>
               <RegisterFormInput type="text" />
-              <RegisterFormLabel htmlFor="LastName">Last Name</RegisterFormLabel>
+              <RegisterFormLabel htmlFor="lastName">Last Name</RegisterFormLabel>
               <RegisterFormInput type="text" />
-              <RegisterFormLabel htmlFor="Email">Email*</RegisterFormLabel>
+              <RegisterFormLabel htmlFor="email">Email*</RegisterFormLabel>
               <RegisterFormInput type="email" />
               <RegisterFormLabel htmlFor="Password">Password*</RegisterFormLabel>
               <RegisterFormInput type="password" />

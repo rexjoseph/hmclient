@@ -1,10 +1,13 @@
-import { useRef } from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import { useSelector } from "react-redux";
 import "./Navbar.css"
 
 function Navbar() {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.carts.cart);
   const navRef = useRef()
+  
+  // set state of scroll
+  const [scrolled, setScrolled] = React.useState("unscrolled")
 
   const showNavbar = () => {
     navRef.current.classList.toggle('active');
@@ -18,8 +21,23 @@ function Navbar() {
     return total
   }
 
+  // useLayoutEffect to mutate the DOM
+  useLayoutEffect(() => {
+    const handleScroll = () =>
+    window.scrollY > 0 ? setScrolled("scrolled") : setScrolled("unscrolled");
+    // when window is scrolled, set state of scrolled to true
+
+    window.addEventListener("scroll", handleScroll);
+    // event listener added for scroll
+
+    return () => window.removeEventListener("scroll", handleScroll);
+    // remove the event
+  }, [])
+
+
+
   return (
-    <div className='page-header'>
+    <div className={`page-header ${scrolled}`}>
       <div className='nav-container' ref={navRef}>
         <nav>
           <ul className='mobile-nav'>

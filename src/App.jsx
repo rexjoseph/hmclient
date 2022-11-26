@@ -15,6 +15,7 @@ import Privacy from "./pages/Privacy";
 import Contact from "./pages/Contact";
 import { useSelector } from 'react-redux';
 import FAQ from "./pages/FAQ";
+import Account from "./pages/Account";
 
 
 const App = () => {
@@ -26,9 +27,9 @@ const App = () => {
       <Route path="/product/:id" element={<Product/>} />
       <Route path="/products" element={<Arrivals />}/>
       <Route path="/cart" element={<Cart />}/>
-      <Route path="/login" element={ user ? <Navigate to="/" /> : <Login />} />
-      <Route path="/register" element={ user ? <Navigate to="/" /> : <Register />} />
-      <Route path="/account" element={ user ? <Navigate to="/account" /> : <Login />} />
+      <Route path="/login" element={ user ? <Navigate to="/account" /> : <Login />} />
+      <Route path="/register" element={ user ? <Navigate to="/account" /> : <Register />} />
+      <Route path="/account" element= { user ? <Account /> : <Navigate to="/login" /> } />
       <Route path="/sustainability" element={<Sustainability />}/>
       <Route path="/company" element={<Company />}/>
       <Route path="/shipping" element={<Shipping />}/>

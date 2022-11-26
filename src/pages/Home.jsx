@@ -10,6 +10,7 @@ import Footer from '../components/Footer'
 import Collections from '../components/Collections'
 // import Products from '../components/Products'
 import Navbar from '../components/Navbar'
+import Announcement from '../components/Announcement'
 
 const Home = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ const Home = () => {
   }, [])
   return (
     <div>
+      <Announcement />
       <Navbar />
       <Slider />
       <Testimonial />

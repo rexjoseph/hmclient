@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+import Announcement from "../components/Announcement"
 import Product from "./Product";
 import axios from "axios";
 import Navbar from "./Navbar";
@@ -81,6 +82,7 @@ const Arrivals = () => {
 
   return (
     <Page>
+      <Announcement />
       <Navbar />
       <Header>Arrivals</Header>
       <Divider />
