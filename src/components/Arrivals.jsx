@@ -92,7 +92,7 @@ const Arrivals = () => {
             { products.map(item => <Product 
             item={item} 
             key={item._id} 
-            />)}
+            />).reverse()}
           </ProductsUl>
         </ProductsWrapper>
       </CollectionWrapper>

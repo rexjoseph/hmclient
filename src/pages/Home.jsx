@@ -8,7 +8,7 @@ import EmailMarketing from '../components/EmailMarketing'
 import Prefooter from '../components/Prefooter'
 import Footer from '../components/Footer'
 import Collections from '../components/Collections'
-// import Products from '../components/Products'
+import Products from '../components/Products'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 
@@ -22,7 +22,7 @@ const Home = () => {
       <Navbar />
       <Slider />
       <Testimonial />
-      {/* <Products /> */}
+      <Products />
       <Collections />
       <Ethos />
       <InstaGrid />

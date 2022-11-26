@@ -18,6 +18,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import ProdAccordion from "../components/ProdAccordion";
 import Announcement from "../components/Announcement";
+import { useNavigate } from 'react-router-dom';
 
 const ProductPageWrapper = styled.div`
 `
@@ -134,13 +135,17 @@ const DetailWrapper = styled.div`
 `
 const ProductHeader = styled.div`
   margin-bottom: 24px;
+
+  @media (max-width: 769px) {
+    margin-bottom: 18px;
+  }
 `
 const Header = styled.div``
 const HeaderDiv = styled.div``
 
 const HeaderTitle = styled.h1`
   font-weight: 700;
-  font-size: 25px;
+  font-size: 24px;
   line-height: 1.32;
   letter-spacing: 0.5px;
   margin-top: 1rem;
@@ -213,7 +218,7 @@ const ProductColorsDiv = styled.div`
 `
 
 const ProductColorsTitle = styled.div`
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   font-size: 12px;
   line-height: 1.25;
   display: flex;
@@ -235,7 +240,7 @@ const ProductColorsSelector = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
-  margin-bottom: 21px;
+  margin-bottom: 20px;
   margin-left: -7.5px;
 
   @media (min-width: 992px) {
@@ -280,6 +285,11 @@ const ColorSwatch = styled.div`
     border-radius: 50%;
     transition: all 125ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     border: 2px solid transparent;
+  }
+
+  @media (max-width: 769px) {
+    width: 36px;
+    height: 36px;
   }
 `
 
@@ -363,6 +373,10 @@ const ButtonAddToBag = styled.button`
 
   &:hover {
     background: var(--brand-blue);
+  }
+
+  @media (max-width: 769px) {
+    margin-top: 1rem;
   }
 `
 
@@ -499,6 +513,7 @@ const Product = () => {
   const dispatch = useDispatch()
   const {pathname} = useLocation()
   const [active, setActive] = useState("Details")
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -510,9 +525,10 @@ const Product = () => {
     getProduct()
   }, [id])
 
-  // const handleClick = () => {
-  //   dispatch(addToCart({id, quantity, color, size}))
-  // }
+  const handleClick = () => {
+     dispatch(addToCart({id: product._id, title: product.title, image: product.image[0], price: product.price, color: color, size: size}))
+     navigate('/cart')
+  }
 
   useEffect(() => {
     document.title = `${product.title} — Hashingmart`
@@ -641,7 +657,7 @@ const Product = () => {
                     </AmountContainer>
                   </AddContainer> */}
                   <ProductAdd>
-                    <ButtonAddToBag onClick={() => dispatch(addToCart({id: product._id, title: product.title, image: product.image[0], price: product.price, color: color, size: size}))}>
+                    <ButtonAddToBag onClick={handleClick}>
                       Add to Bag&nbsp;
                       <ButtonSpan>${product.price}</ButtonSpan>
                     </ButtonAddToBag>
