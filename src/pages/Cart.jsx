@@ -428,6 +428,84 @@ const PaymentMethods = styled.div`
 
 const PaymentMethodDivs = styled.div``
 
+const CartEmptyContainer = styled.div`
+  max-width: 1250px;
+  width: 100%;
+  padding: 0 1.5rem;
+  margin: 0 auto;
+`
+
+const CartEmpty = styled.div`
+`
+
+const CartEmptyFlex = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2.5%;
+  padding-top: 2.5%;
+`
+
+const CartHeaderOne = styled.h1`
+  margin-bottom: 48px;
+  text-align: center;
+  font-size: 24px;
+  line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+`
+
+const CartHeaderTwo = styled.h2`
+  margin-bottom: 24px;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: normal;
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
+`
+
+const CartEmptyLinksDiv = styled.div`
+  width: 70%;
+  margin: 0px auto;
+
+  @media (min-width: 769px) {
+    width: 30%;
+  }
+`
+
+const CartEmptyA = styled.a`
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  width: 100%;
+  display: block;
+  background-color: transparent;
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  font-size: 14px;
+  padding: 13px 18px;
+  cursor: pointer;
+  transition: all 100ms ease 0s;
+  letter-spacing: 2px;
+  text-align: center;
+  text-decoration: none;
+  opacity: 1;
+  position: relative;
+  border-radius: 2px;
+  font-weight: 400;
+
+  &:hover {
+    background: var(--brand-blue);
+    border: 2px solid var(--brand-blue);
+    color: var(--color-secondary);
+  }
+`
+
 const Cart = () => {
   const cart = useSelector((state) => state.carts.cart)
   const dispatch = useDispatch()
@@ -455,7 +533,9 @@ const Cart = () => {
       <PDPContainer>
         <PDP>
           <Container>
-            <CartRoot>
+            {
+              cart.length > 0 ? 
+              <CartRoot>
               <CartColumn1>
                 <BackNav>
                   <BackNavDiv>
@@ -519,7 +599,7 @@ const Cart = () => {
                         <svg aria-hidden="true" height="36" viewBox="0 0 36 36" width="36" role="presentation"><path d="M19.414 18l4.243 4.243a1 1 0 0 1-1.414 1.414L18 19.414l-4.243 4.243a1 1 0 0 1-1.414-1.414L16.586 18l-4.243-4.243a1 1 0 0 1 1.414-1.414L18 16.586l4.243-4.243a1 1 0 0 1 1.414 1.414L19.414 18z" fillRule="evenodd"></path></svg>
                       </CartListButton>
                     </CartList>
-                  ))}
+                  )).reverse()}
                 </CartUl>
               </CartColumn1>
               <CartColumn2>
@@ -536,7 +616,7 @@ const Cart = () => {
                         <CardFormTotalSpan>${getTotal().totalPrice}</CardFormTotalSpan>
                       </CardFormTotal>
                       <CheckoutButtonWrapper>
-                        <CheckoutButton>
+                        <CheckoutButton onClick={() => navigate('/checkout')}>
                           Continue to Checkout&nbsp;
                           <FontAwesomeIcon icon={faArrowRight} />
                         </CheckoutButton>
@@ -562,7 +642,20 @@ const Cart = () => {
                   </CartForm>
                 </CartSummaryWrapper>
               </CartColumn2>
-            </CartRoot>
+            </CartRoot> : 
+            <CartEmptyContainer>
+              <CartEmpty>
+                <CartEmptyFlex>
+                  <CartHeaderOne>Your Cart Is Empty.</CartHeaderOne>
+                  <CartHeaderTwo>Not sure where to start?</CartHeaderTwo>
+                  <CartEmptyLinksDiv>
+                    <CartEmptyA>Shop Arrivals</CartEmptyA>
+                    <CartEmptyA>Shop Collections</CartEmptyA>
+                  </CartEmptyLinksDiv>
+                </CartEmptyFlex>
+              </CartEmpty>
+            </CartEmptyContainer>
+            }
           </Container>
         </PDP>
       </PDPContainer>

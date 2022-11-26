@@ -16,6 +16,7 @@ import Contact from "./pages/Contact";
 import { useSelector } from 'react-redux';
 import FAQ from "./pages/FAQ";
 import Account from "./pages/Account";
+import Checkout from "./pages/Checkout";
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
       <Route path="/products/:category" element={<ProductList/>} />
       <Route path="/product/:id" element={<Product/>} />
       <Route path="/products" element={<Arrivals />}/>
+      <Route path="/checkout" element={ !user ? <Navigate to="/login" /> : <Checkout />} />
       <Route path="/cart" element={<Cart />}/>
       <Route path="/login" element={ user ? <Navigate to="/account" /> : <Login />} />
       <Route path="/register" element={ user ? <Navigate to="/account" /> : <Register />} />
