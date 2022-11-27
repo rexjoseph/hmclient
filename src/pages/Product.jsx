@@ -1,6 +1,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation, EffectFade } from 'swiper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faStar, faStarHalf, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
+// import { faStar, faStarHalf, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import styled from "styled-components";
@@ -13,7 +16,7 @@ import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { addToCart } from "../redux/cartRedux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import ProdAccordion from "../components/ProdAccordion";
@@ -380,6 +383,23 @@ const ButtonAddToBag = styled.button`
   }
 `
 
+const ButtonAddToBagNull = styled.button`
+  background: #DDD;
+  border: 0;
+  color: #fff;
+  cursor: auto;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 0 24px;
+  position: relative;
+  transition: background .2s ease-in-out,color .2s ease-in-out;
+  white-space: nowrap;
+  border-radius: 24px;
+  border-color: #DDD;
+  height: 48px;
+  width: 100%;
+`
+
 const ShipByDiv = styled.div`
   margin: 0 auto;
   margin-top: 1.5rem;
@@ -501,11 +521,31 @@ const SlideContainer = styled.div`
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 `
+const Reviews = styled.div``
+const ReviewsHeader = styled.h1`
+  font-size: 2.4rem;
+`
 
+const BigSup = styled.h1`
+  font-size: 5.2rem;
+  font-weight: 700;
+  line-height: 1;
+
+  @media (max-width: 769px) {
+    font-size: 3.8rem;
+  }
+`
+
+const NoReviewFlex = styled.div`
+  display: flex;
+  align-items: center;
+  gape: 1rem;
+`
 
 const Product = () => {
   const location = useLocation()
   const id = location.pathname.split("/")[2];
+  const user = useSelector(state => state.user.currentUser);
   const [product, setProduct] = useState({});
   // const [quantity] = useState(1);
   const [color, setColor] = useState("");
@@ -615,14 +655,39 @@ const Product = () => {
                     <HeaderReviewWrapper>
                       <HeaderRatingDiv>
                         <HeaderRatingColumn>
-                          <HeaderRatingRow><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="13" height="13"><polygon fill="#212a2f" points="23,8.8 15,7.6 11.5,0 8,7.6 0,8.8 5.7,14.7 4.4,23 11.5,19 18.6,23 17.2,14.7"></polygon></svg></HeaderRatingRow>
-                          <HeaderRatingRow><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="13" height="13"><polygon fill="#212a2f" points="23,8.8 15,7.6 11.5,0 8,7.6 0,8.8 5.7,14.7 4.4,23 11.5,19 18.6,23 17.2,14.7"></polygon></svg></HeaderRatingRow>
-                          <HeaderRatingRow><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="13" height="13"><polygon fill="#212a2f" points="23,8.8 15,7.6 11.5,0 8,7.6 0,8.8 5.7,14.7 4.4,23 11.5,19 18.6,23 17.2,14.7"></polygon></svg></HeaderRatingRow>
-                          <HeaderRatingRow><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="13" height="13"><polygon fill="#212a2f" points="23,8.8 15,7.6 11.5,0 8,7.6 0,8.8 5.7,14.7 4.4,23 11.5,19 18.6,23 17.2,14.7"></polygon></svg></HeaderRatingRow>
-                          <HeaderRatingRow><svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 23 23" width="13" height="13"><defs></defs><path className="cls-1" d="M11.51,2.37,14.16,8l.23.48.52.08,6,.92L16.55,14l-.36.36.08.5,1,6.29L12,18.22,11.51,18l-.48.27L5.72,21.15l1-6.29.08-.5L6.48,14,2.09,9.5l6-.92.53-.08L8.86,8l2.65-5.65m0-2.35L8,7.59,0,8.8l5.75,5.9L4.4,23l7.11-3.93L18.62,23,17.26,14.7,23,8.8l-8-1.21L11.51,0Z" transform="translate(-.01 -.02)"></path></svg></HeaderRatingRow>
+                          <HeaderRatingRow>
+                            <i className={
+                              product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                              }>
+                            </i>
+                          </HeaderRatingRow>
+                          <HeaderRatingRow>
+                            <i className={
+                              product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                              }>
+                            </i>
+                          </HeaderRatingRow>
+                          <HeaderRatingRow>
+                            <i className={
+                              product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                              }>
+                            </i>
+                          </HeaderRatingRow>
+                          <HeaderRatingRow>
+                            <i className={
+                              product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                              }>
+                            </i>
+                          </HeaderRatingRow>
+                          <HeaderRatingRow>
+                            <i className={
+                              product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                              }>
+                            </i>
+                          </HeaderRatingRow>
                         </HeaderRatingColumn>
                       </HeaderRatingDiv>
-                      <HeaderReviewDiv>(246)</HeaderReviewDiv>
+                      <HeaderReviewDiv>({product.numReviews})</HeaderReviewDiv>
                     </HeaderReviewWrapper>
                   </ProductHeader>
                   <ProductColors>
@@ -657,10 +722,14 @@ const Product = () => {
                     </AmountContainer>
                   </AddContainer> */}
                   <ProductAdd>
-                    <ButtonAddToBag onClick={handleClick}>
-                      Add to Bag&nbsp;
-                      <ButtonSpan>${product.price}</ButtonSpan>
-                    </ButtonAddToBag>
+                    {!color ? (
+                      <ButtonAddToBagNull>Select A Color</ButtonAddToBagNull>
+                    ) : (
+                      <ButtonAddToBag onClick={handleClick}>
+                        Add to Bag&nbsp;
+                        <ButtonSpan>${product.price}</ButtonSpan>
+                      </ButtonAddToBag>
+                    )}
                     <ShipByDiv>
                       <ShipBySpan>In stock, ships between 1-2 business days.</ShipBySpan>
                     </ShipByDiv>
@@ -682,19 +751,19 @@ const Product = () => {
                         title="Sustainability" 
                         active={active} 
                         setActive={setActive}
-                        content="ZQ merino wool heel lining. Castor bean oil-based insole foam. Bio-based nylon eyelets"
+                        content={product.sustainability}
                       />
                       <ProdAccordion 
                         title="Care Guide" 
                         active={active} 
                         setActive={setActive}
-                        content="Handy tips: Don’t put them in the dryer. They’ll go back to their original shape in no time. You can hand wash your laces and insoles on their own."
+                        content={product.care_guide}
                       />
                       <ProdAccordion 
                         title="Shipping & Returns" 
                         active={active} 
                         setActive={setActive}
-                        content="Free shipping on all orders, and our 30 days, no questions asked return policy. Lightly used essentials get ReHashed."
+                        content="Free shipping on all orders, and our 30 days, no questions asked return policy. It takes about 7-15 days for a package to arrive from the time you place an order. Please note that we only ship and deliver on business days."
                       />
                     </PDescriptionWrap>
                   </PDescripton>
@@ -718,6 +787,40 @@ const Product = () => {
                 </HelpContent>
               </HelpRow>
             </HelpDiv>
+            <Reviews>
+              <ReviewsHeader>Reviews</ReviewsHeader>
+              {product.numReviews === 0 && (
+                <>
+                  <NoReviewFlex>
+                  <BigSup>{product.rating.toFixed(1)}</BigSup>
+                    <>
+                      <i className={
+                        product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                      <i className={
+                        product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                      <i className={
+                        product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                      <i className={
+                        product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                      <i className={
+                        product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                    </>
+                  </NoReviewFlex>
+                  <p>No product review yet</p>
+                  <p>Be the first to review this product</p>
+                </>
+              )}
+            </Reviews>
           </Container>
           <InstaHandle />
         </PDP>

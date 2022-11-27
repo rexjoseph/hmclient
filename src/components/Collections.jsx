@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { categories } from '../data'
 import CollectionItem from "./CollectionItem"
 import { mobile } from "../responsive";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin: 0 auto;
@@ -77,13 +78,14 @@ const CollectionRows = styled.ul`
 `
 
 const Collections = () => {
+  const navigate = useNavigate()
   return (
     <Container>
       <Header>
         <HeaderTitle>
           Collections
         </HeaderTitle>
-        <HeaderLink>
+        <HeaderLink onClick={() => navigate('/collections')}>
           Shop — Collections
         </HeaderLink>
       </Header>

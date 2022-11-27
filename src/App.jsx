@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import FAQ from "./pages/FAQ";
 import Account from "./pages/Account";
 import Checkout from "./pages/Checkout";
+import CollectionsList from "./pages/CollectionsList";
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
   return (
     <Routes>
       <Route exact path="/" element={<Home />} />
+      <Route path="/collections" element={<CollectionsList />}/>
       <Route path="/products/:category" element={<ProductList/>} />
       <Route path="/product/:id" element={<Product/>} />
       <Route path="/products" element={<Arrivals />}/>

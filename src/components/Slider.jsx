@@ -163,7 +163,7 @@ const Slider = () => {
           <Asset>
             <Figure>
               <AssetImage>
-                <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0Ijo4OTYsIndpZHRoIjoxMDAwfSwidG9Gb3JtYXQiOiJ3ZWJwIn0sImtleSI6Im1lZGlhL2Jsb2Nrcy9QTFBfLV9Ib3VzZV9BZF8tX09WX091dGRvb3JzXy1fRGVza3RvcF8tXzEuanBnIn0=" />
+                <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0Ijo4OTYsIndpZHRoIjoxMDAwfSwidG9Gb3JtYXQiOiJ3ZWJwIn0sImtleSI6Im1lZGlhL2Jsb2Nrcy9QTFBfLV9Ib3VzZV9BZF8tX0NsYXNzaWNzXy1fRGVza3RvcF8tXzEuanBnIn0=" />
               </AssetImage>
             </Figure>
             <Header>

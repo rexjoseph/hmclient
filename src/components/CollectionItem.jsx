@@ -31,7 +31,7 @@ const Image = styled.img`
   width: 100%;
   object-fit: cover;
   transform: scale(1);
-  transition: opacity .1s ease-in-out,transform 1s ease-in-out,-webkit-transform 1s ease-in-out!important;
+  transition: opacity .2s ease-in-out,transform .2s ease-in-out,-webkit-transform .2s ease-in-out;
   z-index: 2;
   opacity: 1;
 `

@@ -1,6 +1,7 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import styled from "styled-components"
+import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import {mobile} from "../responsive"
@@ -83,6 +84,7 @@ const Sustainability = () => {
 
   return (
     <Page>
+      <Announcement />
       <Navbar />
       <PageWrapper>
       <Container>
