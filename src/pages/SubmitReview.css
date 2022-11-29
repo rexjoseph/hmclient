@@ -1,9 +1,16 @@
+main {
+  display: block;
+  margin: 0 auto;
+  max-width: 1656px;
+  padding: 80px 72px 24px;
+  width: 100%;
+}
+
 .submitReview__root {
   margin: 0 auto;
   max-width: 1656px;
-  padding-left: 108px;
-  padding-right: 108px;
   overflow-x: hidden;
+  width: 100%;
 }
 
 .submitReview__header {
@@ -175,4 +182,19 @@
 
 .submitReview__fieldset button:hover {
   background: var(--brand-blue);
+}
+
+
+@media (max-width: 769px) {
+  main {
+    padding: 50px 15px 24px;
+  }
+
+  .imageWrap {
+    flex-basis: calc(50% - 1px);
+  }
+
+  .imageWrap:nth-of-type(1n+3) {
+    display: none;
+  }
 }

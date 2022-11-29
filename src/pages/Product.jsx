@@ -548,6 +548,34 @@ const NoReviewFlex = styled.div`
   gape: 1rem;
 `
 
+const ReviewsFlex = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+`
+
+const CreateReviewLink = styled.a`
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 15px;
+  height: 36px;
+  padding: 0 24px;
+  position: relative;
+  transition: background .2s ease-in-out,color .2s ease-in-out;
+  white-space: nowrap;
+  background: transparent;
+  border: 3px solid var(--color-primary);
+  text-align: center;
+  text-decoration: none;
+  line-height: 32px;
+
+  &:hover {
+    background: var(--color-primary);
+    color: var(--color-secondary);
+  }
+`
+
 const Product = () => {
   const location = useLocation()
   const id = location.pathname.split("/")[2];
@@ -795,7 +823,10 @@ const Product = () => {
               </HelpRow>
             </HelpDiv>
             <Reviews>
-              <ReviewsHeader>Reviews</ReviewsHeader>
+              <ReviewsFlex>
+                <ReviewsHeader>Reviews</ReviewsHeader>
+                <CreateReviewLink onClick={() => navigate(`/submit-review/${product._id}`)}>Write review</CreateReviewLink>
+              </ReviewsFlex>
               {product.reviews?.length === 0 && (
                 <>
                   <NoReviewFlex>
@@ -840,7 +871,6 @@ const Product = () => {
                   </>
                 ))
               }
-              <a href={`/submit-review/${product._id}`}>Write review</a>
             </Reviews>
           </Container>
           <InstaHandle />
