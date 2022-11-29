@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar"
 import Announcement from "../components/Announcement"
 
 const Container = styled.div`
-  background-color: #f7f7f7;
+  // background-color: #f7f7f7;
   width: 100%;
   margin: 0;
   // padding: 5rem;
@@ -53,28 +53,31 @@ const RegisterFormLabel = styled.label`
 
 const RegisterFormInput = styled.input`
   width: 100%;
+  height: 36px;
   margin-bottom: 19px;
   -webkit-appearance: none;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   background-color: white;
   font-family: inherit;
   font-weight: 400;
-  font-size: 16px;
-  padding: 19px 20px;
+  font-size: 14px;
+  padding: 0 12px;
+  background: #f1f1f1;
 `
 
 const RegisterFormButton = styled.button`
   display: block;
   width: 100%;
+  height: 36px;
   font-family: inherit;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   letter-spacing: 1px;
   text-transform: uppercase;
   background-color: var(--color-primary);
   color: white;
-  padding: 23px 0;
+  padding: 0 12px;
   border: none;
   -webkit-appearance: none;
   text-align: center;
@@ -82,9 +85,9 @@ const RegisterFormButton = styled.button`
   cursor: pointer;
   border-radius: 2px;
   border: 2px solid transparent;
-  -webkit-transition: all 300ms ease;
-  -moz-transition: all 300ms ease;
-  transition: all 300ms ease;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  transition: all 200ms ease;
 
   &:hover {
     background: var(--brand-blue);

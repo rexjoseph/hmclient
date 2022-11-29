@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled from "styled-components"
 import { categories } from '../data'
 import CollectionItem from "../components/CollectionItem"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
@@ -52,9 +52,15 @@ const SubHeader = styled.h2`
 `
 
 const CollectionsList = () => {
+  const {pathname} = useLocation()
+
   useEffect(() => {
     document.title = `Shop By Collections — Hashingmart`
   })
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Page>

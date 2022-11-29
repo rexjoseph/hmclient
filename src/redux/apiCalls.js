@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess } from "./userRedux"
+import { loginFailure, loginStart, loginSuccess, editUserStart, editUserSuccess, editUserFailure } from "./userRedux"
 import { publicRequest } from "../requestMethods"
 
 export const login = async (dispatch, user) => {
@@ -8,5 +8,15 @@ export const login = async (dispatch, user) => {
     dispatch(loginSuccess(res.data))
   } catch(err) {
     dispatch(loginFailure())
+  }
+}
+
+export const updateAddress = (userId, address) => async (dispatch) => {
+  dispatch(editUserStart());
+  try {
+    const res = await publicRequest.post(`/users/${userId}/edit-address`, address)
+    dispatch(editUserSuccess(res.data))
+  } catch (err) {
+    dispatch(editUserFailure())
   }
 }

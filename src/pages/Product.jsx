@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation, EffectFade } from 'swiper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faStar, faStarHalf, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 // import { faStar, faStarHalf, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import 'swiper/css/navigation';
@@ -16,7 +16,7 @@ import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { addToCart } from "../redux/cartRedux";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import ProdAccordion from "../components/ProdAccordion";
@@ -43,10 +43,10 @@ const Container = styled.div`
   width: 100%;
   margin: 0px auto;
   max-width: 1250px;
-  padding: 0px 24px;
+  // padding: 0px 15px;
 
   @media (max-width: 769px) {
-    padding: 0 15px;
+    // padding: 0 15px;
   }
 `
 
@@ -141,6 +141,7 @@ const ProductHeader = styled.div`
 
   @media (max-width: 769px) {
     margin-bottom: 18px;
+    padding: 0 15px;
   }
 `
 const Header = styled.div``
@@ -213,7 +214,9 @@ const HeaderReviewDiv = styled.div`
 `
 
 const ProductColors = styled.div`
-
+  @media (max-width: 769px) {
+    padding: 0 15px;
+}
 `
 
 const ProductColorsDiv = styled.div`
@@ -303,6 +306,11 @@ const ProductSizes = styled.div`
   padding: 0 0 12px;
   position: relative;
   width: 100%;
+
+  @media (max-width: 769px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 `
 
 const SizeWrapper = styled.div`
@@ -357,6 +365,10 @@ const ProductAdd = styled.div`
   min-height: 52px;
   padding: 0;
   position: relative;
+
+  @media (max-width: 769px) {
+    padding: 0 15px;
+  }
 `
 
 const ButtonAddToBag = styled.button`
@@ -433,34 +445,39 @@ const GuaranteeList = styled.li`
   font-size: 1.4rem;
 `
 
-const PDescripton = styled.div``
+const PDescripton = styled.div`
+  @media (max-width: 769px) {
+    background: #f9f9f9;
+    padding: 5px 15px;
+  }
+`
 
 const PDescriptionWrap = styled.div``
 
-const PDescriptionTitle = styled.p`
-  display: flex;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-  width: 100%;
-  background: rgb(255, 255, 255);
-  border: none;
-  outline: none;
-  appearance: none;
-  padding: 12px 0px 9px;
-  text-align: left;
-  font-weight: 700;
-  font-size: 12px;
-  line-height: 1.75;
-  letter-spacing: 1.7px;
-  text-transform: uppercase;
-`
+// const PDescriptionTitle = styled.p`
+//   display: flex;
+//   -webkit-box-pack: justify;
+//   justify-content: space-between;
+//   width: 100%;
+//   background: rgb(255, 255, 255);
+//   border: none;
+//   outline: none;
+//   appearance: none;
+//   padding: 12px 0px 9px;
+//   text-align: left;
+//   font-weight: 700;
+//   font-size: 12px;
+//   line-height: 1.75;
+//   letter-spacing: 1.7px;
+//   text-transform: uppercase;
+// `
 
-const PDescriptionDesc = styled.div`
-  font-size: 14px;
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  padding: 0px;
-`
+// const PDescriptionDesc = styled.div`
+//   font-size: 14px;
+//   line-height: 1.5;
+//   letter-spacing: 0.5px;
+//   padding: 0px;
+// `
 
 const ButtonSpan = styled.span``
 
@@ -521,7 +538,12 @@ const SlideContainer = styled.div`
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
 `
-const Reviews = styled.div``
+const Reviews = styled.div`
+  @media (max-width: 769px) {
+    padding: 0 15px;
+  }
+`
+
 const ReviewsHeader = styled.h1`
   font-size: 2.4rem;
 `
@@ -545,7 +567,7 @@ const NoReviewFlex = styled.div`
 const Product = () => {
   const location = useLocation()
   const id = location.pathname.split("/")[2];
-  const user = useSelector(state => state.user.currentUser);
+  // const user = useSelector(state => state.user.currentUser);
   const [product, setProduct] = useState({});
   // const [quantity] = useState(1);
   const [color, setColor] = useState("");
@@ -592,6 +614,8 @@ const Product = () => {
                 effect
                 speed={800}
                 slidesPerView={1}
+                initialSlide={1}
+                loop={true}
                 >
                 {product.image?.map((image,key) => (
                   <SlideContainer key={key}>
