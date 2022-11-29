@@ -1,9 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { Navigation, EffectFade } from 'swiper';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faStar, faStarHalf, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
-// import { faStar, faStarHalf, faStarHalfStroke } from '@fortawesome/free-solid-svg-icons';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
 import styled from "styled-components";
@@ -22,6 +19,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css'
 import ProdAccordion from "../components/ProdAccordion";
 import Announcement from "../components/Announcement";
 import { useNavigate } from 'react-router-dom';
+import ReviewItem from '../components/ReviewItem';
 
 const ProductPageWrapper = styled.div`
 `
@@ -43,11 +41,6 @@ const Container = styled.div`
   width: 100%;
   margin: 0px auto;
   max-width: 1250px;
-  // padding: 0px 15px;
-
-  @media (max-width: 769px) {
-    // padding: 0 15px;
-  }
 `
 
 const Grid = styled.div`
@@ -64,7 +57,6 @@ const GridCell1 = styled.div`
     width: 66.6667%;
     display: block;
     position: relative;
-    // width: 100%;
   }
 `
 const ImageWrapper = styled.div`
@@ -107,20 +99,12 @@ const ImageButton = styled.button`
   background-color: rgb(245, 245, 245);
 `
 const ImageHolder = styled.div`
-  // padding-bottom: 100%;
   position: relative;
 
   & img {
     object-fit: cover;
   }
 `
-// const Image = styled.img`
-//   display: block;
-//   width: 100%;
-//   max-width: 100%;
-//   color: transparent;
-//   opacity: 1;
-// `
 
 const GridCell2 = styled.div`
   position: relative;
@@ -567,7 +551,6 @@ const NoReviewFlex = styled.div`
 const Product = () => {
   const location = useLocation()
   const id = location.pathname.split("/")[2];
-  // const user = useSelector(state => state.user.currentUser);
   const [product, setProduct] = useState({});
   // const [quantity] = useState(1);
   const [color, setColor] = useState("");
@@ -813,7 +796,7 @@ const Product = () => {
             </HelpDiv>
             <Reviews>
               <ReviewsHeader>Reviews</ReviewsHeader>
-              {product.numReviews === 0 && (
+              {product.reviews?.length === 0 && (
                 <>
                   <NoReviewFlex>
                   <BigSup>{product.rating.toFixed(1)}</BigSup>
@@ -844,6 +827,20 @@ const Product = () => {
                   <p>Be the first to review this product</p>
                 </>
               )}
+              {
+                product.reviews?.map((review) => (
+                  <>
+                    <ReviewItem 
+                      firstName={review.firstName}
+                      lastName={review.lastName}
+                      rating={review.rating}
+                      comment={review.comment} 
+                      date={review.createdAt.substring(0, 10)}
+                    />
+                  </>
+                ))
+              }
+              <a href={`/submit-review/${product._id}`}>Write review</a>
             </Reviews>
           </Container>
           <InstaHandle />

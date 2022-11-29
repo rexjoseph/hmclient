@@ -1,4 +1,5 @@
 import { loginFailure, loginStart, loginSuccess, editUserStart, editUserSuccess, editUserFailure } from "./userRedux"
+import { createReviewStart, createReviewSuccess, createReviewFailure } from "./productRedux";
 import { publicRequest } from "../requestMethods"
 
 export const login = async (dispatch, user) => {
@@ -18,5 +19,15 @@ export const updateAddress = (userId, address) => async (dispatch) => {
     dispatch(editUserSuccess(res.data))
   } catch (err) {
     dispatch(editUserFailure())
+  }
+}
+
+export const createReview = (id, review) => async (dispatch) => {
+  dispatch(createReviewStart());
+  try {
+    const res = await publicRequest.post(`/products/${id}/reviews`, review)
+    dispatch(createReviewSuccess(res.data))
+  } catch (err) {
+    dispatch(createReviewFailure())
   }
 }

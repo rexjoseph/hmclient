@@ -19,6 +19,7 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import CollectionsList from "./pages/CollectionsList";
 import Information from './pages/Information';
+import SubmitReview from './pages/SubmitReview';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser)
@@ -28,6 +29,7 @@ const App = () => {
       <Route path="/collections" element={<CollectionsList />}/>
       <Route path="/products/:category" element={<ProductList/>} />
       <Route path="/product/:id" element={<Product/>} />
+      <Route path="/submit-review/:id" element={<SubmitReview />} />
       <Route path="/products" element={<Arrivals />}/>
       <Route path="/checkout" element={ !user ? <Navigate to="/login" /> : user && user.address === undefined ? <Navigate to={Information}/> : <Checkout />} />
       <Route path="/cart" element={<Cart />}/>
