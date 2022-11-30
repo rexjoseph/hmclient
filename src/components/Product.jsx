@@ -82,7 +82,6 @@ const Badge = styled.span`
 `
 
 const Image = styled.img`
-  aspect-ratio: 900 / 1200;
   max-height: 100%;
   pointer-events: none;
   width: 100%;

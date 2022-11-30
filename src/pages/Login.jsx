@@ -141,15 +141,15 @@ const Login = () => {
           <RegisterTitle>Hello</RegisterTitle>
           <RegisterParagraph>Old Friends... Welcome back! Let's get you back in.</RegisterParagraph>
           <RegisterFormDiv>
-            <RegisterForm>
+            <RegisterForm onSubmit={handleClick}>
               <RegisterFormLabel htmlFor="Email">Email</RegisterFormLabel>
-              <RegisterFormInput type="email" onChange={(e) => setEmail(e.target.value)} />
+              <RegisterFormInput type="email" required onChange={(e) => setEmail(e.target.value)} />
               <RegisterFormLabel htmlFor="Password">Password</RegisterFormLabel>
-              <RegisterFormInput type="password" onChange={(e) => setPassword(e.target.value)} />
-              <RegisterFormButton onClick={handleClick} disabled={isFetching}>
+              <RegisterFormInput type="password" required onChange={(e) => setPassword(e.target.value)} />
+              <RegisterFormButton disabled={isFetching}>
                 Sign In
               </RegisterFormButton>
-              {error && <Error>Invalid login credentials</Error>}
+              {/* {error && <Error>Invalid login credentials</Error>} */}
               <RecoverLink> 
                 Forgot Password?
               </RecoverLink>

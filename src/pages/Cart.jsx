@@ -200,7 +200,6 @@ const CartListImageLink = styled.a`
 `
 
 const CartListImageWrapper = styled.div`
-  aspect-ratio: 3/4;
   background-color: #f1f1f1;
   margin-right: 12px;
   width: 100px;

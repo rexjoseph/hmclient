@@ -1,8 +1,8 @@
-main {
+.main {
   display: block;
   margin: 0 auto;
-  max-width: 1656px;
-  padding: 80px 72px 24px;
+  max-width: 1250px;
+  padding: 80px 0 24px;
   width: 100%;
 }
 
@@ -47,7 +47,6 @@ main {
   display: block;
   height: auto;
   width: 100%;
-  aspect-ratio: 900 / 1200;
   max-width: 100%;
 }
 
@@ -186,7 +185,7 @@ main {
 
 
 @media (max-width: 769px) {
-  main {
+  .main {
     padding: 50px 15px 24px;
   }
 
@@ -196,5 +195,13 @@ main {
 
   .imageWrap:nth-of-type(1n+3) {
     display: none;
+  }
+
+  .submitReview__fieldgroups {
+    flex-direction: column;
+  }
+
+  .submitReview__fieldhalf {
+    width: 100%;
   }
 }

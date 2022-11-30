@@ -45,7 +45,8 @@ const Information = () => {
           zip,
           phone,
         })
-      );
+      )
+      navigate('/checkout');
     } else {
       alert("Please fill out the fields");
     }
@@ -239,13 +240,15 @@ const Information = () => {
                 </div>
               </div>
               <div className="step_footer">
-                <button type="submit">
-                  {isFetching ? (
-                    <span>Hashing things...</span>
-                  ) : (
-                    <span>Continue to order</span>
-                  )}
-                </button>
+                <a href="/checkout">
+                  <button type="submit">
+                    {isFetching ? (
+                      <span>Hashing things...</span>
+                    ) : (
+                      <span>Continue to order</span>
+                    )}
+                  </button>
+                </a>
                 <div className="step_footer-href">
                   <a href="/cart">
                     <FontAwesomeIcon icon={faChevronLeft} />

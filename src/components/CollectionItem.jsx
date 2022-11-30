@@ -21,7 +21,6 @@ const CollectionWrapper = styled.div`
 `
 
 const Image = styled.img`
-  aspect-ratio: 800 / 800;
   bottom: 0;
   height: 100%;
   left: 0;

@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess, editUserStart, editUserSuccess, editUserFailure } from "./userRedux"
+import { loginFailure, loginStart, loginSuccess, logoutStart, editUserStart, editUserSuccess, editUserFailure, registerStart, registerSuccess, registerFailure } from "./userRedux"
 import { createReviewStart, createReviewSuccess, createReviewFailure } from "./productRedux";
 import { publicRequest } from "../requestMethods"
 
@@ -10,6 +10,20 @@ export const login = async (dispatch, user) => {
   } catch(err) {
     dispatch(loginFailure())
   }
+}
+
+export const register = async (dispatch, user) => {
+  dispatch(registerStart());
+  try {
+    const res = await publicRequest.post("/auth/register", user)
+    dispatch(registerSuccess(res.data));
+  } catch(err) {
+    dispatch(registerFailure())
+  }
+}
+
+export const logout = async (dispatch) => {
+  dispatch(logoutStart());
 }
 
 export const updateAddress = (userId, address) => async (dispatch) => {

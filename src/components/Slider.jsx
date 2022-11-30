@@ -63,7 +63,6 @@ const Image = styled.img`
   object-fit: cover;
   object-position: top center;
   width: 100%;
-  aspect-ratio: 2400 / 1350;
   opacity: 1;
 `
 

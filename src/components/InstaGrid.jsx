@@ -142,7 +142,6 @@ const IGContent = styled.div`
 `
 
 const Image = styled.img`
-  aspect-ratio: 800/800;
   object-fit: cover;
   height: 100%;
   width: 100%;

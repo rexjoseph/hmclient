@@ -739,7 +739,8 @@ const Product = () => {
                       </ProductColorsSelector>
                     </ProductColorsDiv>
                   </ProductColors>
-                  <ProductSizes>
+                  {product.size?.length > 0 ? (
+                    <ProductSizes>
                     <SizeWrapper>
                       Select Size
                     </SizeWrapper>
@@ -749,6 +750,7 @@ const Product = () => {
                     ))}
                     </FilterSize>
                   </ProductSizes>
+                  ) : (<></>)}
                   {/* <AddContainer>
                     <AmountContainer>
                       <FontAwesomeIcon onClick={() => handleQuantity("dec")} icon={faMinus} />

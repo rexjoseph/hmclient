@@ -31,7 +31,8 @@ const App = () => {
       <Route path="/product/:id" element={<Product/>} />
       <Route path="/submit-review/:id" element={<SubmitReview />} />
       <Route path="/products" element={<Arrivals />}/>
-      <Route path="/checkout" element={ !user ? <Navigate to="/login" /> : user && user.address === undefined ? <Navigate to={Information}/> : <Checkout />} />
+      <Route path="/checkout" element={ user && user.address !== undefined ? <Checkout /> : <Navigate to="/checkout/information" /> } />
+      <Route path="/checkout/information" element={<Information />} />
       <Route path="/cart" element={<Cart />}/>
       <Route path="/login" element={ user ? <Navigate to="/account" /> : <Login />} />
       <Route path="/register" element={ user ? <Navigate to="/account" /> : <Register />} />
