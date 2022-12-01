@@ -17,7 +17,7 @@ const Header = styled.header`
   flex-direction: column;
   max-width: 1250px;
   text-align: center;
-  margin-top: 8rem;
+  margin: 8rem auto 0;
 `
 
 const Title = styled.h1`

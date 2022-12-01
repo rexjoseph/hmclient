@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import { login } from "../redux/apiCalls"
@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import Announcement from "../components/Announcement"
 
+const Page = styled.div``
+
 const Container = styled.div`
-  // background-color: #f7f7f7;
   width: 100%;
   margin: 0;
-  // padding: 5rem;
 
   @media (max-width: 768px) {
     padding: 1.5rem;
@@ -132,10 +132,15 @@ const Login = () => {
     login(dispatch, { email, password });
   }
 
+  useEffect(() => {
+    document.title = `Login — Hashingmart`;
+  });
+
   return (
-    <Container>
+    <Page>
       <Announcement />
       <Navbar />
+      <Container>
       <SignUpWrapper>
         <RegisterWrapper>
           <RegisterTitle>Hello</RegisterTitle>
@@ -150,7 +155,7 @@ const Login = () => {
                 Sign In
               </RegisterFormButton>
               {/* {error && <Error>Invalid login credentials</Error>} */}
-              <RecoverLink> 
+              <RecoverLink onClick={() => navigate('/reset')}> 
                 Forgot Password?
               </RecoverLink>
               <RecoverLink onClick={() => navigate('/register')}>
@@ -161,6 +166,7 @@ const Login = () => {
         </RegisterWrapper>
       </SignUpWrapper>
     </Container>
+    </Page>
   )
 }
 

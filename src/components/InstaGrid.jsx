@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { mobile } from "../responsive";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   max-width: 1250px;
@@ -170,12 +171,14 @@ const HandleLink = styled.a`
 `
 
 const InstaGrid = () => {
+  const navigate = useNavigate()
+
   return (
     <IGWrapper>
       <Container>
         <IGHeader>
           <Title>On The Grid</Title>
-          <Link>Shop — Social</Link>
+          <Link onClick={() => navigate('/products')}>Shop — Social</Link>
         </IGHeader>
       </Container>
       <IGRows>
@@ -247,7 +250,7 @@ const InstaGrid = () => {
         </IGList>
       </IGRows>
       <IGFooter>
-        <IGFooterLink>
+        <IGFooterLink onClick={() => navigate('/products')}>
           Shop — Social
         </IGFooterLink>
       </IGFooter>

@@ -1,5 +1,5 @@
 .announcement-bar-container {
-  background: var(--brand-blue);
+  background: #F7F7F7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@
 
 .announcement-bar-container p,
 .announcement-bar-container a {
-  color: var(--color-secondary);
+  color: var(--color-primary);
   line-height: 3rem;
   font-size: 13px;
   height: 100%;

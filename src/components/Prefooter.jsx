@@ -108,7 +108,7 @@ const Prefooter = () => {
             <Paragraph>
               Because we are aware that putting durability first leads in using less energy, wasting less water, and producing less trash.
             </Paragraph>
-            <Link>View Guarantee</Link>
+            <Link onClick={() => navigate('/contact')}>View Guarantee</Link>
           </Column>
           <Column>
             <Icon>
@@ -128,7 +128,7 @@ const Prefooter = () => {
             <Paragraph>
             Renew used, recycle and fix your essentials through ReHash.
             </Paragraph>
-            <Link>Visit ReHash</Link>
+            <Link onClick={() => navigate('/pages/rehash')}>Visit ReHash</Link>
           </Column>
         </Row>
       </Container>

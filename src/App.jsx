@@ -20,6 +20,9 @@ import Checkout from "./pages/Checkout";
 import CollectionsList from "./pages/CollectionsList";
 import Information from './pages/Information';
 import SubmitReview from './pages/SubmitReview';
+import GetReset from './pages/GetReset';
+import PostReset from './pages/PostReset';
+import Rehash from './pages/Rehash';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser)
@@ -36,6 +39,8 @@ const App = () => {
       <Route path="/cart" element={<Cart />}/>
       <Route path="/login" element={ user ? <Navigate to="/account" /> : <Login />} />
       <Route path="/register" element={ user ? <Navigate to="/account" /> : <Register />} />
+      <Route path='/reset' element={<GetReset />} />
+      <Route path='/reset/:token' element={<PostReset />} />
       <Route path="/account" element= { user ? <Account /> : <Navigate to="/login" /> } />
       <Route path="/sustainability" element={<Sustainability />}/>
       <Route path="/company" element={<Company />}/>
@@ -44,6 +49,7 @@ const App = () => {
       <Route path="/terms-of-use" element={<Terms />}/>
       <Route path="/privacy-policy" element={<Privacy />}/>
       <Route path="/contact" element={<Contact />}/>
+      <Route path="/pages/rehash" element={<Rehash />} />
       <Route path="/faq" element={<FAQ />}/>
     </Routes>
   )

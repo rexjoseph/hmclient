@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import Announcement from "../components/Announcement";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/apiCalls";
@@ -133,6 +133,10 @@ const Register = () => {
       alert('Confirm password and password must be the same')
     }
   };
+
+  useEffect(() => {
+    document.title = `Register — Hashingmart`;
+  });
 
   return (
     <Page>

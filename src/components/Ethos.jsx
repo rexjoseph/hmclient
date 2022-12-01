@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { mobile } from "../responsive";
 
@@ -57,6 +58,8 @@ const MissionLink = styled.a`
 `
 
 const Ethos = () => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <MissionStatement>
@@ -66,7 +69,7 @@ const Ethos = () => {
           </Paragraph>
         </Mission>
         <MissionMore>
-          <MissionLink>Our Story</MissionLink>
+          <MissionLink onClick={() => navigate('/sustainability')}>Our Story</MissionLink>
         </MissionMore>
       </MissionStatement>
     </Container>

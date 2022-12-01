@@ -60,7 +60,7 @@ const Information = () => {
     <section className="checkout">
       {/* <Announcement /> */}
       {/* <Navbar /> */}
-      <main>
+      <main className="main">
         <div className="checkout_col">
           <div className="c_contact">
             <form onSubmit={submitHandler}>

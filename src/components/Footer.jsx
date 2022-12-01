@@ -231,7 +231,7 @@ const Footer = () => {
                 <LinkA onClick={() => navigate('/terms-of-use')}>Terms</LinkA>
               </LinkHolder>
               <LinkHolder>
-                <LinkA>Contact</LinkA>
+                <LinkA onClick={() => navigate('/contact')}>Contact</LinkA>
               </LinkHolder>
             </LinkBodyOne>
           </LinksWrapper>

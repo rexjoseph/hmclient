@@ -1,10 +1,15 @@
 import React, { useRef, useLayoutEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Navbar.css"
+import { logout } from "../redux/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const cart = useSelector((state) => state.carts.cart);
-  const navRef = useRef()
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const navRef = useRef();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   
   // set state of scroll
   const [scrolled, setScrolled] = React.useState("unscrolled")
@@ -35,6 +40,11 @@ function Navbar() {
   }, [])
 
 
+  const handleLogout = (e) => {
+    e.preventDefault()
+    dispatch(logout);
+    navigate('/');
+  }
 
   return (
     <div className={`page-header ${scrolled}`}>
@@ -76,8 +86,16 @@ function Navbar() {
             <li>
               <a href="/sustainability">Sustainability</a>
             </li>
-            <li>
-              <a href="/account">My Account</a>
+            <li className="account__user">
+              {currentUser ? (
+                <a href="/account">
+                Hi, <span className="span span-show">{currentUser.firstName}</span>
+              </a>
+              ) : (
+                <a href="/account">
+                Hello, <span className="span span-show">Sign in</span>
+              </a>
+              )}
             </li>
             <li className='bag-list'>
               <a href="/cart" className='link-bag'>
@@ -86,6 +104,7 @@ function Navbar() {
                 </span>
               </a>
             </li>
+            {currentUser && <button class="navLogout" onClick={handleLogout}>Log Out</button>}
           </ul>
         </nav>
       </div>

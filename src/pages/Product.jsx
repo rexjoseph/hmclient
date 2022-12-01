@@ -553,6 +553,12 @@ const ReviewsFlex = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 15px 0;
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+    gap: 2rem;
+    margin: 25px 0;
+  }
 `
 
 const CreateReviewLink = styled.a`
@@ -569,6 +575,10 @@ const CreateReviewLink = styled.a`
   text-align: center;
   text-decoration: none;
   line-height: 32px;
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
 
   &:hover {
     background: var(--color-primary);

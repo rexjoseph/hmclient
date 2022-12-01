@@ -204,4 +204,8 @@
   .submitReview__fieldhalf {
     width: 100%;
   }
+
+  .submitReview__title {
+    font-size: 22px;
+  }
 }
