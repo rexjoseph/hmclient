@@ -57,6 +57,18 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    // POST EMAIL SUBSCRIPTION
+    postSubscribeStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    postSubscribeSuccess: (state, action) => {
+      state.isFetching = false;
+    },
+    postSubscribeFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
     //  UPDATE
     editUserStart: (state) => {
       state.isFetching = true;
@@ -91,5 +103,8 @@ export const {
   newPasswordStart,
   newPasswordSuccess,
   newPasswordFailure,
+  postSubscribeStart,
+  postSubscribeSuccess,
+  postSubscribeFailure
 } = userSlice.actions;
 export default userSlice.reducer;

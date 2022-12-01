@@ -14,7 +14,10 @@ import {
   resetPasswordFailure,
   newPasswordStart,
   newPasswordSuccess,
-  newPasswordFailure
+  newPasswordFailure,
+  postSubscribeStart,
+  postSubscribeSuccess,
+  postSubscribeFailure
 } from "./userRedux";
 import {
   createReviewStart,
@@ -57,13 +60,23 @@ export const reset = async (dispatch, email) => {
   }
 };
 
+export const subscribe = async (dispatch, email) => {
+  dispatch(postSubscribeStart());
+  try {
+    const res = await publicRequest.post("/email/signup", email);
+    dispatch(postSubscribeSuccess(res.data));
+  } catch (err) {
+    dispatch(postSubscribeFailure());
+  }
+}
+
 export const newpassword = async (dispatch, user) => {
   dispatch(newPasswordStart());
   try {
     const res = await publicRequest.post("/auth/new-password", user);
-    dispatch(resetPasswordSuccess(res.data));
+    dispatch(newPasswordSuccess(res.data));
   } catch (err) {
-    dispatch(resetPasswordFailure());
+    dispatch(newPasswordFailure());
   }
 }
 

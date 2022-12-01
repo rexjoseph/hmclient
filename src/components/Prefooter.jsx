@@ -23,8 +23,6 @@ const Row = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  // --bs-gutter-x: 1.6rem;
-  --bs-gutter-y: 0;
   margin-left: calc(var(--bs-gutter-x)*-.5);
   margin-right: calc(var(--bs-gutter-x)*-.5);
   margin-top: calc(var(--bs-gutter-y)*-1);

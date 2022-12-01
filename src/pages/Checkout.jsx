@@ -31,7 +31,7 @@ const Checkout = () => {
   });
   return (
     <section className="checkout">
-      <main>
+      <main  className="main">
         <div className="checkout_col">
           <div className="c_contact">
             <div className="step">

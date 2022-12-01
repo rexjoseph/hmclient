@@ -1,4 +1,8 @@
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+import { subscribe } from "../redux/apiCalls"
 
 const EmailDiv = styled.div`
   background-color: #f8f7f5;
@@ -132,7 +136,7 @@ const Input = styled.input`
 
 const SignupFormButton = styled.div``
 
-const Button = styled.div`
+const Button = styled.button`
   font-size: 14px;
   font-family: inherit;
   padding: 13px 18px;
@@ -179,6 +183,15 @@ const Link = styled.div`
 `
 
 const EmailMarketing = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    subscribe(dispatch, {email})
+    // navigate('/email-susbcribe/success');
+  }
   return (
     <EmailDiv>
       <Container>
@@ -193,10 +206,10 @@ const EmailMarketing = () => {
                   Join our email list and be the first to know about new limited edition products, innovations, and lots of other fun updates.
                 </Paragraph>
               </SignupRow>
-              <SignupForm>
+              <SignupForm onSubmit={handleSubmit}>
                 <SignupFormRow>
                   <SignupFormInput>
-                    <Input placeholder="Enter Your Email Address"></Input>
+                    <Input placeholder="Enter Your Email Address" required onChange={(e) => setEmail(e.target.value)} />
                   </SignupFormInput>
                   <SignupFormButton>
                     <Button>Sign Up Now</Button>

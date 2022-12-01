@@ -828,7 +828,7 @@ const Product = () => {
               <HelpRow>
                 <HelpTitle>Have questions about buying this product?</HelpTitle>
                 <HelpContent>
-                  <HelpLink>
+                  <HelpLink onClick={() => navigate('/contact')}>
                     Chat with a representative
                   </HelpLink>
                 </HelpContent>

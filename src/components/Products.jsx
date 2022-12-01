@@ -78,8 +78,8 @@ const Products = ({cat, filters, sort}) => {
       <ProductsWrapper>
         <ProductsUl>
           { cat 
-            ? filteredProducts.map(item => <Product item={item} key={item.id}/>).reverse()
-            : products.slice(0, 9).map(item => <Product item={item} key={item.id}/>).reverse()}
+            ? filteredProducts.map(item => <Product item={item} key={item._id}/>).reverse()
+            : products.slice(0, 9).map(item => <Product item={item} key={item._id}/>).reverse()}
         </ProductsUl>
       </ProductsWrapper>
     </CollectionWrapper>

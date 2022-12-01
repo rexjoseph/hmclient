@@ -58,7 +58,7 @@ const SubmitReview = () => {
     <div>
       <Announcement />
       <Navbar />
-      <main className="main">
+      <main className="main__block">
         <div className="submitReview__root">
           <div>
             <div className="submitReview__header">

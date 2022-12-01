@@ -104,7 +104,7 @@ function Navbar() {
                 </span>
               </a>
             </li>
-            {currentUser && <button class="navLogout" onClick={handleLogout}>Log Out</button>}
+            {currentUser && <button className="navLogout" onClick={handleLogout}>Log Out</button>}
           </ul>
         </nav>
       </div>

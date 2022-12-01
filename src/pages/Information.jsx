@@ -305,7 +305,7 @@ const Information = () => {
                   </table>
                 </div>
               </div>
-              <div className="order__section-discount">
+              <div className="order__section-discount no-display">
                 <form>
                   <div className="fieldSet">
                     <div className="datafield">
