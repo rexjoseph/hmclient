@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { subscribe } from "../redux/apiCalls"
@@ -189,8 +189,8 @@ const EmailMarketing = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    subscribe(dispatch, {email})
-    // navigate('/email-susbcribe/success');
+    subscribe(dispatch, {email});
+    navigate('/email-subscribe/success');
   }
   return (
     <EmailDiv>

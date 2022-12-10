@@ -1,0 +1,24 @@
+.widgetOrders {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.widgetTitle {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.widgetTable {
+  width: 100%;
+}
+
+.widgetTh {
+  text-align: left;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--line-divider);
+}
+
+.widgetTr {
+  border-bottom: 2px solid var(--line-divider);
+}

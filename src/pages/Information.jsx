@@ -46,7 +46,7 @@ const Information = () => {
           phone,
         })
       )
-      navigate('/checkout');
+      // navigate('/checkout');
     } else {
       alert("Please fill out the fields");
     }

@@ -517,6 +517,7 @@ const CartEmptyA = styled.a`
 const Cart = () => {
   const cart = useSelector((state) => state.carts.cart)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
     document.title = `Your Shopping Cart — Hashingmart`
@@ -531,8 +532,6 @@ const Cart = () => {
     })
     return {totalPrice, totalQuantity}
   }
-
-  const navigate = useNavigate()
 
   return (
     <CartPageWrapper>
@@ -664,8 +663,8 @@ const Cart = () => {
                   <CartHeaderOne>Your Cart Is Empty.</CartHeaderOne>
                   <CartHeaderTwo>Not sure where to start?</CartHeaderTwo>
                   <CartEmptyLinksDiv>
-                    <CartEmptyA>Shop Arrivals</CartEmptyA>
-                    <CartEmptyA>Shop Collections</CartEmptyA>
+                    <CartEmptyA onClick={() => navigate('/products')}>Shop Arrivals</CartEmptyA>
+                    <CartEmptyA onClick={() => navigate('/collections')}>Shop Collections</CartEmptyA>
                   </CartEmptyLinksDiv>
                 </CartEmptyFlex>
               </CartEmpty>

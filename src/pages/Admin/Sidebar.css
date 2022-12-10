@@ -1,0 +1,29 @@
+.sidebar {
+  flex: 1;
+  height: calc(100vh);
+  /* background-color: var(--color-primary); */
+  border-right: 1px solid var(--line-divider);
+  /* color: var(--color-secondary); */
+  position: sticky;
+  top: 50px;
+  padding: 3rem;
+}
+
+.sidebar ul {
+  margin-left: 0.5rem;
+}
+
+.sidebar ul li {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  color: #333;
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar ul li:hover {
+  background: #f7f7f7;
+  border-radius: 5px;
+  color: var(--brand-blue);
+}

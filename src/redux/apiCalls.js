@@ -15,17 +15,23 @@ import {
   newPasswordStart,
   newPasswordSuccess,
   newPasswordFailure,
-  postSubscribeStart,
-  postSubscribeSuccess,
-  postSubscribeFailure
 } from "./userRedux";
 import {
   createReviewStart,
   createReviewSuccess,
   createReviewFailure,
+  addProductStart,
+  addProductSuccess,
+  addProductFailure
 } from "./productRedux";
-import { publicRequest } from "../requestMethods";
+import {
+  postSubscribeStart,
+  postSubscribeSuccess,
+  postSubscribeFailure,
+} from "./emailRedux";
+import { publicRequest, userRequest } from "../requestMethods";
 
+// USER
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
@@ -65,10 +71,11 @@ export const subscribe = async (dispatch, email) => {
   try {
     const res = await publicRequest.post("/email/signup", email);
     dispatch(postSubscribeSuccess(res.data));
+    
   } catch (err) {
     dispatch(postSubscribeFailure());
   }
-}
+};
 
 export const newpassword = async (dispatch, user) => {
   dispatch(newPasswordStart());
@@ -78,7 +85,7 @@ export const newpassword = async (dispatch, user) => {
   } catch (err) {
     dispatch(newPasswordFailure());
   }
-}
+};
 
 export const updateAddress = (userId, address) => async (dispatch) => {
   dispatch(editUserStart());
@@ -102,3 +109,14 @@ export const createReview = (id, review) => async (dispatch) => {
     dispatch(createReviewFailure());
   }
 };
+
+// ADMIN
+export const addProduct = async (product, dispatch) => {
+  dispatch(addProductStart());
+  try {
+    const res = await userRequest.post(`/products`, product);
+    dispatch(addProductSuccess(res.data));
+  } catch (err) {
+    dispatch(addProductFailure());
+  }
+}

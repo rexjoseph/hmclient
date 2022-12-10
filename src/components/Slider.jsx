@@ -162,14 +162,14 @@ const Slider = () => {
           <Asset>
             <Figure>
               <AssetImage>
-                <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0IjoxMzUwLCJ3aWR0aCI6MTM1MH0sInRvRm9ybWF0Ijoid2VicCJ9LCJrZXkiOiJtZWRpYS9ibG9ja3MvRnJvc3RLbml0Xy1fSGVyb18tX0Rlc2t0b3AuanBnIn0=" />
+                <Image src="https://cdn.shopify.com/s/files/1/0156/6146/files/Dual_Gender_Desktop_6c5d6a84-d36c-4289-a67b-7f439f95dc61_1440x.jpg?v=1670533532" />
               </AssetImage>
             </Figure>
             <Header>
-              <Heading>A case for cold-weather cardio.</Heading>
-              <SubHeading>Sweat-wicking, snug-fitting, warm-wearing. FrostKnit.</SubHeading>
+              <Heading>30% Off Cold Weather Essentials</Heading>
+              <SubHeading>For a short time, save on MegaFleece, RecTrek, FrostKnit, and more.</SubHeading>
               <Action>
-                <LinkA onClick={() => navigate('/products')}>Shop — New Arrivals</LinkA>
+                <LinkA onClick={() => navigate('/products')}>Go, Go, Go</LinkA>
               </Action>
             </Header>
           </Asset>

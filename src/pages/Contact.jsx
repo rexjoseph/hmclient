@@ -10,7 +10,7 @@ const Main = styled.main`
   margin: 8rem 0;
 `;
 
-const Container = styled.div`
+const Wrapper = styled.div`
   max-width: 1000px;
   width: 100%;
   margin: 0 auto;
@@ -62,6 +62,12 @@ const ContentDiv = styled.p`
 const Paragraph = styled.p``;
 
 const Contact = () => {
+  const triggerText = 'Open form';
+  const onSubmit = (event) => {
+    event.preventDefault(event);
+    console.log(event.target.name.value);
+    console.log(event.target.email.value);
+  };
   const {pathname} = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -77,11 +83,11 @@ const Contact = () => {
       <Navbar />
       <Main>
         <HelpCenterHeader>
-          <Container>
+          <Wrapper>
             <Header>Help Center</Header>
-          </Container>
+          </Wrapper>
         </HelpCenterHeader>
-        <Container>
+        <Wrapper>
           <Guarantee>
             <SubHeader>Guarantee</SubHeader>
             <Paragraph>
@@ -116,7 +122,7 @@ const Contact = () => {
               </Paragraph>
             </ContentDiv>
           </Other>
-        </Container>
+        </Wrapper>
       </Main>
       <Footer />
     </Page>

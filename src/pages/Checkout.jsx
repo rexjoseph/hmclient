@@ -2,8 +2,15 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useAcceptJs } from "react-acceptjs";
 import "./Checkout.css";
 import "./Information.css";
+import { useNavigate } from "react-router-dom";
+
+const authData = {
+  apiLoginID: process.env.LOGINID,
+  clientKey: process.env.KEY
+}
 
 const Checkout = () => {
   const cart = useSelector((state) => state.carts.cart);
@@ -15,6 +22,15 @@ const Checkout = () => {
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [phone, setPhone] = useState("");
+  const navigate = useNavigate()
+
+  const { dispatchData, loading, error } = useAcceptJs({authData});
+  const [cardData, setCardData] = useState({
+    cardNumber: '',
+    expMonth: '',
+    expYear: '',
+    cardCode: ''
+  })
 
   const getTotal = () => {
     let totalQuantity = 0;
@@ -29,6 +45,20 @@ const Checkout = () => {
   useEffect(() => {
     document.title = `Checkout — Hashingmart`;
   });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // Dispatch CC Data to Authorize.net and receive payment nonce for use on the server
+    try {
+      const res = await dispatchData({ cardData });
+      console.log('Received response:', res)
+      navigate('/', {
+        authorizeData: res.data,
+        products: cart
+      })
+    } catch {}
+  }
+
   return (
     <section className="checkout">
       <main  className="main">
@@ -74,7 +104,7 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-                <form className="checkout__form">
+                <form className="checkout__form" onSubmit={handleSubmit}>
                   <div className="section">
                     <div className="section__header">
                       <h2 className="section__header-title">Payment</h2>
@@ -123,6 +153,8 @@ const Checkout = () => {
                                       name="cardNumber"
                                       className="fieldinput"
                                       placeholder="Card number"
+                                      value={cardData.cardNumber}
+                                      onChange={(e) => setCardData({...cardData, cardNumber: e.target.value})}
                                       required
                                     />
                                   </div>
@@ -145,25 +177,47 @@ const Checkout = () => {
                                     />
                                   </div>
                                 </div>
-                                <div className="datafield datafield-half">
+                                <div className="datafield datafield-third">
                                   <div className="emaildata_wrapper">
                                     <label
-                                      htmlFor="expiryDate"
+                                      htmlFor="expiryMonth"
                                       className="fieldlabel"
                                     >
-                                      Expiration date (MM/YY)
+                                      Expiration month (MM)
                                     </label>
                                     <input
                                       type="text"
-                                      id="expiryDate"
-                                      name="expiryDate"
+                                      id="expiryMonth"
+                                      name="expiryMonth"
                                       className="fieldinput"
-                                      placeholder="Expiration date (MM/YY)"
+                                      placeholder="MM"
                                       required
+                                      value={cardData.expMonth}
+                                      onChange={(e) => setCardData({...cardData, expMonth: e.target.value})}
                                     />
                                   </div>
                                 </div>
-                                <div className="datafield datafield-half">
+                                <div className="datafield datafield-third">
+                                  <div className="emaildata_wrapper">
+                                    <label
+                                      htmlFor="expiryYear"
+                                      className="fieldlabel"
+                                    >
+                                      Expiration year (YY)
+                                    </label>
+                                    <input
+                                      type="text"
+                                      id="expiryYear"
+                                      name="expiryYear"
+                                      className="fieldinput"
+                                      placeholder="YY"
+                                      required
+                                      value={cardData.expYear}
+                                      onChange={(e) => setCardData({...cardData, expYear: e.target.value})}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="datafield datafield-third">
                                   <div className="emaildata_wrapper">
                                     <label htmlFor="cvv" className="fieldlabel">
                                       Security code
@@ -175,6 +229,8 @@ const Checkout = () => {
                                       className="fieldinput"
                                       placeholder="Security code"
                                       required
+                                      value={cardData.cardCode}
+                                      onChange={(e) => setCardData({...cardData, cardCode: e.target.value})}
                                     />
                                   </div>
                                 </div>

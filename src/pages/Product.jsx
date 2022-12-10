@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import Prefooter from "../components/Prefooter";
 import Feedback from "../components/Feedback";
 import Footer from "../components/Footer";
+import ProductItem from "../components/Product";
 import InstaHandle from "../components/InstaHandle";
 import { useLocation } from "react-router";
 import { useEffect, useState } from "react";
@@ -20,6 +21,7 @@ import ProdAccordion from "../components/ProdAccordion";
 import Announcement from "../components/Announcement";
 import { useNavigate } from 'react-router-dom';
 import ReviewItem from '../components/ReviewItem';
+import PlaceholderImage from "../images/imgplaceholder.jpg";
 
 const ProductPageWrapper = styled.div`
 `
@@ -586,10 +588,33 @@ const CreateReviewLink = styled.a`
   }
 `
 
+const RelatedContainer = styled.div`
+  margin-top: 3rem;
+`
+
+const ProductsUl = styled.ul`
+  display: flex;
+  flex: 1 1;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+`
+
+const RelatedDiv = styled.div`
+  margin-bottom: 1rem;
+  max-width: 1250px;
+  width: 100%;
+  padding: 0 18px;
+`
+
+const RelatedHeader = styled.h3``
+
 const Product = () => {
   const location = useLocation()
   const id = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
+  const [related, setRelated] = useState({});
   // const [quantity] = useState(1);
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
@@ -602,7 +627,8 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/"+id)
-        setProduct(res.data);
+        setProduct(res.data.product);
+        setRelated(res.data.related);
       } catch {}
     }
     getProduct()
@@ -675,6 +701,7 @@ const Product = () => {
                                 width={"100%"} 
                                 height={"100%"}
                                 effect="blur"
+                                placeholderSrc={PlaceholderImage}
                               />
                               </ImageHolder>
                             </ImageButton>
@@ -834,6 +861,20 @@ const Product = () => {
                 </HelpContent>
               </HelpRow>
             </HelpDiv>
+            {
+              related.length > 0 && (
+                <RelatedContainer>
+                  <RelatedDiv>
+                    <RelatedHeader>Also Consider</RelatedHeader>
+                  </RelatedDiv>
+                  <ProductsUl>
+                    {related.slice(0, 4)?.map((item) => 
+                      <ProductItem item={item} key={item._id}/>
+                    ).reverse()}
+                  </ProductsUl>
+                </RelatedContainer>
+              )
+            }
             <Reviews>
               <ReviewsFlex>
                 <ReviewsHeader>Reviews</ReviewsHeader>
@@ -875,7 +916,8 @@ const Product = () => {
                   <>
                     <ReviewItem 
                       firstName={review.firstName}
-                      lastName={review.lastName}
+                      lastName={review.lastName.substring(0, 1).concat('.')}
+                      header={review.header}
                       rating={review.rating}
                       comment={review.comment} 
                       date={review.createdAt.substring(0, 10)}

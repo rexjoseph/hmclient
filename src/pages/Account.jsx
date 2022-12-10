@@ -41,13 +41,13 @@ const Account = () => {
               <h3>{user.firstName}&nbsp;{user.lastName}</h3>
               <div className="address-body">
                 <div className="email">{user.email}</div>
-                <div>{user.address.street}</div>
+                {/* <div>{user.address.street}</div>
                 <div>{user.address.apartment}</div>
                 <div className="city-state">{user.address.city},&nbsp;</div>
                 <div className="city-state">{user.address.state}&nbsp;</div>
                 <div className="city-state">{user.address.zip}</div>
                 <div>{user.address.country}</div>
-                <div>{user.address.phone}</div>
+                <div>{user.address.phone}</div> */}
               </div>
             </div>
           </div>

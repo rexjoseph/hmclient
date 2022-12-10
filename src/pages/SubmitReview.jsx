@@ -14,6 +14,7 @@ const SubmitReview = () => {
   const user = useSelector((state) => state.user.currentUser);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
+  const [header, setHeader] = useState("");
   const [product, setProduct] = useState({});
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -23,7 +24,7 @@ const SubmitReview = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get("/products/find/" + id);
-        setProduct(res.data);
+        setProduct(res.data.product);
       } catch {}
     };
     getProduct();
@@ -36,6 +37,7 @@ const SubmitReview = () => {
         createReview(id, {
           rating,
           comment,
+          header,
           firstName: user.firstName,
           lastName: user.lastName,
         })
@@ -109,7 +111,7 @@ const SubmitReview = () => {
                       </div>
                       <div className="submitReview__fieldhalf">
                         <label htmlFor="header">Title</label>
-                        <input type="text" name="header" />
+                        <input type="text" name="header" onChange={(e) => setHeader(e.target.value)} />
                       </div>
                     </div>
                     <div className="submitReview__fieldtext">
@@ -148,7 +150,7 @@ const SubmitReview = () => {
                   </fieldset>
                 </form>
               ) : (
-                <>Sign in to leave a review</>
+                <a href="/login">Sign in to leave a review</a>
               )}
             </div>
           </div>

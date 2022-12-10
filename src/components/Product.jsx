@@ -24,7 +24,8 @@ const List = styled.li`
   list-style: none;
   margin: 0;
   padding: 0 18px;
-  width: 33.3333333333%;
+  // width: 33.3333333333%;
+  width: 25%;
   // cursor: pointer;
 
   @media (max-width: 960px) {
@@ -140,7 +141,19 @@ const PriceSpan = styled.span`
   font-size: 13px;
 `
 
-const Product = ({item}) => {
+const RatingProduct = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+
+  > * + * {
+    margin-left: .5rem;
+  }
+`
+
+const HeaderRatingRow = styled.span``
+
+const  Product = ({item}) => {
   // const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -170,6 +183,40 @@ const Product = ({item}) => {
           <TitleWrapper>
             <LinkA>
               <ProductTitle>{item.title}</ProductTitle>
+              {item.rating > 0 && (
+                <RatingProduct>
+                  <HeaderRatingRow>
+                    <i className={
+                      item.rating >= 1 ? 'fa fa-star' : item.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                      }>
+                    </i>
+                  </HeaderRatingRow>
+                  <HeaderRatingRow>
+                    <i className={
+                      item.rating >= 2 ? 'fa fa-star' : item.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                      }>
+                    </i>
+                  </HeaderRatingRow>
+                  <HeaderRatingRow>
+                    <i className={
+                      item.rating >= 3 ? 'fa fa-star' : item.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                      }>
+                    </i>
+                  </HeaderRatingRow>
+                  <HeaderRatingRow>
+                    <i className={
+                      item.rating >= 4 ? 'fa fa-star' : item.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                      }>
+                    </i>
+                  </HeaderRatingRow>
+                  <HeaderRatingRow>
+                    <i className={
+                      item.rating >= 5 ? 'fa fa-star' : item.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                      }>
+                    </i>
+                  </HeaderRatingRow>
+                </RatingProduct>
+              )}
               <MoreInfo>{item.color.length}&nbsp; colors available</MoreInfo>
               <PriceDiv>
                 <PriceSpan>${item.price}</PriceSpan>

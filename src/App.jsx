@@ -23,9 +23,12 @@ import SubmitReview from './pages/SubmitReview';
 import GetReset from './pages/GetReset';
 import PostReset from './pages/PostReset';
 import Rehash from './pages/Rehash';
+import EmailMarketingSuccess from './pages/EmailMarketingSuccess';
+import NewProduct from './pages/Admin/NewProduct';
+import AdminHome from './pages/Admin/Home';
 
 const App = () => {
-  const user = useSelector(state => state.user.currentUser)
+  const user = useSelector(state => state.user.currentUser);
   return (
     <Routes>
       <Route exact path="/" element={<Home />}/>
@@ -51,6 +54,9 @@ const App = () => {
       <Route path="/contact" element={<Contact />}/>
       <Route path="/pages/rehash" element={<Rehash />} />
       <Route path="/faq" element={<FAQ />}/>
+      <Route path="/email-subscribe/success" element={<EmailMarketingSuccess />}/>
+      <Route path="/admin/" element={ user && user.isAdmin ? <AdminHome /> : <Navigate to="/" />} />
+      <Route path="/admin/newproduct" element={ user && user.isAdmin ? <NewProduct /> : <Navigate to="/" />} />
     </Routes>
   )
 };
