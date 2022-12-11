@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
-import { categories } from '../data'
 import CollectionItem from "../components/CollectionItem"
 import { useLocation, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import InstaHandle from '../components/InstaHandle'
+import axios from 'axios'
 
 const Page = styled.section``
 const Collections = styled.div`
@@ -53,6 +53,17 @@ const SubHeader = styled.h2`
 
 const CollectionsList = () => {
   const {pathname} = useLocation()
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/api/category/all")
+        setCategories(res.data)
+      } catch (err) {}
+    };
+     getCategories()
+  }, [])
 
   useEffect(() => {
     document.title = `Shop By Collections — Hashingmart`

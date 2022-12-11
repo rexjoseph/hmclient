@@ -85,7 +85,7 @@ const SubmitReview = () => {
             </div>
             <div>
               {user ? (
-                <form onSubmit={submitRatingHandler}>
+                <form onSubmit={submitRatingHandler} className="submitReviewForm">
                   <fieldset className="submitReview__fieldset">
                     <legend className="submitReview__legend">
                       Your review

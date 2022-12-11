@@ -74,11 +74,11 @@ const Title = styled.h3`
 const CollectionItem = ({item}) => {
   return (
     <CollectionList>
-      <Link to={`/products/${item.cat}`} >
+      <Link to={`/products/${item.name}`} >
         <CollectionWrapper>
           <CollectionContent>
-            <Image src={item.img} />
-            <Title>{item.cat.toUpperCase()}</Title>
+            <Image src={item.banner} />
+            <Title>{item.name.toUpperCase()}</Title>
           </CollectionContent>
         </CollectionWrapper>
       </Link>

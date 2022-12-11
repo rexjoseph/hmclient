@@ -11,6 +11,7 @@ import Collections from '../components/Collections'
 import Products from '../components/Products'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
+import USP from '../components/USP'
 
 const Home = () => {
   useEffect(() => {
@@ -22,6 +23,7 @@ const Home = () => {
       <Navbar />
       <Slider />
       <Testimonial />
+      <USP />
       <Products />
       <Collections />
       <Ethos />

@@ -868,7 +868,7 @@ const Product = () => {
                     <RelatedHeader>Also Consider</RelatedHeader>
                   </RelatedDiv>
                   <ProductsUl>
-                    {related.slice(0, 4)?.map((item) => 
+                    {related.slice(0, 8)?.map((item) => 
                       <ProductItem item={item} key={item._id}/>
                     ).reverse()}
                   </ProductsUl>

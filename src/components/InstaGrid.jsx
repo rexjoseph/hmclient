@@ -3,6 +3,8 @@ import { mobile } from "../responsive";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css'
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Container = styled.div`
   max-width: 1250px;
@@ -171,7 +173,18 @@ const HandleLink = styled.a`
 `
 
 const InstaGrid = () => {
+  const [ugcContent, setUgcContent] = useState([]);
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const getUGCs = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/api/social/all")
+        setUgcContent(res.data)
+      } catch (err) {}
+    };
+     getUGCs()
+  })
 
   return (
     <IGWrapper>
@@ -182,72 +195,25 @@ const InstaGrid = () => {
         </IGHeader>
       </Container>
       <IGRows>
-        <IGList>
-          <IGContentWrapper>
-            <IGContent>
-              <LazyLoadImage
-                src='https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0Ijo4MDAsIndpZHRoIjo0ODB9LCJ0b0Zvcm1hdCI6IndlYnAifSwia2V5IjoibWVkaWEvaW5zdGFncmFtL3ByaW1vXzhPTFk2NDkucG5nIn0='
-                width={"100%"}
-                height={"100%"}
-                effect="blur"
-              />
-              {/* <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0Ijo4MDAsIndpZHRoIjo0ODB9LCJ0b0Zvcm1hdCI6IndlYnAifSwia2V5IjoibWVkaWEvaW5zdGFncmFtL3ByaW1vXzhPTFk2NDkucG5nIn0=" /> */}
-              <SocialHandle>
-                <HandleLink>
-                  @_makenziegrace
-                </HandleLink>
-              </SocialHandle>
-            </IGContent>
-          </IGContentWrapper>
-        </IGList>
-        <IGList>
-          <IGContentWrapper>
-            <IGContent>
-              <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0IjoxNDQwLCJ3aWR0aCI6NDgwfSwidG9Gb3JtYXQiOiJ3ZWJwIn0sImtleSI6Im1lZGlhL2luc3RhZ3JhbS9pbWFnZTIuanBlZyJ9" />
-              <SocialHandle>
-                <HandleLink>
-                  @tyler_slater__
-                </HandleLink>
-              </SocialHandle>
-            </IGContent>
-          </IGContentWrapper>
-        </IGList>
-        <IGList>
-          <IGContentWrapper>
-            <IGContent>
-              <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0Ijo4MDAsIndpZHRoIjo0ODB9LCJ0b0Zvcm1hdCI6IndlYnAifSwia2V5IjoibWVkaWEvaW5zdGFncmFtL2Rvd25sb2FkXzE2LnBuZyJ9" />
-              <SocialHandle>
-                <HandleLink>
-                @justinedpierre
-                </HandleLink>
-              </SocialHandle>
-            </IGContent>
-          </IGContentWrapper>
-        </IGList>
-        <IGList>
-          <IGContentWrapper>
-            <IGContent>
-              <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0Ijo4MDAsIndpZHRoIjo0ODB9LCJ0b0Zvcm1hdCI6IndlYnAifSwia2V5IjoibWVkaWEvaW5zdGFncmFtL2Rvd25sb2FkXzI1LnBuZyJ9" />
-              <SocialHandle>
-                <HandleLink>
-                @adrianmartinn
-                </HandleLink>
-              </SocialHandle>
-            </IGContent>
-          </IGContentWrapper>
-        </IGList>
-        <IGList>
-          <IGContentWrapper>
-            <IGContent>
-              <Image src="https://d35k3ag2pobvfm.cloudfront.net/eyJidWNrZXQiOiJvdi1lbXMiLCJlZGl0cyI6eyJyZXNpemUiOnsiZml0IjoiaW5zaWRlIiwiaGVpZ2h0Ijo4MDAsIndpZHRoIjo0ODB9LCJ0b0Zvcm1hdCI6IndlYnAifSwia2V5IjoibWVkaWEvaW5zdGFncmFtL2hzX3lwcGZuRHoucG5nIn0=" />
-              <SocialHandle>
-                <HandleLink>
-                @bonjourclem
-                </HandleLink>
-              </SocialHandle>
-            </IGContent>
-          </IGContentWrapper>
-        </IGList>
+        {ugcContent?.map(item => (
+          <IGList key={item._id}>
+            <IGContentWrapper>
+              <IGContent>
+                <LazyLoadImage
+                  src={item.photourl}
+                  width={"100%"}
+                  height={"100%"}
+                  effect="blur"
+                />
+                <SocialHandle>
+                  <HandleLink>
+                    @{item.handle}
+                  </HandleLink>
+                </SocialHandle>
+              </IGContent>
+            </IGContentWrapper>
+          </IGList>
+        )).reverse()}
       </IGRows>
       <IGFooter>
         <IGFooterLink onClick={() => navigate('/products')}>

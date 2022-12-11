@@ -1,8 +1,9 @@
 import styled from "styled-components"
-import { categories } from '../data'
 import CollectionItem from "./CollectionItem"
 import { mobile } from "../responsive";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import axios from 'axios' 
 
 const Container = styled.div`
   margin: 0 auto;
@@ -78,7 +79,19 @@ const CollectionRows = styled.ul`
 `
 
 const Collections = () => {
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/api/category/all")
+        setCategories(res.data)
+      } catch (err) {}
+    };
+     getCategories()
+  })
+
   return (
     <Container>
       <Header>
@@ -90,7 +103,7 @@ const Collections = () => {
         </HeaderLink>
       </Header>
       <CollectionRows>
-        {categories.map(item => (
+        {categories?.map(item => (
           <CollectionItem item={item} key={item.id} />
         ))}
       </CollectionRows>

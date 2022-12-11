@@ -21,7 +21,8 @@ const WidgetOrders = () => {
     <div className='widgetOrders'>
       <div className="widgetLarge">
         <h3 className='widgetTitle'>Recent Invoices</h3>
-        <table className='widgetTable'>
+        {orders.length > 0 ? (
+          <table className='widgetTable'>
           <tr className='widgetTr'>
             <th className='widgetTh'>Order ID</th>
             <th className='widgetTh'>Customer Name</th>
@@ -43,7 +44,10 @@ const WidgetOrders = () => {
               <td className='widgetAmount'>{order.amount}</td>
             </tr>
           ))}
-        </table>
+          </table>
+        ) : (
+          <p>No orders yet</p>
+        )}
       </div>
     </div>
   )

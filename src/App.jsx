@@ -26,6 +26,8 @@ import Rehash from './pages/Rehash';
 import EmailMarketingSuccess from './pages/EmailMarketingSuccess';
 import NewProduct from './pages/Admin/NewProduct';
 import AdminHome from './pages/Admin/Home';
+import NewCategory from './pages/Admin/NewCategory';
+import NewUGC from './pages/Admin/NewUGC';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -57,6 +59,8 @@ const App = () => {
       <Route path="/email-subscribe/success" element={<EmailMarketingSuccess />}/>
       <Route path="/admin/" element={ user && user.isAdmin ? <AdminHome /> : <Navigate to="/" />} />
       <Route path="/admin/newproduct" element={ user && user.isAdmin ? <NewProduct /> : <Navigate to="/" />} />
+      <Route path="/admin/newcategory" element={ user && user.isAdmin ? <NewCategory /> : <Navigate to="/" />} />
+      <Route path="/admin/newugc" element={ user && user.isAdmin ? <NewUGC /> : <Navigate to="/" />} />
     </Routes>
   )
 };

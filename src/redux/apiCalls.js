@@ -29,6 +29,16 @@ import {
   postSubscribeSuccess,
   postSubscribeFailure,
 } from "./emailRedux";
+import {
+  addCategoryStart,
+  addCategorySuccess,
+  addCategoryFailure
+} from "./categoryRedux";
+import {
+  createUGCStart,
+  createUGCSuccess,
+  createUGCFailure
+} from "./ugcRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 
 // USER
@@ -111,6 +121,7 @@ export const createReview = (id, review) => async (dispatch) => {
 };
 
 // ADMIN
+// ADD PRODUCT
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
@@ -118,5 +129,27 @@ export const addProduct = async (product, dispatch) => {
     dispatch(addProductSuccess(res.data));
   } catch (err) {
     dispatch(addProductFailure());
+  }
+}
+
+// ADD CATEGORY
+export const addCategory = async (category, dispatch) => {
+  dispatch(addCategoryStart());
+  try {
+    const res = await userRequest.post(`/category`, category);
+    dispatch(addCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(addCategoryFailure());
+  }
+}
+
+// CREATE CONTENT
+export const addUGCContent = async (content, dispatch) => {
+  dispatch(createUGCStart());
+  try {
+    const res = await userRequest.post(`/social/new-ig`, content);
+    dispatch(createUGCSuccess(res.data));
+  } catch (err) {
+    dispatch(createUGCFailure());
   }
 }

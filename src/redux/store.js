@@ -3,6 +3,9 @@ import {cartReducer} from "./cartRedux"
 import userReducer from "./userRedux"
 import emailReducer from "./emailRedux"
 import productReducer from "./productRedux"
+import categoryReducer from "./categoryRedux"
+import userGeneratedContentReducer from "./ugcRedux"
+
 import {
   persistStore,
   persistReducer,
@@ -25,7 +28,9 @@ const rootReducer = combineReducers({
   carts: cartReducer,
   user: userReducer,
   product: productReducer,
-  emailMarketing: emailReducer
+  category: categoryReducer,
+  emailMarketing: emailReducer,
+  uGCContent: userGeneratedContentReducer, 
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

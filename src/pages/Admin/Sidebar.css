@@ -1,12 +1,10 @@
 .sidebar {
   flex: 1;
   height: calc(100vh);
-  /* background-color: var(--color-primary); */
   border-right: 1px solid var(--line-divider);
-  /* color: var(--color-secondary); */
   position: sticky;
   top: 50px;
-  padding: 3rem;
+  padding: 3rem 0;
 }
 
 .sidebar ul {

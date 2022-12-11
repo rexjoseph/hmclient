@@ -162,7 +162,7 @@ const Slider = () => {
           <Asset>
             <Figure>
               <AssetImage>
-                <Image src="https://cdn.shopify.com/s/files/1/0156/6146/files/Dual_Gender_Desktop_6c5d6a84-d36c-4289-a67b-7f439f95dc61_1440x.jpg?v=1670533532" />
+                <Image src="https://images.lululemon.com/is/image/lululemon/na_dec22_wk1_D_Holiday_1_1_Md_MediaAction_D_ShopStudio?wid=1440&op_usm=0.5,2,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72" />
               </AssetImage>
             </Figure>
             <Header>
