@@ -72,15 +72,10 @@ const Checkout = () => {
       navigate('/payment/success', {
         state: {
           authData: res.data,
-          products: cart,
+          cart: cart,
           amount: getTotal().totalPrice
         }
       })
-      // const res = await dispatchData({ cardData });
-      // console.log('Received response:', res)
-      // navigate('/', {
-      //   authorizeData: res.data,
-      //   products: cart
     } catch {}
   }
 

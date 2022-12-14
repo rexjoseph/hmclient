@@ -84,7 +84,7 @@ const CollectionsList = () => {
             <SubHeader>We create best in class activewear engineered for performance, designed for fun. We focus on developing state-of-the-art materials to ensure comfort in movement and confidence in your gear.</SubHeader>
           </Header>
           {categories.map(item => (
-            <CollectionItem item={item} key={item.id} />
+            <CollectionItem item={item} key={item._id} />
           ))}
         </CollectionWrappers>
       </Collections>

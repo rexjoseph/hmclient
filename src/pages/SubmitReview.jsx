@@ -71,7 +71,7 @@ const SubmitReview = () => {
                 <a href={`/product/${product._id}`}>{product.title}</a>
               </h1>
               <div className="submitReview__productImages">
-                {product.image?.slice(0, 4).map((image, key) => (
+                {product.images?.slice(0, 4).map((image, key) => (
                   <div className="imageWrap" key={key}>
                     <LazyLoadImage
                       src={image}

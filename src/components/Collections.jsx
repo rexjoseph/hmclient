@@ -104,7 +104,7 @@ const Collections = () => {
       </Header>
       <CollectionRows>
         {categories?.map(item => (
-          <CollectionItem item={item} key={item.id} />
+          <CollectionItem item={item} key={item._id} />
         ))}
       </CollectionRows>
     </Container>

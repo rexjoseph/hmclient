@@ -168,7 +168,7 @@ const  Product = ({item}) => {
             <Badge>New</Badge>
           </BadgeHolder>
           <ImageDiv onClick={() => navigate(`/product/${item._id}`)}>
-            <Image src={item.image[0]} />
+            <Image src={item.images[0]} />
           </ImageDiv>
           {/* <button onClick={() => dispatch(addToCart({
                 id: item._id, title: item.title, image: item.image[0], price: item.price
@@ -220,7 +220,20 @@ const  Product = ({item}) => {
                   </HeaderRatingRow>
                 </RatingProduct>
               )}
-              <MoreInfo>{item.color.length}&nbsp; colors available</MoreInfo>
+              <MoreInfo>
+                {item.color.length === 1 && (
+                  <>
+                    {item.color.length}&nbsp;color available
+                  </>
+                )}
+                {
+                  item.color.length > 1 && (
+                    <>
+                      {item.color.length}&nbsp;colors available
+                    </>
+                  )
+                }
+              </MoreInfo>
               <PriceDiv>
                 <PriceSpan>${item.price}</PriceSpan>
               </PriceDiv>

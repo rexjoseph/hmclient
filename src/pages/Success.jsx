@@ -1,13 +1,17 @@
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from "react-router";
 import { userRequest } from "../requestMethods";
+import { resetCart } from '../redux/cartRedux';
+import Announcement from '../components/Announcement';
+import Navbar from '../components/Navbar';
 
 const Success = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const data = location.state.authData;
-  const cart = location.state.products;
+  const cart = location.state.cart;
   const amount = location.state.amount;
   const currentUser = useSelector((state) => state.user.currentUser);
   const [orderId, setOrderId] = useState(null);
@@ -20,33 +24,49 @@ const Success = () => {
     const createOrder = async () => {
       try {
         const res = await userRequest.post("/orders", {
-          userId: currentUser._id,
-          products: cart?.map((item) => ({
+          user: {
+            email: currentUser.email,
+            firstName: currentUser.firstName,
+            lastName: currentUser.lastName,
+            userId: currentUser._id
+          },
+          cart: cart?.map((item) => ({
             productId: item.id,
             quantity: item.quantity,
+            title: item.title,
+            color: item.color,
+            size: item.size
           })),
           amount: amount,
+          address: currentUser.address,
+          paymentId: data
         })
-        console.log(res.data);
         setOrderId(res.data._id);
+        dispatch(resetCart);
       } catch {}
     }
     data && createOrder();
-  }, [data, cart, amount, currentUser])
+  }, [data, cart, amount, currentUser, dispatch])
 
   return (
-    <div style={{
-      height: "100vh",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      }}
-    >
-      {orderId
-        ? `Order has been created successfully. Your order number is ${orderId}`
-        : `Successful. Your order is being prepared...`}
-    </div>
+    <>
+      <Announcement />
+      <Navbar />
+      <div style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "8rem"
+        }}
+      >
+        {orderId
+          ? `Order has been created successfully. Your order number is ${orderId}`
+          : `Successful. Your order is being prepared...`
+        }
+      </div>
+    </>
   )
 }
 

@@ -635,7 +635,7 @@ const Product = () => {
   }, [id])
 
   const handleClick = () => {
-     dispatch(addToCart({id: product._id, title: product.title, image: product.image[0], price: product.price, color: color, size: size}))
+     dispatch(addToCart({id: product._id, title: product.title, image: product.images[0], price: product.price, color: color, size: size}))
      navigate('/cart')
   }
 
@@ -664,10 +664,10 @@ const Product = () => {
                 initialSlide={1}
                 loop={true}
                 >
-                {product.image?.map((image,key) => (
+                {product.images?.map((image, key) => (
                   <SlideContainer key={key}>
                     <SwiperSlide>
-                      <ImageColumn key={image}>
+                      <ImageColumn key={key}>
                         <ImageButtonWrapper>
                           <ImageButton>
                             <ImageHolder>
@@ -691,7 +691,7 @@ const Product = () => {
                 <ImageWrapper>
                   <ImageDiv>
                     <ImageGrid>
-                      {product.image?.map((image, key) => (
+                      {product.images?.map((image, key) => (
                         <ImageColumn key={key}>
                           <ImageButtonWrapper>
                             <ImageButton>
