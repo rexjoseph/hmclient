@@ -62,7 +62,8 @@ const Title = styled.h3`
   text-align: center;
   z-index: 3;
   font-size: 40px;
-  // letter-spacing: -3.4px;
+  text-transform: capitalize;
+  font-weight: 400;
   margin: 0 0 18px;
   padding: 0 108px;
 
@@ -78,7 +79,7 @@ const CollectionItem = ({item}) => {
         <CollectionWrapper>
           <CollectionContent>
             <Image src={item.banner} />
-            <Title>{item.name.toUpperCase()}</Title>
+            <Title>Shop {item.name}</Title>
           </CollectionContent>
         </CollectionWrapper>
       </Link>

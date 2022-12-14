@@ -2,35 +2,37 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useAcceptJs } from "react-acceptjs";
+// import { useAcceptJs } from "react-acceptjs";
+import { userRequest } from "../requestMethods";
 import "./Checkout.css";
 import "./Information.css";
 import { useNavigate } from "react-router-dom";
 
-const authData = {
-  apiLoginID: process.env.LOGINID,
-  clientKey: process.env.KEY
-}
+// const authData = {
+//   apiLoginID: process.env.LOGINID,
+//   clientKey: process.env.KEY
+// }
 
 const Checkout = () => {
   const cart = useSelector((state) => state.carts.cart);
   const user = useSelector((state) => state.user.currentUser);
-  const [street, setStreet] = useState("");
-  const [apartment, setApartment] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [zip, setZip] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [street, setStreet] = useState("");
+  // const [apartment, setApartment] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [state, setState] = useState("");
+  // const [city, setCity] = useState("");
+  // const [zip, setZip] = useState("");
+  // const [phone, setPhone] = useState("");
+  const [inputs, setInputs] = useState({});
   const navigate = useNavigate()
 
-  const { dispatchData, loading, error } = useAcceptJs({authData});
-  const [cardData, setCardData] = useState({
-    cardNumber: '',
-    expMonth: '',
-    expYear: '',
-    cardCode: ''
-  })
+  // const { dispatchData, loading, error } = useAcceptJs({authData});
+  // const [cardData, setCardData] = useState({
+  //   cardNumber: '',
+  //   expMonth: '',
+  //   expYear: '',
+  //   cardCode: ''
+  // })
 
   const getTotal = () => {
     let totalQuantity = 0;
@@ -46,16 +48,39 @@ const Checkout = () => {
     document.title = `Checkout — Hashingmart`;
   });
 
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const data = {
+      ...inputs
+    }
     // Dispatch CC Data to Authorize.net and receive payment nonce for use on the server
     try {
-      const res = await dispatchData({ cardData });
-      console.log('Received response:', res)
-      navigate('/', {
-        authorizeData: res.data,
-        products: cart
+      const res = await userRequest.post("/checkout/payment", {
+        data, 
+        amount: getTotal().totalPrice,
+        shipFirstName: user.firstName,
+        shipLastName: user.lastName,
+        shipAddress: user.address,
+        email: user.email
+      });
+      navigate('/payment/success', {
+        state: {
+          authData: res.data,
+          products: cart,
+          amount: getTotal().totalPrice
+        }
       })
+      // const res = await dispatchData({ cardData });
+      // console.log('Received response:', res)
+      // navigate('/', {
+      //   authorizeData: res.data,
+      //   products: cart
     } catch {}
   }
 
@@ -68,24 +93,24 @@ const Checkout = () => {
               <div className="step__sections">
                 <div className="section">
                   <div className="content-box">
-                    <div role="table" className="content-box__row">
+                    <div className="content-box__row">
                       <div className="row">
                         <div className="row-block__inner">
-                          <div role="rowHeader" className="row-block__label">
+                          <div className="row-block__label">
                             Contact
                           </div>
                         </div>
-                        <div role="cell" className="role-block__link">
+                        <div className="role-block__link">
                           {user.email}
                         </div>
                       </div>
                       <div className="row bb">
                         <div className="row-block__inner">
-                          <div role="rowHeader" className="row-block__label">
+                          <div className="row-block__label">
                             Shipping to
                           </div>
                         </div>
-                        <div role="cell" className="role-block__link">
+                        <div className="role-block__link">
                           {user.address.street},&nbsp;{user.address.city}&nbsp;
                           {user.address.state}&nbsp;{user.address.zip},&nbsp;
                           {user.address.country}
@@ -93,11 +118,11 @@ const Checkout = () => {
                       </div>
                       <div className="row bb">
                         <div className="row-block__inner">
-                          <div role="rowHeader" className="row-block__label">
+                          <div className="row-block__label">
                             Method
                           </div>
                         </div>
-                        <div role="cell" className="role-block__link">
+                        <div className="role-block__link">
                           Free shipping
                         </div>
                       </div>
@@ -124,7 +149,7 @@ const Checkout = () => {
                                 Credit card
                               </label>
                               <div className="payment-method-accessory">
-                                <ul role="list">
+                                <ul>
                                   <li className="payment-icon payment-icon-visa"></li>
                                   <li className="payment-icon payment-icon-master"></li>
                                   <li className="payment-icon payment-icon-amex"></li>
@@ -149,12 +174,12 @@ const Checkout = () => {
                                     </label>
                                     <input
                                       type="text"
-                                      id="cardNumber"
-                                      name="cardNumber"
+                                      id="cc"
+                                      name="cc"
                                       className="fieldinput"
                                       placeholder="Card number"
-                                      value={cardData.cardNumber}
-                                      onChange={(e) => setCardData({...cardData, cardNumber: e.target.value})}
+                                      // value={cardData.cardNumber}
+                                      onChange={handleChange}
                                       required
                                     />
                                   </div>
@@ -171,53 +196,35 @@ const Checkout = () => {
                                       type="text"
                                       id="cardName"
                                       name="cardName"
+                                      defaultValue={user.firstName.concat(` ${user.lastName}`)}
                                       className="fieldinput"
                                       placeholder="Name on card"
                                       required
                                     />
                                   </div>
                                 </div>
-                                <div className="datafield datafield-third">
+                                <div className="datafield datafield-half">
                                   <div className="emaildata_wrapper">
                                     <label
                                       htmlFor="expiryMonth"
                                       className="fieldlabel"
                                     >
-                                      Expiration month (MM)
+                                      Expiration month (MM/YY)
                                     </label>
                                     <input
                                       type="text"
-                                      id="expiryMonth"
-                                      name="expiryMonth"
+                                      id="expiry"
+                                      name="expiry"
                                       className="fieldinput"
-                                      placeholder="MM"
+                                      placeholder="MM/YY"
+                                      maxLength={4}
                                       required
-                                      value={cardData.expMonth}
-                                      onChange={(e) => setCardData({...cardData, expMonth: e.target.value})}
+                                      // value={cardData.expMonth}
+                                      onChange={handleChange}
                                     />
                                   </div>
                                 </div>
-                                <div className="datafield datafield-third">
-                                  <div className="emaildata_wrapper">
-                                    <label
-                                      htmlFor="expiryYear"
-                                      className="fieldlabel"
-                                    >
-                                      Expiration year (YY)
-                                    </label>
-                                    <input
-                                      type="text"
-                                      id="expiryYear"
-                                      name="expiryYear"
-                                      className="fieldinput"
-                                      placeholder="YY"
-                                      required
-                                      value={cardData.expYear}
-                                      onChange={(e) => setCardData({...cardData, expYear: e.target.value})}
-                                    />
-                                  </div>
-                                </div>
-                                <div className="datafield datafield-third">
+                                <div className="datafield datafield-half">
                                   <div className="emaildata_wrapper">
                                     <label htmlFor="cvv" className="fieldlabel">
                                       Security code
@@ -228,9 +235,10 @@ const Checkout = () => {
                                       name="cvv"
                                       className="fieldinput"
                                       placeholder="Security code"
+                                      maxLength={4}
                                       required
-                                      value={cardData.cardCode}
-                                      onChange={(e) => setCardData({...cardData, cardCode: e.target.value})}
+                                      // value={cardData.cardCode}
+                                      onChange={handleChange}
                                     />
                                   </div>
                                 </div>
@@ -263,10 +271,10 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    id="country"
-                                    value={country}
+                                    id="billCountry"
+                                    name="billCountry"
                                     className="fieldinput"
-                                    onChange={(e) => setCountry(e.target.value)}
+                                    onChange={handleChange}
                                     required
                                   />
                                 </div>
@@ -281,9 +289,9 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    defaultValue={user.firstName}
+                                    id="billFirstName"
+                                    name="billFirstName"
+                                    onChange={handleChange}
                                     className="fieldinput"
                                     required
                                   />
@@ -299,8 +307,10 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    defaultValue={user.lastName}
+                                    id="billLastName"
+                                    name="billLastName"
                                     className="fieldinput"
+                                    onChange={handleChange}
                                     required
                                   />
                                 </div>
@@ -315,11 +325,10 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    name="street"
-                                    id="street"
-                                    value={street}
+                                    name="billStreet"
+                                    id="billStreet"
                                     className="fieldinput"
-                                    onChange={(e) => setStreet(e.target.value)}
+                                    onChange={handleChange}
                                     required
                                   />
                                 </div>
@@ -334,12 +343,10 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    name="apartment"
-                                    id="apartment"
-                                    value={apartment}
+                                    name="billApartment"
+                                    id="billApartment"
                                     className="fieldinput"
-                                    onChange={(e) =>
-                                      setApartment(e.target.value)
+                                    onChange={handleChange
                                     }
                                   />
                                 </div>
@@ -351,11 +358,10 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    name="city"
-                                    id="city"
-                                    value={city}
+                                    name="billCity"
+                                    id="billCity"
                                     className="fieldinput"
-                                    onChange={(e) => setCity(e.target.value)}
+                                    onChange={handleChange}
                                     required
                                   />
                                 </div>
@@ -367,11 +373,10 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    name="state"
-                                    id="state"
-                                    value={state}
+                                    name="billState"
+                                    id="billState"
                                     className="fieldinput"
-                                    onChange={(e) => setState(e.target.value)}
+                                    onChange={handleChange}
                                     required
                                   />
                                 </div>
@@ -383,11 +388,10 @@ const Checkout = () => {
                                   </label>
                                   <input
                                     type="text"
-                                    name="zip"
-                                    id="zip"
-                                    value={zip}
+                                    name="billZip"
+                                    id="billZip"
                                     className="fieldinput"
-                                    onChange={(e) => setZip(e.target.value)}
+                                    onChange={handleChange}
                                     required
                                   />
                                 </div>
@@ -401,9 +405,8 @@ const Checkout = () => {
                                     type="text"
                                     name="phone"
                                     id="phone"
-                                    value={phone}
                                     className="fieldinput"
-                                    onChange={(e) => setPhone(e.target.value)}
+                                    onChange={handleChange}
                                   />
                                 </div>
                               </div>

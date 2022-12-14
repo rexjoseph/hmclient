@@ -49,6 +49,9 @@ const ImageHolder = styled.div`
   margin-bottom: 4px;
   position: relative;
   cursor: pointer;
+  background: #F1F1F1;
+  max-height: 368px;
+  max-width: 276px;
 `
 
 const ProductTitle = styled.span`

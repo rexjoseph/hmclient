@@ -6,6 +6,7 @@ const ReviewItem = ({ firstName, lastName, comment, rating, header, date }) => {
     <div className="p-reviewlist">
       <div className="p-review">
         <div className="p-review__1">
+          <h3>{header}</h3>
           <div className="p-review__1-stars">
             <div className="rating">
               <span>
@@ -25,7 +26,6 @@ const ReviewItem = ({ firstName, lastName, comment, rating, header, date }) => {
               </span>
             </div>
           </div>
-          <h3>{header}</h3>
           <div className="p-review-comment">
             <p>{comment}</p>
           </div>

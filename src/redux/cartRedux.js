@@ -31,7 +31,7 @@ const cartSlice = createSlice({
       state.cart = removeItem;
     },
     resetList: (state) => {
-      return (state = [])
+      return (state.cart = [])
     }
   },
 });

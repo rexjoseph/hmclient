@@ -68,7 +68,7 @@ const Featured = () => {
             </div>
           </div>
           <div className="featuredBodyHolder">
-            <span className='bold-text metric'>${income[1]?.total || 0}</span>
+            <span className='bold-text metric'>${income[0]?.total || 0}</span>
             <span className={perc < 0 ? (`'metric-rate metric-rate-bad'`) : ('metric-rate metric-rate-good')}>
               {perc < 0 ? (
                 <>-</>

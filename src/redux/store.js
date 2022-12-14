@@ -5,6 +5,7 @@ import emailReducer from "./emailRedux"
 import productReducer from "./productRedux"
 import categoryReducer from "./categoryRedux"
 import userGeneratedContentReducer from "./ugcRedux"
+import bannerReducer from "./bannerRedux"
 
 import {
   persistStore,
@@ -30,7 +31,8 @@ const rootReducer = combineReducers({
   product: productReducer,
   category: categoryReducer,
   emailMarketing: emailReducer,
-  uGCContent: userGeneratedContentReducer, 
+  uGCContent: userGeneratedContentReducer,
+  banner: bannerReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

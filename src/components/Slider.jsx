@@ -1,5 +1,7 @@
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import styled from "styled-components"
+import axios from 'axios'
 
 const Homepage = styled.div`
   margin-top: 5rem;
@@ -155,26 +157,40 @@ const LinkA = styled.a`
 
 const Slider = () => {
   const navigate = useNavigate()
+  const [banner, setBanner] = useState([]);
+
+  useEffect(() => {
+    const getBanners = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/api/banner/all")
+        setBanner(res.data)
+      } catch (err) {}
+    };
+     getBanners()
+  }, [])
+
   return (
     <Homepage>
-      <Hero>
-        <Layout>
-          <Asset>
-            <Figure>
-              <AssetImage>
-                <Image src="https://images.lululemon.com/is/image/lululemon/na_dec22_wk1_D_Holiday_1_1_Md_MediaAction_D_ShopStudio?wid=1440&op_usm=0.5,2,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72" />
-              </AssetImage>
-            </Figure>
-            <Header>
-              <Heading>30% Off Cold Weather Essentials</Heading>
-              <SubHeading>For a short time, save on MegaFleece, RecTrek, FrostKnit, and more.</SubHeading>
-              <Action>
-                <LinkA onClick={() => navigate('/products')}>Go, Go, Go</LinkA>
-              </Action>
-            </Header>
-          </Asset>
-        </Layout>
-      </Hero>
+      {banner?.map(item => (
+        <Hero>
+          <Layout>
+            <Asset>
+              <Figure>
+                <AssetImage>
+                  <Image src={item.image} />
+                </AssetImage>
+              </Figure>
+              <Header>
+                <Heading>{item.title}</Heading>
+                <SubHeading>{item.caption}</SubHeading>
+                <Action>
+                  <LinkA onClick={() => navigate(`${item.target}`)}>{item.actionText}</LinkA>
+                </Action>
+              </Header>
+            </Asset>
+          </Layout>
+        </Hero>
+      ))}
     </Homepage>
   )
 }

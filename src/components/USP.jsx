@@ -7,6 +7,10 @@ const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 3.5rem;
+
+  @media (max-width: 769px) {
+    padding: 0 1.5rem;
+  }
 `
 
 const Body = styled.div``
@@ -15,6 +19,10 @@ const Heading = styled.h1`
   font-size: 4rem;
   font-weight: 400;
   font-style: italic;
+
+  @media (max-width: 769px) {
+    font-size: 2rem;
+  }
 `
 
 const USP = () => {

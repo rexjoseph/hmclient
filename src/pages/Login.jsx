@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import { login } from "../redux/apiCalls"
@@ -124,7 +125,7 @@ const Login = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const dispatch = useDispatch()
-  const {isFetching, error} = useSelector(state => state.user)
+  const { isFetching, error } = useSelector((state) => state.user);
   const navigate = useNavigate()
 
   const handleClick = (e) => {
@@ -154,7 +155,7 @@ const Login = () => {
               <RegisterFormButton disabled={isFetching}>
                 Sign In
               </RegisterFormButton>
-              {/* {error && <Error>Invalid login credentials</Error>} */}
+              {error && <Error>Invalid login credentials</Error>}
               <RecoverLink onClick={() => navigate('/reset')}> 
                 Forgot Password?
               </RecoverLink>

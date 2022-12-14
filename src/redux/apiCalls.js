@@ -39,6 +39,11 @@ import {
   createUGCSuccess,
   createUGCFailure
 } from "./ugcRedux";
+import {
+  createBannerStart,
+  createBannerSuccess,
+  createBannerFailure
+} from "./bannerRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 
 // USER
@@ -151,5 +156,16 @@ export const addUGCContent = async (content, dispatch) => {
     dispatch(createUGCSuccess(res.data));
   } catch (err) {
     dispatch(createUGCFailure());
+  }
+}
+
+// CREATE BANNER
+export const addBanner = async (banner, dispatch) => {
+  dispatch(createBannerStart());
+  try {
+    const res = await userRequest.post(`/banner/`, banner);
+    dispatch(createBannerSuccess(res.data));
+  } catch (err) {
+    dispatch(createBannerFailure());
   }
 }

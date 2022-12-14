@@ -23,26 +23,30 @@ const WidgetOrders = () => {
         <h3 className='widgetTitle'>Recent Invoices</h3>
         {orders.length > 0 ? (
           <table className='widgetTable'>
-          <tr className='widgetTr'>
-            <th className='widgetTh'>Order ID</th>
-            <th className='widgetTh'>Customer Name</th>
-            <th className='widgetTh'>Order Date</th>
-            <th className='widgetTh'>Country</th>
-            <th className='widgetTh'>Status</th>
-            <th className='widgetTh'>Amount</th>
-          </tr>
-          {orders.map((order) => (
-            <tr className='widgetTr' key={order._id}>
-              <td className='widgetID'>
-                <span>#{order._id.substring(0, 4)}</span>
-              </td>
-              <td className='widgetUser'>
-                <span>{order.userId}</span>
-              </td>
-              <td className='widgetDate'>{format(order.createdAt)}</td>
-              <td className='widgetStatus'>{order.status}</td>
-              <td className='widgetAmount'>{order.amount}</td>
+          <thead>
+            <tr className='widgetTr'>
+              <th className='widgetTh'>Order ID</th>
+              <th className='widgetTh'>Customer Name</th>
+              <th className='widgetTh'>Order Date</th>
+              <th className='widgetTh'>Country</th>
+              <th className='widgetTh'>Status</th>
+              <th className='widgetTh'>Amount</th>
             </tr>
+          </thead>
+          {orders.map((order) => (
+            <tbody key={order._id}>
+              <tr className='widgetTr' key={order._id}>
+                <td className='widgetID'>
+                  <span>#{order._id.substring(0, 4)}</span>
+                </td>
+                <td className='widgetUser'>
+                  <span>{order.userId}</span>
+                </td>
+                <td className='widgetDate'>{format(order.createdAt)}</td>
+                <td className='widgetStatus'>{order.status}</td>
+                <td className='widgetAmount'>{order.amount}</td>
+              </tr>
+            </tbody>
           ))}
           </table>
         ) : (
