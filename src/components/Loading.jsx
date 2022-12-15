@@ -8,7 +8,7 @@ const Loading = (props) => {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      margin: "5rem 0",
+      margin: "8rem 0",
       width: "100%"
     }}>
       <Oval

@@ -22,7 +22,13 @@ import {
   createReviewFailure,
   addProductStart,
   addProductSuccess,
-  addProductFailure
+  addProductFailure,
+  getProductStart,
+  getProductSuccess,
+  getProductFailure,
+  deleteProductStart,
+  deleteProductSuccess,
+  deleteProductFailure
 } from "./productRedux";
 import {
   postSubscribeStart,
@@ -118,7 +124,7 @@ export const updateAddress = (userId, address) => async (dispatch) => {
 export const createReview = (id, review) => async (dispatch) => {
   dispatch(createReviewStart());
   try {
-    const res = await publicRequest.post(`/products/${id}/reviews`, review);
+    const res = await userRequest.post(`/products/${id}/reviews`, review);
     dispatch(createReviewSuccess(res.data));
   } catch (err) {
     dispatch(createReviewFailure());
@@ -136,6 +142,28 @@ export const addProduct = async (product, dispatch) => {
     dispatch(addProductFailure());
   }
 }
+
+// GET PRODUCT
+export const getProducts = async (dispatch) => {
+  dispatch(getProductStart());
+  try {
+    const res = await userRequest.get("/products");
+    dispatch(getProductSuccess(res.data));
+  } catch (err) {
+    dispatch(getProductFailure());
+  }
+};
+
+// DELETE PRODUCT
+export const deleteProduct = async (id, dispatch) => {
+  dispatch(deleteProductStart());
+  try {
+    const res = await userRequest.delete(`/products/${id}`);
+    dispatch(deleteProductSuccess(id));
+  } catch (err) {
+    dispatch(deleteProductFailure());
+  }
+};
 
 // ADD CATEGORY
 export const addCategory = async (category, dispatch) => {

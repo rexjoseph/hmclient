@@ -42,7 +42,7 @@ const Success = () => {
           paymentId: data
         })
         setOrderId(res.data._id);
-        dispatch(resetCart);
+        resetCart(dispatch);
       } catch {}
     }
     data && createOrder();

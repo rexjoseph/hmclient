@@ -29,7 +29,9 @@ import AdminHome from './pages/Admin/Home';
 import NewCategory from './pages/Admin/NewCategory';
 import NewUGC from './pages/Admin/NewUGC';
 import NewBanner from './pages/Admin/NewBanner';
+import AdminProductList from './pages/Admin/ProductList';
 import Success from './pages/Success';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -38,7 +40,7 @@ const App = () => {
       <Route exact path="/" element={<Home />}/>
       <Route path="/collections" element={<CollectionsList />}/>
       <Route path="/products/:category" element={<ProductList/>} />
-      <Route path="/product/:id" element={<Product/>} />
+      <Route path="/product/:slug" element={<Product/>} />
       <Route path="/submit-review/:id" element={<SubmitReview />} />
       <Route path="/products" element={<Arrivals />}/>
       <Route path="/checkout" element={ user && user.address !== undefined ? <Checkout /> : <Navigate to="/checkout/information" /> } />
@@ -65,6 +67,8 @@ const App = () => {
       <Route path="/admin/newcategory" element={ user && user.isAdmin ? <NewCategory /> : <Navigate to="/" />} />
       <Route path="/admin/newugc" element={ user && user.isAdmin ? <NewUGC /> : <Navigate to="/" />} />
       <Route path="/admin/newbanner" element={ user && user.isAdmin ? <NewBanner /> : <Navigate to="/" />} />
+      <Route path="/admin/products" element={ user && user.isAdmin ? <AdminProductList /> : <Navigate to="/" />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 };

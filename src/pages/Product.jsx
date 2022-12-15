@@ -22,6 +22,7 @@ import Announcement from "../components/Announcement";
 import { useNavigate } from 'react-router-dom';
 import ReviewItem from '../components/ReviewItem';
 import PlaceholderImage from "../images/imgplaceholder.jpg";
+import Loading from "../components/Loading";
 
 const ProductPageWrapper = styled.div`
 `
@@ -612,7 +613,7 @@ const RelatedHeader = styled.h3``
 
 const Product = () => {
   const location = useLocation()
-  const id = location.pathname.split("/")[2];
+  const slug = location.pathname.split("/")[2];
   const [product, setProduct] = useState({});
   const [related, setRelated] = useState({});
   // const [quantity] = useState(1);
@@ -622,20 +623,22 @@ const Product = () => {
   const {pathname} = useLocation()
   const [active, setActive] = useState("Details")
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products/find/"+id)
+        const res = await publicRequest.get("/products/find/"+slug)
         setProduct(res.data.product);
         setRelated(res.data.related);
+        setLoading(true)
       } catch {}
     }
     getProduct()
-  }, [id])
+  }, [slug])
 
   const handleClick = () => {
-     dispatch(addToCart({id: product._id, title: product.title, image: product.images[0], price: product.price, color: color, size: size}))
+     dispatch(addToCart({id: product._id, title: product.title, image: product.images[0], price: product.price, color: color, size: size, slug: product.slug}))
      navigate('/cart')
   }
 
@@ -653,280 +656,284 @@ const Product = () => {
       <Navbar />
       <PDPContainer>
         <PDP>
-          <Container>
-            <CarouselWrapper>
-              <Swiper 
-                modules={[Navigation, EffectFade]}
-                navigation
-                effect
-                speed={800}
-                slidesPerView={1}
-                initialSlide={1}
-                loop={true}
-                >
-                {product.images?.map((image, key) => (
-                  <SlideContainer key={key}>
-                    <SwiperSlide>
-                      <ImageColumn key={key}>
-                        <ImageButtonWrapper>
-                          <ImageButton>
-                            <ImageHolder>
-                              <LazyLoadImage 
-                              src={image} 
-                              width={"100%"} 
-                              height={"100%"}
-                              effect="blur"
-                            />
-                            </ImageHolder>
-                          </ImageButton>
-                        </ImageButtonWrapper>
-                      </ImageColumn>
-                    </SwiperSlide>`
-                  </SlideContainer>
-                ))}
-              </Swiper>
-            </CarouselWrapper>
-            <Grid>
-              <GridCell1>
-                <ImageWrapper>
-                  <ImageDiv>
-                    <ImageGrid>
-                      {product.images?.map((image, key) => (
-                        <ImageColumn key={key}>
-                          <ImageButtonWrapper>
-                            <ImageButton>
-                              <ImageHolder>
-                                <LazyLoadImage 
-                                src={image} 
-                                width={"100%"} 
-                                height={"100%"}
-                                effect="blur"
-                                placeholderSrc={PlaceholderImage}
-                              />
-                              </ImageHolder>
-                            </ImageButton>
-                          </ImageButtonWrapper>
-                        </ImageColumn>
-                      ))}
-                    </ImageGrid>
-                  </ImageDiv>
-                </ImageWrapper>
-              </GridCell1>
-
-              <GridCell2>
-                <DetailWrapper>
-                  <ProductHeader>
-                    <Header>
-                      <HeaderDiv>
-                        <HeaderTitle>{product.title}</HeaderTitle>
-                        <HeaderPriceWrapper>
-                          <HeaderPrice>${product.price}</HeaderPrice>
-                        </HeaderPriceWrapper>
-                      </HeaderDiv>
-                    </Header>
-                    <HeaderReviewWrapper>
-                      <HeaderRatingDiv>
-                        <HeaderRatingColumn>
-                          <HeaderRatingRow>
-                            <i className={
-                              product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                              }>
-                            </i>
-                          </HeaderRatingRow>
-                          <HeaderRatingRow>
-                            <i className={
-                              product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                              }>
-                            </i>
-                          </HeaderRatingRow>
-                          <HeaderRatingRow>
-                            <i className={
-                              product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                              }>
-                            </i>
-                          </HeaderRatingRow>
-                          <HeaderRatingRow>
-                            <i className={
-                              product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                              }>
-                            </i>
-                          </HeaderRatingRow>
-                          <HeaderRatingRow>
-                            <i className={
-                              product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                              }>
-                            </i>
-                          </HeaderRatingRow>
-                        </HeaderRatingColumn>
-                      </HeaderRatingDiv>
-                      <HeaderReviewDiv>({product.numReviews})</HeaderReviewDiv>
-                    </HeaderReviewWrapper>
-                  </ProductHeader>
-                  <ProductColors>
-                    <ProductColorsDiv>
-                      <ProductColorsTitle>
-                        <ProductColorsSpan>Colors</ProductColorsSpan>
-                      </ProductColorsTitle>
-                      <ProductColorsSelector>
-                        {product.color?.map((c) => (
-                          <ProductColorSwatch key={c} onClick={() => setColor(c)}>
-                            <ColorSwatch color={c}></ColorSwatch>
-                          </ProductColorSwatch>
-                        ))}
-                      </ProductColorsSelector>
-                    </ProductColorsDiv>
-                  </ProductColors>
-                  {product.size?.length > 0 ? (
-                    <ProductSizes>
-                    <SizeWrapper>
-                      Select Size
-                    </SizeWrapper>
-                    <FilterSize onChange={(e) => setSize(e.target.value)}>
-                    {product.size?.map((s) => (
-                      <SizeOption key={s}>{s}</SizeOption>
+          {
+            loading ? (
+              <Container>
+                <CarouselWrapper>
+                  <Swiper 
+                    modules={[Navigation, EffectFade]}
+                    navigation
+                    effect
+                    speed={800}
+                    slidesPerView={1}
+                    initialSlide={1}
+                    loop={true}
+                    >
+                    {product.images?.map((image, key) => (
+                      <SlideContainer key={key}>
+                        <SwiperSlide>
+                          <ImageColumn key={key}>
+                            <ImageButtonWrapper>
+                              <ImageButton>
+                                <ImageHolder>
+                                  <LazyLoadImage 
+                                  src={image} 
+                                  width={"100%"} 
+                                  height={"100%"}
+                                  effect="blur"
+                                />
+                                </ImageHolder>
+                              </ImageButton>
+                            </ImageButtonWrapper>
+                          </ImageColumn>
+                        </SwiperSlide>`
+                      </SlideContainer>
                     ))}
-                    </FilterSize>
-                  </ProductSizes>
-                  ) : (<></>)}
-                  {/* <AddContainer>
-                    <AmountContainer>
-                      <FontAwesomeIcon onClick={() => handleQuantity("dec")} icon={faMinus} />
-                        <Amount>{quantity}</Amount>
-                      <FontAwesomeIcon onClick={() => handleQuantity("inc")} icon={faPlus} />
-                    </AmountContainer>
-                  </AddContainer> */}
-                  <ProductAdd>
-                    {!color ? (
-                      <ButtonAddToBagNull>Select A Color</ButtonAddToBagNull>
-                    ) : (
-                      <ButtonAddToBag onClick={handleClick}>
-                        Add to Bag&nbsp;
-                        <ButtonSpan>${product.price}</ButtonSpan>
-                      </ButtonAddToBag>
-                    )}
-                    <ShipByDiv>
-                      <ShipBySpan>In stock, ships between 1-2 business days.</ShipBySpan>
-                    </ShipByDiv>
-                    <GuaranteeWidget>
-                      <GuaranteeList>100% satisfaction guarantee</GuaranteeList>
-                      <GuaranteeList>30 day, no hassle returns. </GuaranteeList>
-                    </GuaranteeWidget>
-                  </ProductAdd>
-                  
-                  <PDescripton>
-                    <PDescriptionWrap>
-                      <ProdAccordion 
-                          title="Details" 
-                          active={active} 
-                          setActive={setActive}
-                          content={product.description}
-                        />
-                      <ProdAccordion 
-                        title="Sustainability" 
-                        active={active} 
-                        setActive={setActive}
-                        content={product.sustainability}
-                      />
-                      <ProdAccordion 
-                        title="Care Guide" 
-                        active={active} 
-                        setActive={setActive}
-                        content={product.care_guide}
-                      />
-                      <ProdAccordion 
-                        title="Shipping & Returns" 
-                        active={active} 
-                        setActive={setActive}
-                        content="Free shipping on all orders, and our 30 days, no questions asked return policy. It takes about 7-15 days for a package to arrive from the time you place an order. Please note that we only ship and deliver on business days."
-                      />
-                    </PDescriptionWrap>
-                  </PDescripton>
-                </DetailWrapper>
-              </GridCell2>
-            </Grid>
-            <HelpDiv>
-              <HelpRow1>
-                <svg viewBox="0 0 35 35" role="img" aria-hidden="true" width="35px" height="35px">
-                  <path fill="none" d="M0 .213h35v35H0z"></path>
-                  <path d="M14.4 21.048a13.284 13.284 0 01-1.344.076q-.411 0-.829-.025l-.334-.02-.279.185a15.461 15.461 0 01-4.388 2.109 16.182 16.182 0 001.365-2.054l.484-.923-.941-.446a7.127 7.127 0 01-4.384-6.276c0-4.114 4.274-7.461 9.529-7.461s9.529 3.347 9.529 7.461c0 .059-.009.116-.011.174.33-.029.664-.046 1-.046 0-.043.008-.085.008-.128 0-4.677-4.67-8.461-10.529-8.461S2.75 9 2.75 13.674a8.1 8.1 0 004.95 7.181 18.048 18.048 0 01-1.573 2.305c-.481.6-.236 1.28.613 1.28 1.17 0 3.557-1.1 5.425-2.343q.448.027.888.027c.455 0 .9-.028 1.34-.069-.011-.157-.029-.312-.029-.472 0-.183.018-.357.036-.535z"></path>
-                  <path d="M32.25 21.583c0-3.749-3.745-6.782-8.443-6.782h-.1c-.351 0-.694.027-1.032.063-3.876.413-6.886 2.906-7.269 6.036a5.584 5.584 0 00-.042.678c0 .117.015.23.021.345.222 3.737 3.994 6.428 8.6 6.428.235 0 .473-.007.712-.021a10.723 10.723 0 004.35 1.878c.681 0 .878-.543.492-1.026a14.459 14.459 0 01-1.263-1.848 6.5 6.5 0 003.974-5.751zm-4.4 4.852l-.942.446.484.923a10.673 10.673 0 00.759 1.2 14.28 14.28 0 01-2.9-1.5l-.279-.185-.334.02c-.219.013-.437.019-.653.019-4.21 0-7.515-2.462-7.614-5.629 0-.048-.009-.1-.009-.144a4.521 4.521 0 01.1-.922c.5-2.386 2.87-4.288 5.908-4.75a9.506 9.506 0 011.092-.1c.113 0 .225-.013.339-.013 4.1 0 7.443 2.594 7.443 5.782a5.517 5.517 0 01-3.394 4.853z"></path>
-                </svg>
-              </HelpRow1>
-              <HelpRow>
-                <HelpTitle>Have questions about buying this product?</HelpTitle>
-                <HelpContent>
-                  <HelpLink onClick={() => navigate('/contact')}>
-                    Chat with a representative
-                  </HelpLink>
-                </HelpContent>
-              </HelpRow>
-            </HelpDiv>
-            {
-              related.length > 0 && (
-                <RelatedContainer>
-                  <RelatedDiv>
-                    <RelatedHeader>Also Consider</RelatedHeader>
-                  </RelatedDiv>
-                  <ProductsUl>
-                    {related.slice(0, 8)?.map((item) => 
-                      <ProductItem item={item} key={item._id}/>
-                    ).reverse()}
-                  </ProductsUl>
-                </RelatedContainer>
-              )
-            }
-            <Reviews>
-              <ReviewsFlex>
-                <ReviewsHeader>Reviews</ReviewsHeader>
-                <CreateReviewLink onClick={() => navigate(`/submit-review/${product._id}`)}>Write review</CreateReviewLink>
-              </ReviewsFlex>
-              {product.reviews?.length === 0 && (
-                <>
-                  <NoReviewFlex>
-                  <BigSup>{product.rating.toFixed(1)}</BigSup>
+                  </Swiper>
+                </CarouselWrapper>
+                <Grid>
+                  <GridCell1>
+                    <ImageWrapper>
+                      <ImageDiv>
+                        <ImageGrid>
+                          {product.images?.map((image, key) => (
+                            <ImageColumn key={key}>
+                              <ImageButtonWrapper>
+                                <ImageButton>
+                                  <ImageHolder>
+                                    <LazyLoadImage 
+                                    src={image} 
+                                    width={"100%"} 
+                                    height={"100%"}
+                                    effect="blur"
+                                    placeholderSrc={PlaceholderImage}
+                                  />
+                                  </ImageHolder>
+                                </ImageButton>
+                              </ImageButtonWrapper>
+                            </ImageColumn>
+                          ))}
+                        </ImageGrid>
+                      </ImageDiv>
+                    </ImageWrapper>
+                  </GridCell1>
+
+                  <GridCell2>
+                    <DetailWrapper>
+                      <ProductHeader>
+                        <Header>
+                          <HeaderDiv>
+                            <HeaderTitle>{product.title}</HeaderTitle>
+                            <HeaderPriceWrapper>
+                              <HeaderPrice>${product.price}</HeaderPrice>
+                            </HeaderPriceWrapper>
+                          </HeaderDiv>
+                        </Header>
+                        <HeaderReviewWrapper>
+                          <HeaderRatingDiv>
+                            <HeaderRatingColumn>
+                              <HeaderRatingRow>
+                                <i className={
+                                  product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                  }>
+                                </i>
+                              </HeaderRatingRow>
+                              <HeaderRatingRow>
+                                <i className={
+                                  product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                  }>
+                                </i>
+                              </HeaderRatingRow>
+                              <HeaderRatingRow>
+                                <i className={
+                                  product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                  }>
+                                </i>
+                              </HeaderRatingRow>
+                              <HeaderRatingRow>
+                                <i className={
+                                  product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                  }>
+                                </i>
+                              </HeaderRatingRow>
+                              <HeaderRatingRow>
+                                <i className={
+                                  product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                  }>
+                                </i>
+                              </HeaderRatingRow>
+                            </HeaderRatingColumn>
+                          </HeaderRatingDiv>
+                          <HeaderReviewDiv>({product.numReviews})</HeaderReviewDiv>
+                        </HeaderReviewWrapper>
+                      </ProductHeader>
+                      <ProductColors>
+                        <ProductColorsDiv>
+                          <ProductColorsTitle>
+                            <ProductColorsSpan>Colors</ProductColorsSpan>
+                          </ProductColorsTitle>
+                          <ProductColorsSelector>
+                            {product.color?.map((c) => (
+                              <ProductColorSwatch key={c} onClick={() => setColor(c)}>
+                                <ColorSwatch color={c}></ColorSwatch>
+                              </ProductColorSwatch>
+                            ))}
+                          </ProductColorsSelector>
+                        </ProductColorsDiv>
+                      </ProductColors>
+                      {product.size?.length > 0 ? (
+                        <ProductSizes>
+                        <SizeWrapper>
+                          Select Size
+                        </SizeWrapper>
+                        <FilterSize onChange={(e) => setSize(e.target.value)}>
+                        {product.size?.map((s) => (
+                          <SizeOption key={s}>{s}</SizeOption>
+                        ))}
+                        </FilterSize>
+                      </ProductSizes>
+                      ) : (<></>)}
+                      {/* <AddContainer>
+                        <AmountContainer>
+                          <FontAwesomeIcon onClick={() => handleQuantity("dec")} icon={faMinus} />
+                            <Amount>{quantity}</Amount>
+                          <FontAwesomeIcon onClick={() => handleQuantity("inc")} icon={faPlus} />
+                        </AmountContainer>
+                      </AddContainer> */}
+                      <ProductAdd>
+                        {!color ? (
+                          <ButtonAddToBagNull>Select A Color</ButtonAddToBagNull>
+                        ) : (
+                          <ButtonAddToBag onClick={handleClick}>
+                            Add to Bag&nbsp;
+                            <ButtonSpan>${product.price}</ButtonSpan>
+                          </ButtonAddToBag>
+                        )}
+                        <ShipByDiv>
+                          <ShipBySpan>In stock, ships between 1-2 business days.</ShipBySpan>
+                        </ShipByDiv>
+                        <GuaranteeWidget>
+                          <GuaranteeList>100% satisfaction guarantee</GuaranteeList>
+                          <GuaranteeList>30 day, no hassle returns. </GuaranteeList>
+                        </GuaranteeWidget>
+                      </ProductAdd>
+                      
+                      <PDescripton>
+                        <PDescriptionWrap>
+                          <ProdAccordion 
+                              title="Details" 
+                              active={active} 
+                              setActive={setActive}
+                              content={product.description}
+                            />
+                          <ProdAccordion 
+                            title="Sustainability" 
+                            active={active} 
+                            setActive={setActive}
+                            content={product.sustainability}
+                          />
+                          <ProdAccordion 
+                            title="Care Guide" 
+                            active={active} 
+                            setActive={setActive}
+                            content={product.care_guide}
+                          />
+                          <ProdAccordion 
+                            title="Shipping & Returns" 
+                            active={active} 
+                            setActive={setActive}
+                            content="Free shipping on all orders, and our 30 days, no questions asked return policy. It takes about 7-15 days for a package to arrive from the time you place an order. Please note that we only ship and deliver on business days."
+                          />
+                        </PDescriptionWrap>
+                      </PDescripton>
+                    </DetailWrapper>
+                  </GridCell2>
+                </Grid>
+                <HelpDiv>
+                  <HelpRow1>
+                    <svg viewBox="0 0 35 35" role="img" aria-hidden="true" width="35px" height="35px">
+                      <path fill="none" d="M0 .213h35v35H0z"></path>
+                      <path d="M14.4 21.048a13.284 13.284 0 01-1.344.076q-.411 0-.829-.025l-.334-.02-.279.185a15.461 15.461 0 01-4.388 2.109 16.182 16.182 0 001.365-2.054l.484-.923-.941-.446a7.127 7.127 0 01-4.384-6.276c0-4.114 4.274-7.461 9.529-7.461s9.529 3.347 9.529 7.461c0 .059-.009.116-.011.174.33-.029.664-.046 1-.046 0-.043.008-.085.008-.128 0-4.677-4.67-8.461-10.529-8.461S2.75 9 2.75 13.674a8.1 8.1 0 004.95 7.181 18.048 18.048 0 01-1.573 2.305c-.481.6-.236 1.28.613 1.28 1.17 0 3.557-1.1 5.425-2.343q.448.027.888.027c.455 0 .9-.028 1.34-.069-.011-.157-.029-.312-.029-.472 0-.183.018-.357.036-.535z"></path>
+                      <path d="M32.25 21.583c0-3.749-3.745-6.782-8.443-6.782h-.1c-.351 0-.694.027-1.032.063-3.876.413-6.886 2.906-7.269 6.036a5.584 5.584 0 00-.042.678c0 .117.015.23.021.345.222 3.737 3.994 6.428 8.6 6.428.235 0 .473-.007.712-.021a10.723 10.723 0 004.35 1.878c.681 0 .878-.543.492-1.026a14.459 14.459 0 01-1.263-1.848 6.5 6.5 0 003.974-5.751zm-4.4 4.852l-.942.446.484.923a10.673 10.673 0 00.759 1.2 14.28 14.28 0 01-2.9-1.5l-.279-.185-.334.02c-.219.013-.437.019-.653.019-4.21 0-7.515-2.462-7.614-5.629 0-.048-.009-.1-.009-.144a4.521 4.521 0 01.1-.922c.5-2.386 2.87-4.288 5.908-4.75a9.506 9.506 0 011.092-.1c.113 0 .225-.013.339-.013 4.1 0 7.443 2.594 7.443 5.782a5.517 5.517 0 01-3.394 4.853z"></path>
+                    </svg>
+                  </HelpRow1>
+                  <HelpRow>
+                    <HelpTitle>Have questions about buying this product?</HelpTitle>
+                    <HelpContent>
+                      <HelpLink onClick={() => navigate('/contact')}>
+                        Chat with a representative
+                      </HelpLink>
+                    </HelpContent>
+                  </HelpRow>
+                </HelpDiv>
+                {
+                  related.length > 0 && (
+                    <RelatedContainer>
+                      <RelatedDiv>
+                        <RelatedHeader>Also Consider</RelatedHeader>
+                      </RelatedDiv>
+                      <ProductsUl>
+                        {related.slice(0, 8)?.map((item) => 
+                          <ProductItem item={item} key={item._id}/>
+                        ).reverse()}
+                      </ProductsUl>
+                    </RelatedContainer>
+                  )
+                }
+                <Reviews>
+                  <ReviewsFlex>
+                    <ReviewsHeader>Reviews</ReviewsHeader>
+                    <CreateReviewLink onClick={() => navigate(`/submit-review/${product.slug}`)}>Write review</CreateReviewLink>
+                  </ReviewsFlex>
+                  {product.reviews?.length === 0 && (
                     <>
-                      <i className={
-                        product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                        }>
-                      </i>
-                      <i className={
-                        product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                        }>
-                      </i>
-                      <i className={
-                        product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                        }>
-                      </i>
-                      <i className={
-                        product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                        }>
-                      </i>
-                      <i className={
-                        product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                        }>
-                      </i>
+                      <NoReviewFlex>
+                      <BigSup>{product.rating.toFixed(1)}</BigSup>
+                        <>
+                          <i className={
+                            product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                            }>
+                          </i>
+                          <i className={
+                            product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                            }>
+                          </i>
+                          <i className={
+                            product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                            }>
+                          </i>
+                          <i className={
+                            product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                            }>
+                          </i>
+                          <i className={
+                            product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                            }>
+                          </i>
+                        </>
+                      </NoReviewFlex>
+                      <p>No product review yet</p>
+                      <p>Be the first to review this product</p>
                     </>
-                  </NoReviewFlex>
-                  <p>No product review yet</p>
-                  <p>Be the first to review this product</p>
-                </>
-              )}
-              {
-                product.reviews?.map((review) => (
-                  <>
-                    <ReviewItem 
-                      firstName={review.firstName}
-                      lastName={review.lastName.substring(0, 1).concat('.')}
-                      header={review.header}
-                      rating={review.rating}
-                      comment={review.comment} 
-                      date={review.createdAt.substring(0, 10)}
-                    />
-                  </>
-                ))
-              }
-            </Reviews>
-          </Container>
+                  )}
+                  {
+                    product.reviews?.map((review) => (
+                      <>
+                        <ReviewItem 
+                          firstName={review.firstName}
+                          lastName={review.lastName.substring(0, 1).concat('.')}
+                          header={review.header}
+                          rating={review.rating}
+                          comment={review.comment} 
+                          date={review.createdAt.substring(0, 10)}
+                        />
+                      </>
+                    ))
+                  }
+                </Reviews>
+              </Container>
+            ) : (<Loading />)
+          }
           <InstaHandle />
         </PDP>
       </PDPContainer>

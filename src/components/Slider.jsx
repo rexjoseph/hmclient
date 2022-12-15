@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import styled from "styled-components"
 import axios from 'axios'
+import Loading from "./Loading";
 
 const Homepage = styled.div`
   margin-top: 5rem;
@@ -15,7 +16,7 @@ const Hero = styled.div`
   width: 100%;
 
   @media (max-width: 500px) {
-    height: 60vh
+    height: 50vh
   }
 `
 
@@ -158,12 +159,14 @@ const LinkA = styled.a`
 const Slider = () => {
   const navigate = useNavigate()
   const [banner, setBanner] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getBanners = async () => {
       try {
         const res = await axios.get("http://localhost:4000/api/banner/all")
         setBanner(res.data)
+        setLoading(true)
       } catch (err) {}
     };
      getBanners()
@@ -171,26 +174,30 @@ const Slider = () => {
 
   return (
     <Homepage>
-      {banner?.map(item => (
-        <Hero>
-          <Layout>
-            <Asset>
-              <Figure>
-                <AssetImage>
-                  <Image src={item.image} />
-                </AssetImage>
-              </Figure>
-              <Header>
-                <Heading>{item.title}</Heading>
-                <SubHeading>{item.caption}</SubHeading>
-                <Action>
-                  <LinkA onClick={() => navigate(`${item.target}`)}>{item.actionText}</LinkA>
-                </Action>
-              </Header>
-            </Asset>
-          </Layout>
-        </Hero>
-      ))}
+      {
+        loading ? (
+          banner?.map(item => (
+            <Hero key={item._id}>
+              <Layout>
+                <Asset>
+                  <Figure>
+                    <AssetImage>
+                      <Image src={item.image} />
+                    </AssetImage>
+                  </Figure>
+                  <Header>
+                    <Heading>{item.title}</Heading>
+                    <SubHeading>{item.caption}</SubHeading>
+                    <Action>
+                      <LinkA onClick={() => navigate(`${item.target}`)}>{item.actionText}</LinkA>
+                    </Action>
+                  </Header>
+                </Asset>
+              </Layout>
+            </Hero>
+          ))
+        ) : (<Loading />)
+      }
     </Homepage>
   )
 }

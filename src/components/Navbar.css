@@ -241,3 +241,7 @@ nav .desktop-nav li a:hover {
   left: 0;
   right: 0;
 }
+
+#sale-link {
+  color: #EE4A7C;
+}

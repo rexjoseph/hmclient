@@ -24,8 +24,8 @@ const List = styled.li`
   list-style: none;
   margin: 0;
   padding: 0 18px;
-  // width: 33.3333333333%;
-  width: 25%;
+  width: 33.3333333333%;
+  // width: 25%;
   // cursor: pointer;
 
   @media (max-width: 960px) {
@@ -50,8 +50,8 @@ const ImageHolder = styled.div`
   position: relative;
   cursor: pointer;
   background: #F1F1F1;
-  max-height: 368px;
-  max-width: 276px;
+  // max-height: 368px;
+  // max-width: 276px;
 `
 
 const ProductTitle = styled.span`
@@ -167,7 +167,7 @@ const  Product = ({item}) => {
           <BadgeHolder>
             <Badge>New</Badge>
           </BadgeHolder>
-          <ImageDiv onClick={() => navigate(`/product/${item._id}`)}>
+          <ImageDiv onClick={() => navigate(`/product/${item.slug}`)}>
             <Image src={item.images[0]} />
           </ImageDiv>
           {/* <button onClick={() => dispatch(addToCart({
@@ -185,7 +185,7 @@ const  Product = ({item}) => {
         <InfoHolder>
           <TitleWrapper>
             <LinkA>
-              <ProductTitle>{item.title}</ProductTitle>
+              <ProductTitle onClick={() => navigate(`/product/${item.slug}`)}>{item.title}</ProductTitle>
               {item.rating > 0 && (
                 <RatingProduct>
                   <HeaderRatingRow>

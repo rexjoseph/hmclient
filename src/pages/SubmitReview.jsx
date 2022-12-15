@@ -10,7 +10,7 @@ import "./SubmitReview.css";
 
 const SubmitReview = () => {
   const location = useLocation();
-  const id = location.pathname.split("/")[2];
+  const slug = location.pathname.split("/")[2];
   const user = useSelector((state) => state.user.currentUser);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
@@ -19,22 +19,24 @@ const SubmitReview = () => {
   const dispatch = useDispatch();
   const { pathname } = useLocation();
   const navigate = useNavigate()
+  const id = product._id;
 
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get("/products/find/" + id);
+        const res = await publicRequest.get("/products/find/" + slug);
         setProduct(res.data.product);
       } catch {}
     };
     getProduct();
-  }, [id]);
+  }, [slug]);
 
   const submitRatingHandler = (e) => {
     e.preventDefault();
     if (comment && rating) {
       dispatch(
         createReview(id, {
+          productId: id,
           rating,
           comment,
           header,
@@ -42,7 +44,7 @@ const SubmitReview = () => {
           lastName: user.lastName,
         })
       );
-      navigate(`/product/${id}`)
+      navigate(`/product/${slug}`)
     } else {
       alert("Please enter comment and rating");
     }
@@ -119,7 +121,7 @@ const SubmitReview = () => {
                       <textarea
                         name=""
                         id=""
-                        maxLength={250}
+                        maxLength={500}
                         rows={10}
                         onChange={(e) => setComment(e.target.value)}
                       ></textarea>
@@ -128,7 +130,7 @@ const SubmitReview = () => {
                       <div className="submitReview__tips-labels">
                         <span>Review tips:</span>
                         <i className="italicize">
-                          <span>250 characters max</span>
+                          <span>500 characters max</span>
                         </i>
                       </div>
                       <ul>

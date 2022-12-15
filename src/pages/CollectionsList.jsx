@@ -7,6 +7,7 @@ import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import InstaHandle from '../components/InstaHandle'
 import axios from 'axios'
+import Loading from "../components/Loading";
 
 const Page = styled.section``
 const Collections = styled.div`
@@ -54,12 +55,14 @@ const SubHeader = styled.h2`
 const CollectionsList = () => {
   const {pathname} = useLocation()
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getCategories = async () => {
       try {
         const res = await axios.get("http://localhost:4000/api/category/all")
         setCategories(res.data)
+        setLoading(true)
       } catch (err) {}
     };
      getCategories()
@@ -83,9 +86,13 @@ const CollectionsList = () => {
             <Heading>Shop By Collections</Heading>
             <SubHeader>We create best in class activewear engineered for performance, designed for fun. We focus on developing state-of-the-art materials to ensure comfort in movement and confidence in your gear.</SubHeader>
           </Header>
-          {categories.map(item => (
-            <CollectionItem item={item} key={item._id} />
-          ))}
+          {
+            loading ? (
+              categories.map(item => (
+                <CollectionItem item={item} key={item._id} />
+              ))
+            ) : (<Loading />)
+          }
         </CollectionWrappers>
       </Collections>
       <InstaHandle />

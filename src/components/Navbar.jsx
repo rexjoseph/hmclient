@@ -75,7 +75,7 @@ function Navbar() {
               <a href="/" className='link-logo'></a>
             </li>
             <li>
-              <a href="/products">Sale</a>
+              <a id="sale-link" href="/products">Sale</a>
             </li>
             <li>
               <a href="/collections">Collections</a>

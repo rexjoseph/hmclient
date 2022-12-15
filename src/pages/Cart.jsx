@@ -576,14 +576,14 @@ const Cart = () => {
                       <CartListItem>
                         <CartListImageLink>
                           <CartListImageWrapper>
-                            <CartListImageHolder onClick={() => navigate(`/product/${item.id}`)}>
+                            <CartListImageHolder onClick={() => navigate(`/product/${item.slug}`)}>
                               <CartListImage src={item.image} />
                             </CartListImageHolder>
                           </CartListImageWrapper>
                         </CartListImageLink>
                         <CartListDetail>
                           <CartListH3>
-                            <CartListDetailLink onClick={() => navigate(`/product/${item.id}`)}>
+                            <CartListDetailLink onClick={() => navigate(`/product/${item.slug}`)}>
                               <CartListDetailSpan>{item.title}</CartListDetailSpan>
                             </CartListDetailLink>
                           </CartListH3>

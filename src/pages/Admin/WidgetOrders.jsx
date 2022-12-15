@@ -37,14 +37,15 @@ const WidgetOrders = () => {
             <tbody key={order._id}>
               <tr className='widgetTr' key={order._id}>
                 <td className='widgetID'>
-                  <span>#{order._id.substring(0, 4)}</span>
+                  <span>#{order._id.substring(0, 8).toUpperCase()}</span>
                 </td>
                 <td className='widgetUser'>
-                  <span>{order.userId}</span>
+                  <span>{order.user.firstName}&nbsp;{order.user.lastName}</span>
                 </td>
                 <td className='widgetDate'>{format(order.createdAt)}</td>
-                <td className='widgetStatus'>{order.status}</td>
-                <td className='widgetAmount'>{order.amount}</td>
+                <td className='widgetDate'>{order.address.country}</td>
+                <td className='widgetStatus'>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</td>
+                <td className='widgetAmount'>${order.amount}</td>
               </tr>
             </tbody>
           ))}

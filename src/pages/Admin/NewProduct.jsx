@@ -23,6 +23,8 @@ const NewProduct = () => {
   const [sustainability, setSustainability] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
+  const [slug, setSlug] = useState("");
+  
 
   useEffect(() => {
     document.title = `Admin New Product — Hashingmart`;
@@ -92,31 +94,21 @@ const NewProduct = () => {
     });
   };
 
-  // const handleCat = (e) => {
-  //   setCat(e.target.value.split(","));
-  // };
-
-  // const handleSize = (e) => {
-  //   setSize(e.target.value.trim().split(","));
-  // };
-
-  // const handleColor = (e) => {
-  //   setColor(e.target.value.trim().split(","));
-  // };
-
-  // const handleImg = (e) => {
-  //   setImage(e.target.value.trim().split(" "));
-  // };
+  const handleTitle = (e) => {
+    setTitle(e.target.value)
+    setSlug(e.target.value.split(' ').join('-').toLowerCase())
+  }
 
   const handleClick = (e) => {
     e.preventDefault();
     const product = {
       ...inputs,
       title: title,
+      slug: slug,
       description: description,
       care_guide: care_guide,
       sustainability: sustainability,
-      image: img,
+      images: img,
       categories: cat,
       color: color,
       size: size,
@@ -150,7 +142,7 @@ const NewProduct = () => {
                   <div className="flex-1">
                     <div className="npi-div">
                       <label htmlFor="title">Product Name</label>
-                      <input className="npi-div-input" onChange={(e) => setTitle(e.target.value)} required type="text" placeholder="Nike Air Force" />
+                      <input className="npi-div-input" onChange={handleTitle} required type="text" placeholder="Nike Air Force" />
                       <span>
                         Do not exceed 20 characters when entering the product
                         name
