@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import axios from "axios";
+import Loading from "./Loading";
 
 const CollectionWrapper = styled.div`
   display: flex;
@@ -36,12 +37,14 @@ const Products = ({cat, filters, sort}) => {
 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
         const res = await axios.get( cat ? `http://localhost:4000/api/products?category=${cat}` : "http://localhost:4000/api/products")
         setProducts(res.data)
+        setLoading(true)
       } catch (err) {}
     };
      getProducts()
@@ -77,9 +80,11 @@ const Products = ({cat, filters, sort}) => {
     <CollectionWrapper>
       <ProductsWrapper>
         <ProductsUl>
-          { cat 
+          {loading ? (
+            cat 
             ? filteredProducts.map(item => <Product item={item} key={item._id}/>).reverse()
-            : products.slice(0, 9).map(item => <Product item={item} key={item._id}/>).reverse()}
+            : products.slice(0, 9).map(item => <Product item={item} key={item._id}/>).reverse()
+          ) : (<Loading />)}
         </ProductsUl>
       </ProductsWrapper>
     </CollectionWrapper>

@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import InstaHandle from "./InstaHandle";
 import { useLocation } from "react-router-dom";
+import Loading from "./Loading";
 
 const Page = styled.section``
 
@@ -61,12 +62,15 @@ const ProductsUl = styled.ul`
 const Arrivals = () => {
   const [products, setProducts] = useState([]);
   const {pathname} = useLocation();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getProducts = async () => {
       try {
+        
         const res = await axios.get("http://localhost:4000/api/products")
         setProducts(res.data)
+        setLoading(true)
       } catch (err) {}
     };
      getProducts()
@@ -89,10 +93,16 @@ const Arrivals = () => {
       <CollectionWrapper>
         <ProductsWrapper>
           <ProductsUl>
-            { products.map(item => <Product 
+            {loading ? (
+              products.map(item => <Product 
+                item={item} 
+                key={item._id} 
+                />).reverse()
+            ) : (<Loading />)}
+            {/* { products.map(item => <Product 
             item={item} 
             key={item._id} 
-            />).reverse()}
+            />).reverse()} */}
           </ProductsUl>
         </ProductsWrapper>
       </CollectionWrapper>
