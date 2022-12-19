@@ -29,9 +29,14 @@ import AdminHome from './pages/Admin/Home';
 import NewCategory from './pages/Admin/NewCategory';
 import NewUGC from './pages/Admin/NewUGC';
 import NewBanner from './pages/Admin/NewBanner';
+import NewDiscount from './pages/Admin/NewDiscount';
 import AdminProductList from './pages/Admin/ProductList';
 import Success from './pages/Success';
 import NotFound from './pages/NotFound';
+import EditProduct from './pages/Admin/EditProduct';
+import OrderList from './pages/Admin/OrderList';
+import EditOrder from './pages/Admin/EditOrder';
+import OrderDetail from './pages/Admin/OrderDetail';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -44,7 +49,7 @@ const App = () => {
       <Route path="/submit-review/:id" element={<SubmitReview />} />
       <Route path="/products" element={<Arrivals />}/>
       <Route path="/checkout" element={ user && user.address !== undefined ? <Checkout /> : <Navigate to="/checkout/information" /> } />
-      <Route path="/checkout/information" element={<Information />} />
+      <Route path="/checkout/information" element={user ? <Information /> : <Navigate to="/login" />} />
       <Route path="/cart" element={<Cart />}/>
       <Route path="/payment/success" element={<Success />} />
       <Route path="/login" element={ user ? <Navigate to="/account" /> : <Login />} />
@@ -67,7 +72,12 @@ const App = () => {
       <Route path="/admin/newcategory" element={ user && user.isAdmin ? <NewCategory /> : <Navigate to="/" />} />
       <Route path="/admin/newugc" element={ user && user.isAdmin ? <NewUGC /> : <Navigate to="/" />} />
       <Route path="/admin/newbanner" element={ user && user.isAdmin ? <NewBanner /> : <Navigate to="/" />} />
+      <Route path="/admin/newdiscount" element={ user && user.isAdmin ? <NewDiscount /> : <Navigate to="/" />} />
       <Route path="/admin/products" element={ user && user.isAdmin ? <AdminProductList /> : <Navigate to="/" />} />
+      <Route path="/admin/orders" element={ user && user.isAdmin ? <OrderList /> : <Navigate to="/" />} />
+      <Route path="/admin/orders/:orderId" element={ user && user.isAdmin ? <OrderDetail /> : <Navigate to="/" />} />
+      <Route path="/admin/products/edit/:productId" element={ user && user.isAdmin ? <EditProduct /> : <Navigate to="/" />} />
+      <Route path="/admin/orders/edit/:orderId" element={ user && user.isAdmin ? <EditOrder /> : <Navigate to="/" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

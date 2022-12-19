@@ -147,6 +147,7 @@ const Button = styled.button`
   color: #fff;
   text-align: center;
   text-decoration: none;
+  border: none;
   opacity: 1;
   position: relative;
   border-radius: 2px;

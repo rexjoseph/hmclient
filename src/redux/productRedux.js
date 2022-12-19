@@ -48,6 +48,21 @@ const productSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    // UPDATE PRODUCT
+    updateProductStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    updateProductSuccess: (state, action) => {
+      state.isFetching = false;
+      state.products[
+        state.products.findIndex((item) => item._id === action.payload.id)
+      ] = action.payload.product;
+    },
+    updateProductFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
     // DELETE PRODUCT
     deleteProductStart: (state) => {
       state.isFetching = true;
@@ -63,7 +78,47 @@ const productSlice = createSlice({
     deleteProductFailure: (state) => {
       state.isFetching = false;
       state.error = true;
-    }
+    },
+    // UPDATE ORDER
+    updateOrderStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    updateOrderSuccess: (state, action) => {
+      state.isFetching = false;
+    },
+    updateOrderFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+    // DELETE ORDER
+    deleteOrderStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    deleteOrderSuccess: (state, action) => {
+      state.isFetching = false;
+      // state.products.splice(
+      //   state.products.findIndex((item) => item._id === action.payload),
+      //   1
+      // );
+    },
+    deleteOrderFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
+    // CREATE DISCOUNT
+    createDiscountStart: (state) => {
+      state.isFetching = true;
+    },
+    createDiscountSuccess: (state, action) => {
+      state.isFetching = false;
+      state.success = true;
+    },
+    createDiscountFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
   },
 });
 
@@ -77,8 +132,20 @@ export const {
   getProductStart,
   getProductSuccess,
   getProductFailure,
+  updateProductStart,
+  updateProductSuccess,
+  updateProductFailure,
   deleteProductStart,
   deleteProductSuccess,
-  deleteProductFailure
+  deleteProductFailure,
+  updateOrderStart,
+  updateOrderSuccess,
+  updateOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure,
+  createDiscountStart,
+  createDiscountSuccess,
+  createDiscountFailure
 } = productSlice.actions;
 export default productSlice.reducer;

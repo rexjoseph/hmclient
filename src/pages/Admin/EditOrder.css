@@ -1,0 +1,139 @@
+.container {
+  max-width: 1250px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.orders {
+  margin-bottom: 5rem;
+}
+
+.orders__div {
+  padding: 1rem;
+}
+
+.orders__header {
+  font-size: 2.4rem;
+  margin: 2rem 0;
+}
+
+.orders__info {
+  margin-bottom: 2.5rem;
+}
+
+.orders__info p {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.dash-disclaimer {
+  margin: 2rem 0;
+  max-width: 90%;
+  color: var(--color-grey);
+}
+
+.dash-disclaimer p {
+  font-weight: 400 !important;
+  font-size: 1.4rem !important;
+}
+
+.tp-flex {
+  display: flex;
+  align-items: center;
+  /* gap: 2rem; */
+}
+
+.odt__body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5rem;
+}
+
+.odt__body-2__imgflex {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.odt__body-2 .img-div {
+  width: 125px;
+}
+
+.o-personalinfo {
+  color: grey;
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
+.clear-pad > * {
+  padding: .8rem 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.order-stsl-flex {
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+
+.order-stsl-flex > * + * {
+  margin-left: 2rem;
+}
+
+.order-stsl-flex select {
+  width: 100%;
+  padding: 1rem;
+  outline: none;
+  border: 1px solid var(--color-primary);
+  border-radius: .25rem;
+  font-family: inherit;
+}
+
+.order-stsl-flex input {
+  width: 100%;
+  padding: 1rem;
+  outline: none;
+  border: 1px solid var(--color-primary);
+  border-radius: .25rem;
+  font-family: inherit;
+  margin: 1rem 0;
+}
+
+.stsl-div {
+  width: 60%;
+}
+
+.stsl-div2 {
+  width: 40%;
+}
+
+.dash-disclaimer {
+  margin: 2rem 0;
+  max-width: 90%;
+  color: var(--color-grey);
+}
+
+.dash-disclaimer p {
+  font-weight: 400 !important;
+  font-size: 1.4rem !important;
+}
+
+.nav-btn {
+  background: var(--color-primary);
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: inherit;
+  padding: 0 24px;
+  position: relative;
+  transition: background .2s ease-in-out,color .2s ease-in-out;
+  white-space: nowrap;
+  border-radius: 24px;
+  height: 48px;
+
+  @media (max-width: 769px) {
+    margin-top: 1rem;
+  }
+}

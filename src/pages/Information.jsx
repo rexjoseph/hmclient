@@ -45,7 +45,8 @@ const Information = () => {
           zip,
           phone,
         })
-      )
+      );
+      // .then()
       // navigate('/checkout');
     } else {
       alert("Please fill out the fields");
@@ -58,8 +59,8 @@ const Information = () => {
 
   return (
     <section className="checkout">
-      {/* <Announcement /> */}
-      {/* <Navbar /> */}
+      <Announcement />
+      <Navbar />
       <main className="main">
         <div className="checkout_col">
           <div className="c_contact">
@@ -267,40 +268,44 @@ const Information = () => {
                 <div className="order-product-content">
                   <table>
                     <tbody>
-                      {cart?.map((item) => (
-                        <tr key={item.id}>
-                          <td className="product__image">
-                            <div className="product__thumbnail">
-                              <div className="thumbnail__wrapper">
-                                <img src={item.image} alt="{item.title}" />
+                      {cart
+                        ?.map((item) => (
+                          <tr key={item.id}>
+                            <td className="product__image">
+                              <div className="product__thumbnail">
+                                <div className="thumbnail__wrapper">
+                                  <img src={item.image} alt="{item.title}" />
+                                </div>
+                                <span className="product__thumbnail-quantity">
+                                  {item.quantity}
+                                </span>
                               </div>
-                              <span className="product__thumbnail-quantity">
-                                {item.quantity}
+                            </td>
+                            <th className="product__description">
+                              <span className="product__description-name">
+                                {item.title}
                               </span>
-                            </div>
-                          </td>
-                          <th className="product__description">
-                            <span className="product__description-name">
-                              {item.title}
-                            </span>
-                            <span className="product__description-color">
-                              {item.color}
-                            </span>
-                            <span className="product__description-size">
-                              {item.size}
-                            </span>
-                            <span className="product__description-size">
-                              ${item.price}
-                            </span>
-                          </th>
-                          <td className="product__quantity">{item.quantity}</td>
-                          <td className="product__price">
-                            <span className="product__price-emphasis">
-                              ${item.price * item.quantity}
-                            </span>
-                          </td>
-                        </tr>
-                      )).reverse()}
+                              <span className="product__description-color">
+                                {item.color}
+                              </span>
+                              <span className="product__description-size">
+                                {item.size}
+                              </span>
+                              <span className="product__description-size">
+                                ${item.price}
+                              </span>
+                            </th>
+                            <td className="product__quantity">
+                              {item.quantity}
+                            </td>
+                            <td className="product__price">
+                              <span className="product__price-emphasis">
+                                ${item.price * item.quantity}
+                              </span>
+                            </td>
+                          </tr>
+                        ))
+                        .reverse()}
                     </tbody>
                   </table>
                 </div>

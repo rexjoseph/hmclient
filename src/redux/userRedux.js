@@ -6,6 +6,7 @@ const userSlice = createSlice({
     currentUser: null,
     isFetching: false,
     error: false,
+    registerError: false,
     success: false,
   },
   reducers: {
@@ -34,7 +35,7 @@ const userSlice = createSlice({
     },
     registerFailure: (state) => {
       state.isFetching = false;
-      state.error = true;
+      state.registerError = true;
     },
     // RESET
     resetPasswordStart: (state) => {

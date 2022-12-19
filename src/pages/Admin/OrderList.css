@@ -1,0 +1,47 @@
+.actions-ellipsis {
+  background: #fff;
+  border: 1px solid var(--line-divider);
+  border-radius: 5px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.drop-menu {
+  position: absolute;
+  display: none;
+  background: #fff;
+  box-shadow: #0000001a 0 0 35px;
+  list-style-type: none;
+  padding: 2rem 0;
+  border-radius: .5rem;
+}
+
+.drop:hover .drop-menu {
+  display: block;
+}
+
+.drop-menu li {
+  padding: 1rem 3rem;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.drop-menu li:hover {
+  background-color: #FBFBFC;
+}
+
+.drop-menu li:hover a {
+  color: var(--brand-blue);
+}
+
+.drop-menu li button {
+  outline: none;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+.drop-menu li:hover button {
+  color: var(--color-danger);
+}

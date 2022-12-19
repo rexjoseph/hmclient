@@ -6,6 +6,7 @@ import { userRequest } from "../requestMethods";
 import { resetCart } from '../redux/cartRedux';
 import Announcement from '../components/Announcement';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Success = () => {
   const location = useLocation();
@@ -13,6 +14,7 @@ const Success = () => {
   const data = location.state.authData;
   const cart = location.state.cart;
   const amount = location.state.amount;
+  const totalQty = location.state.totalQty;
   const currentUser = useSelector((state) => state.user.currentUser);
   const [orderId, setOrderId] = useState(null);
   
@@ -30,23 +32,27 @@ const Success = () => {
             lastName: currentUser.lastName,
             userId: currentUser._id
           },
-          cart: cart?.map((item) => ({
-            productId: item.id,
-            quantity: item.quantity,
-            title: item.title,
-            color: item.color,
-            size: item.size
-          })),
-          amount: amount,
+          cart: {
+            items: cart?.map((item) => ({
+              productId: item.id,
+              quantity: item.quantity,
+              title: item.title,
+              color: item.color,
+              size: item.size,
+              price: item.price
+            }))
+          },
+          totalCost: amount,
+          totalQty: totalQty,
           address: currentUser.address,
           paymentId: data
         })
         setOrderId(res.data._id);
-        resetCart(dispatch);
+        dispatch(resetCart())
       } catch {}
     }
     data && createOrder();
-  }, [data, cart, amount, currentUser, dispatch])
+  }, [data, cart, amount, currentUser, totalQty, dispatch])
 
   return (
     <>
@@ -66,6 +72,7 @@ const Success = () => {
           : `Successful. Your order is being prepared...`
         }
       </div>
+      <Footer />
     </>
   )
 }

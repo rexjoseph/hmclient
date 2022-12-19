@@ -26,9 +26,21 @@ import {
   getProductStart,
   getProductSuccess,
   getProductFailure,
+  updateProductStart,
+  updateProductSuccess,
+  updateProductFailure,
   deleteProductStart,
   deleteProductSuccess,
-  deleteProductFailure
+  deleteProductFailure,
+  updateOrderStart,
+  updateOrderSuccess,
+  updateOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure,
+  createDiscountStart,
+  createDiscountSuccess,
+  createDiscountFailure
 } from "./productRedux";
 import {
   postSubscribeStart,
@@ -51,6 +63,8 @@ import {
   createBannerFailure
 } from "./bannerRedux";
 import { publicRequest, userRequest } from "../requestMethods";
+import { discountFailure, discountStart, discountSuccess } from "./cartRedux";
+// import { useNavigate } from "react-router-dom";
 
 // USER
 export const login = async (dispatch, user) => {
@@ -109,6 +123,7 @@ export const newpassword = async (dispatch, user) => {
 };
 
 export const updateAddress = (userId, address) => async (dispatch) => {
+  // const navigate = useNavigate();
   dispatch(editUserStart());
   try {
     const res = await publicRequest.post(
@@ -116,6 +131,7 @@ export const updateAddress = (userId, address) => async (dispatch) => {
       address
     );
     dispatch(editUserSuccess(res.data));
+    // navigate('/checkout');
   } catch (err) {
     dispatch(editUserFailure());
   }
@@ -154,6 +170,18 @@ export const getProducts = async (dispatch) => {
   }
 };
 
+// UPDATE PRODUCT
+export const updateProduct = async (id, product, dispatch) => {
+  dispatch(updateProductStart());
+  try {
+    // update
+    const res = await userRequest.put(`/products/${id}`, product);
+    dispatch(updateProductSuccess(res.data));
+  } catch (err) {
+    dispatch(updateProductFailure());
+  }
+};
+
 // DELETE PRODUCT
 export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
@@ -162,6 +190,27 @@ export const deleteProduct = async (id, dispatch) => {
     dispatch(deleteProductSuccess(id));
   } catch (err) {
     dispatch(deleteProductFailure());
+  }
+};
+
+export const updateOrder = async (id, order, dispatch) => {
+  dispatch(updateOrderStart());
+  try {
+    const res = await userRequest.put(`/orders/${id}`, order);
+    dispatch(updateOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(updateOrderFailure())
+  }
+}
+
+// DELETE ORDER
+export const deleteOrder = async (id, dispatch) => {
+  dispatch(deleteOrderStart());
+  try {
+    const res = await userRequest.delete(`/orders/${id}`);
+    dispatch(deleteOrderSuccess());
+  } catch (err) {
+    dispatch(deleteOrderFailure());
   }
 };
 
@@ -195,5 +244,27 @@ export const addBanner = async (banner, dispatch) => {
     dispatch(createBannerSuccess(res.data));
   } catch (err) {
     dispatch(createBannerFailure());
+  }
+}
+
+// CREATE DISCOUNT CODE
+export const addDiscount = async (code, dispatch) => {
+  dispatch(createDiscountStart());
+  try {
+    const res = await userRequest.post(`/carts/new-discount`, code);
+    dispatch(createDiscountSuccess(res.data));
+  } catch (err) {
+    dispatch(createDiscountFailure());
+  }
+}
+
+// APPLY DISCOUNT
+export const applyDiscount = async (code, dispatch) => {
+  dispatch(discountStart());
+  try {
+    const res = await userRequest.get(`/carts/get-discount/${code}`);
+    dispatch(discountSuccess(res.data))
+  } catch (err) {
+    dispatch(discountFailure());
   }
 }

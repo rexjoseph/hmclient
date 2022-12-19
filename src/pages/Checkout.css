@@ -1,3 +1,7 @@
+.checkout {
+  margin-top: 8rem;
+}
+
 .step {
   padding-bottom: 48px;
 }
@@ -47,7 +51,8 @@
 .role-block__link {
   font-size: 13px;
   flex: 5 1;
-  padding-right: 1.14286rem
+  padding-right: 1.14286rem;
+  word-break: break-word;
 }
 
 .bb {
@@ -147,6 +152,12 @@
 
   .section__header {
     margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 769px) {
+  .main {
+    padding: 0 0 24px !important;
   }
 }
 

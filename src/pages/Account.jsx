@@ -5,16 +5,31 @@ import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { logout } from "../redux/apiCalls";
+import Loading from "../components/Loading";
 import "./Account.css";
+import { userRequest } from "../requestMethods";
 
 const Account = () => {
   const user = useSelector((state) => state.user.currentUser);
+  const [order, setOrder] = useState({});
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     document.title = `Account — Hashingmart`;
   });
+
+  useEffect(() =>{
+    const getOrder = async () => {
+      try {
+        const res = await userRequest.get(`/orders/user`);
+        setOrder(res.data);
+        setLoading(true);
+      } catch (err) {}
+    }
+    getOrder();
+  })
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -34,9 +49,30 @@ const Account = () => {
             <button onClick={handleLogout}>Logout</button>
           </div>
           <div className="row">
-            <div className="orders">
-              <p>You haven't placed any orders yet.</p>
-            </div>
+            {
+              loading ? (
+                <>
+                  {
+                    order.length > 0 ? (
+                      <>
+                      <div className="orders">
+                        {
+                          order.length === 1 && <p>{order.length}&nbsp;order</p>
+                        }
+                        {
+                          order.length > 1 && <p>{order.length}&nbsp;orders</p>
+                        }
+                      </div> 
+                      </>
+                    ) : (
+                      <div className="orders">
+                        <p>You haven't placed any orders yet.</p>
+                      </div>
+                    )
+                  }
+                </>
+              ) : (<Loading />)
+            }
             <div className="defaultAddress">
               <h3>{user.firstName}&nbsp;{user.lastName}</h3>
               <div className="address-body">

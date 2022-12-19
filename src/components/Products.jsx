@@ -12,7 +12,6 @@ const CollectionWrapper = styled.div`
   @media (max-width: 666px) {
     flex-direction: column;
   }
-
 `
 
 const ProductsWrapper = styled.div`

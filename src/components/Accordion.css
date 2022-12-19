@@ -1,6 +1,5 @@
 .accordion-section {
   background: #f7f7f7;
-  height: 100vh;
 }
 
 .container {
@@ -16,6 +15,10 @@
 
 .accordion-simple>.active {
   display: block;
+}
+
+.accordion__faq {
+  padding-bottom: 5rem;
 }
 
 .accordion__faq .inactive {
@@ -58,4 +61,10 @@
   margin: 0px;
   padding-bottom: 30px;
   line-height: 1.4;
+}
+
+@media (max-width: 769px) {
+  .container {
+    padding: 0 1.5rem;
+  }
 }

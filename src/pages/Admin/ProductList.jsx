@@ -56,7 +56,9 @@ const ProductList = () => {
                                 <input type="checkbox" className='listable-check' />
                               </td>
                               <td>
-                                <div>Edit</div>
+                                <div>
+                                  <a href={`/admin/products/edit/${item._id}`}>Edit</a>
+                                </div>
                                 <div>
                                   <button className="delist-btn" type="button" onClick={() => handleDelete(item._id)}>Delete</button>
                                 </div>

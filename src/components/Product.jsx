@@ -156,6 +156,11 @@ const RatingProduct = styled.div`
 
 const HeaderRatingRow = styled.span``
 
+const ItemReviewsCount = styled.span`
+  font-size: 12px;
+  font-weight: 400;
+`
+
 const  Product = ({item}) => {
   // const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -186,6 +191,23 @@ const  Product = ({item}) => {
           <TitleWrapper>
             <LinkA>
               <ProductTitle onClick={() => navigate(`/product/${item.slug}`)}>{item.title}</ProductTitle>
+              <PriceDiv>
+                <PriceSpan>${item.price}</PriceSpan>
+              </PriceDiv>
+              <MoreInfo>
+                {item.color.length === 1 && (
+                  <>
+                    {item.color.length}&nbsp;color available
+                  </>
+                )}
+                {
+                  item.color.length > 1 && (
+                    <>
+                      {item.color.length}&nbsp;colors available
+                    </>
+                  )
+                }
+              </MoreInfo>
               {item.rating > 0 && (
                 <RatingProduct>
                   <HeaderRatingRow>
@@ -218,25 +240,11 @@ const  Product = ({item}) => {
                       }>
                     </i>
                   </HeaderRatingRow>
+                  <ItemReviewsCount>
+                    &nbsp;({item.numReviews})
+                  </ItemReviewsCount>
                 </RatingProduct>
               )}
-              <MoreInfo>
-                {item.color.length === 1 && (
-                  <>
-                    {item.color.length}&nbsp;color available
-                  </>
-                )}
-                {
-                  item.color.length > 1 && (
-                    <>
-                      {item.color.length}&nbsp;colors available
-                    </>
-                  )
-                }
-              </MoreInfo>
-              <PriceDiv>
-                <PriceSpan>${item.price}</PriceSpan>
-              </PriceDiv>
             </LinkA>
           </TitleWrapper>
         </InfoHolder>

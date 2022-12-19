@@ -4,7 +4,7 @@ import { faMinus, faPlus, faChevronLeft, faArrowRight } from '@fortawesome/free-
 import Navbar from "../components/Navbar";
 import {useSelector} from 'react-redux'
 import { useNavigate } from "react-router-dom";
-import { incrementQuantity, decrementQuantity, removeItem} from '../redux/cartRedux'
+import { incrementQuantity, decrementQuantity, removeItem, resetCart} from '../redux/cartRedux'
 import { useDispatch } from 'react-redux'
 import Prefooter from "../components/Prefooter";
 import Footer from "../components/Footer";
@@ -516,6 +516,7 @@ const CartEmptyA = styled.a`
 
 const Cart = () => {
   const cart = useSelector((state) => state.carts.cart)
+  const total = useSelector((state) => state.carts.total)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -558,6 +559,7 @@ const Cart = () => {
                   </Shipping>
                 </ShippingNotification>
                 <CartHeader>
+                  {/* <button onClick={() => dispatch(resetCart())}>Clear cart</button> */}
                   <CartHeaderColumn>
                     <CartHeaderH1>Your Bag</CartHeaderH1>
                     <CartHeaderSpan>

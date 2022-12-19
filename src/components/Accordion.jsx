@@ -18,6 +18,26 @@ const dataCollection = [
   {
     question: "Do you ship worldwide?",
     answer: "Yes. We ship worldwide. Alternatively, you can let us know beforehand if you need us to ship to a US, Europe address even if you don't live there and we'll handle your package to make sure they get delivered."
+  },
+  {
+    question: "Where can I see tracking numbers?",
+    answer: "Tracking information is sent out by email and available in the order history section of your dashboard. Please allow 2 business days to receive your tracking number"
+  },
+  {
+    question: "How can I initiate a return?",
+    answer: "You can initiate a return from the order page on your dashboard. Have your order ID ready, open the live chat, call or send an e-mail to help@hashingmart.com"
+  },
+  {
+    question: "Why are my packages shipped separately?",
+    answer: "This is to provide you with fast delivery and prevent us from being packed up."
+  },
+  {
+    question: "Will I get charged for taxes and customs or any hidden charges?",
+    answer: "No. Your order quote during checkout is all you pay. That's right. No hidden charges."
+  },
+  {
+    question: "What happens if my package gets lost in transit?",
+    answer: "All packages are sent with insured shipping and handling. If a package gets stuck at customs, sent back or even lost during the delivery process, we apologize. The postal service is out of our control. However, in cases like this, because the packages are insured, we will send you a new package, if possible. Please see our refund and return policy for when these might be applicable."
   }
 ]
 
@@ -27,6 +47,8 @@ const Accordion = () => {
   useEffect(() => {
     document.title = `FAQ — Hashingmart`
   })
+
+  
 
   function toggleAccordion(index) {
     if (index === accordion) {
