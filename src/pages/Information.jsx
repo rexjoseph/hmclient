@@ -7,9 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import "./Checkout.css";
 import { updateAddress } from "../redux/apiCalls";
+import { publicRequest } from "../requestMethods";
+import { editUserSuccess } from "../redux/userRedux";
 
 const Information = () => {
   const cart = useSelector((state) => state.carts.cart);
+  const total = useSelector((state) => state.carts.total);
   const user = useSelector((state) => state.user.currentUser);
   const { isFetching, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
@@ -32,26 +35,55 @@ const Information = () => {
     return { totalPrice, totalQuantity };
   };
 
-  const submitHandler = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (street && country && state && city && zip) {
-      dispatch(
-        updateAddress(user._id, {
-          street,
-          apartment,
-          country,
-          state,
-          city,
-          zip,
-          phone,
-        })
-      );
-      // .then()
-      // navigate('/checkout');
+      try {
+        const res = await publicRequest.post(
+          `/users/${user._id}/edit-address`,
+          {
+            street: street,
+            apartment: apartment,
+            country: country,
+            state: state,
+            city: city,
+            zip: zip,
+            phone: phone
+          }
+        )
+        // console.log(res);
+        if (res.data && res.status === 201 ) {
+          dispatch(
+            editUserSuccess(res.data)
+          );
+          navigate('/checkout');
+        } else {
+          navigate('/');
+        }
+      } catch (err) {}
     } else {
-      alert("Please fill out the fields");
+      alert('Please fill out the fields');
     }
-  };
+  }
+
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   if (street && country && state && city && zip) {
+  //     dispatch(
+  //       updateAddress(user._id, {
+  //         street,
+  //         apartment,
+  //         country,
+  //         state,
+  //         city,
+  //         zip,
+  //         phone,
+  //       })
+  //     );
+  //   } else {
+  //     alert("Please fill out the fields");
+  //   }
+  // };
 
   useEffect(() => {
     document.title = `Information — Hashingmart`;
@@ -64,7 +96,7 @@ const Information = () => {
       <main className="main">
         <div className="checkout_col">
           <div className="c_contact">
-            <form onSubmit={submitHandler}>
+            <form onSubmit={handleSubmit}>
               <div className="step_sections">
                 <div className="information">
                   <div className="information_header">
@@ -331,7 +363,7 @@ const Information = () => {
                     <tr>
                       <th className="total__line total__line-name">Subtotal</th>
                       <td className="total__price">
-                        <span>${getTotal().totalPrice}</span>
+                        <span>${total.toFixed(2)}</span>
                       </td>
                     </tr>
                     <tr>
@@ -349,7 +381,7 @@ const Information = () => {
                       <td className="total__price pay-due">
                         <span className="currency">USD</span>{" "}
                         <span className="totalamount">
-                          ${getTotal().totalPrice}
+                          ${total.toFixed(2)}
                         </span>
                       </td>
                     </tr>

@@ -26,7 +26,6 @@ const EditProduct = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
   const [slug, setSlug] = useState(product.slug);
-  // const id = product._id;
 
   useEffect(() => {
     document.title = `Admin Edit Product — Hashingmart`;
@@ -145,7 +144,7 @@ const EditProduct = () => {
                   <div className="npi-div">
                     <label htmlFor="category">Category</label>
                     <div className="tags-input">
-                      {product.categories.map((tag, index) => (
+                      {cat.map((tag, index) => (
                         <li className="tag" key={index}>
                           <span>{tag}</span>
                           <i
@@ -223,7 +222,7 @@ const EditProduct = () => {
                   <div className="npi-div">
                     <label htmlFor="image">Product Images</label>
                     <div className="tags-input">
-                      {product.images.map((tag, index) => (
+                      {img.map((tag, index) => (
                         <li className="tag" key={index}>
                           <span>{tag}</span>
                           <i
@@ -246,7 +245,7 @@ const EditProduct = () => {
                       <div className="npi-div">
                         <label htmlFor="size">Add Size</label>
                         <div className="tags-input">
-                          {product.size.map((tag, index) => (
+                          {size.map((tag, index) => (
                             <li className="tag" key={index}>
                               <span>{tag}</span>
                               <i
@@ -269,7 +268,7 @@ const EditProduct = () => {
                       <div className="npi-div">
                         <label htmlFor="color">Add Color</label>
                         <div className="tags-input">
-                          {product.color.map((tag, index) => (
+                          {color.map((tag, index) => (
                             <li className="tag" key={index}>
                               <span>{tag}</span>
                               <i

@@ -171,7 +171,7 @@ const Footer = () => {
       <ContentWrap>
         <Content>
           <Heading>Drive The Impact</Heading>
-          <Paragraph>Exclusive offers, a heads up on new things, innovations, and sightings of Hashingmart in the wild. Oh, we have cute poodles, too. #hashingmart</Paragraph>
+          <Paragraph>Exclusive offers, a heads up on new things, innovations, and sightings of Hashingmart in the wild. #hashingmart</Paragraph>
           <SocialIconUl>
             <a href="https://instagram.com/hashingmart" target={"blank"}>
               <SocialIconLi>
@@ -206,9 +206,6 @@ const Footer = () => {
               </LinkHolder>
               <LinkHolder>
                 <LinkA onClick={() => navigate('/sustainability')}>Sustainability</LinkA>
-              </LinkHolder>
-              <LinkHolder>
-                <LinkA>Purchase History</LinkA>
               </LinkHolder>
               <LinkHolder>
                 <LinkA onClick={() => navigate('/company')}>Company</LinkA>

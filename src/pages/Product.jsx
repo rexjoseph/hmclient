@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import ReviewItem from '../components/ReviewItem';
 import PlaceholderImage from "../images/imgplaceholder.jpg";
 import Loading from "../components/Loading";
+import Modal from '../components/Modal';
 
 const ProductPageWrapper = styled.div`
 `
@@ -624,6 +625,15 @@ const Product = () => {
   const [active, setActive] = useState("Details")
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false)
+
+  useEffect(()=>{
+    let modalStatus = localStorage.getItem('modal_status');
+    if(!modalStatus){
+      setOpenModal(true);
+      localStorage.setItem('modal_status',1);
+    }
+  },[])
 
   useEffect(() => {
     const getProduct = async () => {
@@ -666,7 +676,7 @@ const Product = () => {
                     effect
                     speed={800}
                     slidesPerView={1}
-                    initialSlide={1}
+                    initialSlide={0}
                     loop={true}
                     >
                     {product.images?.map((image, key) => (
@@ -937,6 +947,7 @@ const Product = () => {
           <InstaHandle />
         </PDP>
       </PDPContainer>
+      <Modal open={openModal} onClose={() => setOpenModal(false)}/>
       <Feedback />
       <Prefooter />
       <Footer />

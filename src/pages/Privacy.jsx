@@ -4,6 +4,7 @@ import Footer from "../components/Footer"
 import {mobile} from "../responsive"
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import Announcement from "../components/Announcement";
 
 const Wrapper = styled.section``
 
@@ -89,6 +90,7 @@ const Privacy = () => {
 
   return (
     <Wrapper>
+      <Announcement />
       <Navbar />
       <TermsSection>
         <TermsHeader>

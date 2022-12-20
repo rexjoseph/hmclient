@@ -63,6 +63,8 @@ const Select = styled.select`
   margin-right: 20px;
   border: 1px solid var(--color-primary);
   outline: none;
+  // width: 100%;
+  font-family: inherit;
 `
 
 const Option = styled.option`

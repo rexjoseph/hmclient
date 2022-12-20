@@ -59,16 +59,17 @@ const Success = () => {
       <Announcement />
       <Navbar />
       <div style={{
-        height: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "8rem"
+        margin: "10rem auto",
+        maxWidth: "500px",
+        padding: "0 1.5rem"
         }}
       >
         {orderId
-          ? `Order has been created successfully. Your order number is ${orderId}`
+          ? <p className='total'>`Order has been created successfully. Your order number is ${orderId}.` Order value is $<span id='totalCost'>{amount}</span></p>
           : `Successful. Your order is being prepared...`
         }
       </div>

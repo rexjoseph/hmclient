@@ -4,6 +4,7 @@ import Footer from "../components/Footer"
 import {mobile} from "../responsive"
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
+import Announcement from "../components/Announcement"
 
 const Wrapper = styled.section``
 
@@ -192,6 +193,7 @@ const Shipping = () => {
 
   return (
     <Wrapper>
+      <Announcement />
       <Navbar />
       <EstDelDate>
         <Container>

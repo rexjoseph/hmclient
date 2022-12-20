@@ -70,7 +70,7 @@ const SubmitReview = () => {
                 Leave a review for:
               </span>
               <h1 className="submitReview__title">
-                <a href={`/product/${product._id}`}>{product.title}</a>
+                <a href={`/product/${product.slug}`}>{product.title}</a>
               </h1>
               <div className="submitReview__productImages">
                 {product.images?.slice(0, 4).map((image, key) => (

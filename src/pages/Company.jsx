@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUndo, faCertificate, faHeart, faTruck } from '@fortawesome/free-solid-svg-icons';
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import Announcement from "../components/Announcement";
 
 
 const CompanyPage = styled.section``
@@ -144,6 +145,7 @@ const Company = () => {
 
   return (
     <CompanyPage>
+      <Announcement />
       <Navbar />
       <About>
         <Container>

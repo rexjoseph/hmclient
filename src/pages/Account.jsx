@@ -23,7 +23,7 @@ const Account = () => {
   useEffect(() =>{
     const getOrder = async () => {
       try {
-        const res = await userRequest.get(`/orders/user`);
+        const res = await userRequest.get(`/orders/user/${user._id}`);
         setOrder(res.data);
         setLoading(true);
       } catch (err) {}

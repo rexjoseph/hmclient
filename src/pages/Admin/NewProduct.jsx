@@ -8,7 +8,6 @@ import Sidebar from "./Sidebar";
 import { Editor } from "@tinymce/tinymce-react";
 import "./NewProduct.css";
 import axios from "axios";
-import Multiselect from "multiselect-react-dropdown";
 import { addProduct } from "../../redux/apiCalls";
 
 const NewProduct = () => {

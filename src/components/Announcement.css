@@ -3,13 +3,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.2rem 1.5rem;
+  padding: 1rem .25rem;
 }
 
 .announcement-bar-container p,
 .announcement-bar-container a {
   color: var(--color-primary);
-  line-height: 3rem;
+  /* line-height: 3rem; */
   font-size: 13px;
   height: 100%;
   letter-spacing: .1px;

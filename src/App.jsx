@@ -37,6 +37,9 @@ import EditProduct from './pages/Admin/EditProduct';
 import OrderList from './pages/Admin/OrderList';
 import EditOrder from './pages/Admin/EditOrder';
 import OrderDetail from './pages/Admin/OrderDetail';
+import ThankYou from './pages/ThankYou';
+import FeedForm from './pages/FeedForm';
+import EmailMarketingSuccessV2 from './pages/EmailMarketingSuccessV2';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -66,6 +69,9 @@ const App = () => {
       <Route path="/contact" element={<Contact />}/>
       <Route path="/pages/rehash" element={<Rehash />} />
       <Route path="/faq" element={<FAQ />}/>
+      <Route path="/thank-you" element={<ThankYou />} />
+      <Route path="/feedback" element={<FeedForm />} />
+      <Route path="/email/:subscriber/signup/success" element={<EmailMarketingSuccessV2 />} />
       <Route path="/email-subscribe/success" element={<EmailMarketingSuccess />}/>
       <Route path="/admin/" element={ user && user.isAdmin ? <AdminHome /> : <Navigate to="/" />} />
       <Route path="/admin/newproduct" element={ user && user.isAdmin ? <NewProduct /> : <Navigate to="/" />} />

@@ -13,6 +13,7 @@ import Navbar from "../components/Navbar";
 const Checkout = () => {
   const cart = useSelector((state) => state.carts.cart);
   const total = useSelector((state) => state.carts.total);
+  const discountCode = useSelector((state) => state.carts.discountCode);
   const user = useSelector((state) => state.user.currentUser);
   const [inputs, setInputs] = useState({});
   const [code, setCode] = useState("");
@@ -443,7 +444,7 @@ const Checkout = () => {
                               <td className="product__image">
                                 <div className="product__thumbnail">
                                   <div className="thumbnail__wrapper">
-                                    <img src={item.image} alt="{item.title}" />
+                                    <img src={item.image} alt={item.title} />
                                   </div>
                                   <span className="product__thumbnail-quantity">
                                     {item.quantity}
@@ -501,12 +502,24 @@ const Checkout = () => {
                 <div className="order__section-discount">
                   <table>
                     <tbody>
+                      {
+                        discountCode !== null ? (
+                          <tr>
+                            <th className="total__line total__line-name">
+                              Discount code
+                            </th>
+                            <td className="total__price">
+                              {discountCode}
+                            </td>
+                          </tr>
+                        ) : (<></>)
+                      }
                       <tr>
                         <th className="total__line total__line-name">
                           Subtotal
                         </th>
                         <td className="total__price">
-                          <span>${total}</span>
+                          <span>${total.toFixed(2)}</span>
                         </td>
                       </tr>
                       <tr>
@@ -525,7 +538,7 @@ const Checkout = () => {
                         </th>
                         <td className="total__price pay-due">
                           <span className="currency">USD</span>{" "}
-                          <span className="totalamount">${total}</span>
+                          <span className="totalamount">${total.toFixed(2)}</span>
                         </td>
                       </tr>
                     </tfoot>

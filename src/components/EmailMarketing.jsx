@@ -181,6 +181,7 @@ const Link = styled.div`
   color: inherit;
   margin: 0;
   padding: 0;
+  cursor: pointer;
 `
 
 const EmailMarketing = () => {
@@ -220,9 +221,9 @@ const EmailMarketing = () => {
               <SignupDisclaimer>
                 <Span>
                   Note: You can opt-out at any time. See our&nbsp;
-                  <Link>Privacy Policy</Link>
+                  <Link onClick={() => navigate('/privacy-policy')}>Privacy Policy</Link>
                   &nbsp;and&nbsp;
-                  <Link>Terms.</Link>
+                  <Link onClick={() => navigate('/terms-of-use')}>Terms.</Link>
                 </Span>
               </SignupDisclaimer>
             </EmailWrapper>

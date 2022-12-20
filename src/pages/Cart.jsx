@@ -517,6 +517,7 @@ const CartEmptyA = styled.a`
 const Cart = () => {
   const cart = useSelector((state) => state.carts.cart)
   const total = useSelector((state) => state.carts.total)
+  const discountCode = useSelector((state) => state.carts.discountCode)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -555,7 +556,7 @@ const Cart = () => {
                 <ShippingNotification>
                   <Shipping>
                     <ShippingHeader>Free Shipping on all orders</ShippingHeader>
-                    <ShippingSpan>Free Returns on all orders within the U.S.</ShippingSpan>
+                    <ShippingSpan>Free shipping & returns on all orders</ShippingSpan>
                   </Shipping>
                 </ShippingNotification>
                 <CartHeader>
@@ -623,13 +624,21 @@ const Cart = () => {
                   <CartForm>
                     <CartFormCard>
                       <CardFormHeading>Order Summary</CardFormHeading>
+                      {
+                        discountCode !== null ? (
+                          <CardFormShipping>
+                            <CardFormShippingH3>Discount code</CardFormShippingH3>
+                            <CardFormShippingSpan>{discountCode}</CardFormShippingSpan>
+                          </CardFormShipping>
+                        ) : (<></>)
+                      }
                       <CardFormShipping>
                         <CardFormShippingH3>Standard Shipping</CardFormShippingH3>
                         <CardFormShippingSpan>Free</CardFormShippingSpan>
                       </CardFormShipping>
                       <CardFormTotal>
                         <CardFormTotalH3>Bag Subtotal</CardFormTotalH3>
-                        <CardFormTotalSpan>${getTotal().totalPrice}</CardFormTotalSpan>
+                        <CardFormTotalSpan>${total.toFixed(2)}</CardFormTotalSpan>
                       </CardFormTotal>
                       <CheckoutButtonWrapper>
                         <CheckoutButton onClick={() => navigate('/checkout')}>

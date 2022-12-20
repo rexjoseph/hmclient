@@ -84,3 +84,9 @@ a {
 .swiper-button-prev {
   color: var(--color-secondary) !important;
 }
+
+select {
+  -webkit-appearance:none;
+  -webkit-appearance: none; 
+	appearance: none;
+}

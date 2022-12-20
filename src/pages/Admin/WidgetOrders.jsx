@@ -45,7 +45,7 @@ const WidgetOrders = () => {
                 <td className='widgetDate'>{format(order.createdAt)}</td>
                 <td className='widgetDate'>{order.address.country}</td>
                 <td className='widgetStatus'>{order.status.charAt(0).toUpperCase() + order.status.slice(1)}</td>
-                <td className='widgetAmount'>${order.amount}</td>
+                <td className='widgetAmount'>${order.totalCost}</td>
               </tr>
             </tbody>
           ))}

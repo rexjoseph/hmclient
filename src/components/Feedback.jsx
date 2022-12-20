@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
 const FeedbackSection = styled.section`
@@ -39,12 +40,13 @@ const LinkA = styled.a`
 `
 
 const Feedback = () => {
+  const navigate = useNavigate()
   return (
     <FeedbackSection>
       <Container>
         <Body>
           <Paragraph>We'd love to hear what you think!</Paragraph>
-          <LinkA>Get in touch</LinkA>
+          <LinkA onClick={() => navigate('/feedback')}>Get in touch</LinkA>
         </Body>
       </Container>
     </FeedbackSection>
