@@ -17,6 +17,11 @@ const Success = () => {
   const totalQty = location.state.totalQty;
   const currentUser = useSelector((state) => state.user.currentUser);
   const [orderId, setOrderId] = useState(null);
+  const {pathname} = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
   
   useEffect(() => {
     document.title = `Successful Order — Hashingmart`;

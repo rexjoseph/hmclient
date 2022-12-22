@@ -144,13 +144,6 @@ const IGContent = styled.div`
   top: 0;
 `
 
-const Image = styled.img`
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
-  display: block;
-`
-
 const SocialHandle = styled.div`
   height: 26px;
   left: 0;

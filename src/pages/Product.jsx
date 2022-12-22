@@ -315,10 +315,12 @@ const FilterSize = styled.select`
   padding: 12px;
   border: 1px solid var(--color-primary);
   outline: none;
+  background: transparent;
+  color: var(--color-primary);
 `
 
 const SizeOption = styled.option`
-
+  color: var(--color-primary);
 `
 
 // const AddContainer = styled.div`

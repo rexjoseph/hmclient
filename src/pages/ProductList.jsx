@@ -63,12 +63,14 @@ const Select = styled.select`
   margin-right: 20px;
   border: 1px solid var(--color-primary);
   outline: none;
+  background: transparent;
+  color: var(--color-primary);
   // width: 100%;
   font-family: inherit;
 `
 
 const Option = styled.option`
-  
+  color: var(--color-primary)
 `
 
 const ProductList = () => {
@@ -87,8 +89,8 @@ const ProductList = () => {
   }
 
   useEffect(() => {
-    document.title = 'Sale — Hashingmart'
-  }, [])
+    document.title = `${cat.charAt(0).toUpperCase() + cat.slice(1)} — Hashingmart`
+  }, [cat])
 
   useEffect(() => {
     window.scrollTo(0, 0);

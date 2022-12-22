@@ -30,7 +30,7 @@ const USP = () => {
     <Container>
       <Body>
         <Heading>
-          Lean into luxe. 100% biodegrable and recyclable essentials that rise to the occassion
+          Lean into reusability. 100% biodegradable and recyclable essentials that rise to the occassion
         </Heading>
       </Body>
     </Container>

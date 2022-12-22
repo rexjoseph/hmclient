@@ -100,6 +100,10 @@
   font-family: inherit;
 }
 
+.checkout main input {
+  font-size: 14px;
+}
+
 .shipping_content {
   padding-top: 42px;
 }
@@ -238,6 +242,7 @@
 
 .field__input-wrapper {
   display: flex;
+  align-items: center;
 }
 
 .field__input {
@@ -450,4 +455,10 @@
 
 .no-display {
   display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .infoc {
+    margin-top: 70px;
+  }
 }

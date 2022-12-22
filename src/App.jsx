@@ -40,6 +40,7 @@ import OrderDetail from './pages/Admin/OrderDetail';
 import ThankYou from './pages/ThankYou';
 import FeedForm from './pages/FeedForm';
 import EmailMarketingSuccessV2 from './pages/EmailMarketingSuccessV2';
+import NewAnnouncement from './pages/Admin/NewAnnouncement';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -78,6 +79,7 @@ const App = () => {
       <Route path="/admin/newcategory" element={ user && user.isAdmin ? <NewCategory /> : <Navigate to="/" />} />
       <Route path="/admin/newugc" element={ user && user.isAdmin ? <NewUGC /> : <Navigate to="/" />} />
       <Route path="/admin/newbanner" element={ user && user.isAdmin ? <NewBanner /> : <Navigate to="/" />} />
+      <Route path="/admin/newannouncement" element={ user && user.isAdmin ? <NewAnnouncement /> : <Navigate to="/" />} />
       <Route path="/admin/newdiscount" element={ user && user.isAdmin ? <NewDiscount /> : <Navigate to="/" />} />
       <Route path="/admin/products" element={ user && user.isAdmin ? <AdminProductList /> : <Navigate to="/" />} />
       <Route path="/admin/orders" element={ user && user.isAdmin ? <OrderList /> : <Navigate to="/" />} />

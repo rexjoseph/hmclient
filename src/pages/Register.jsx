@@ -19,8 +19,22 @@ const Container = styled.div`
   }
 `;
 
+const RecoverLink = styled.a`
+  display: block;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-decoration: underline;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 16px;
+  color: var(--color-primary);
+  cursor: pointer;
+  margin-bottom: 2.5rem;
+`
+
 const Register = () => {
-  const { isFetching, error } = useSelector((state) => state.user);
+  const { isFetching } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [values, setValues] = useState({
@@ -133,6 +147,9 @@ const Register = () => {
                   <a href="/privacy-policy" className="registerLabelLink">Privacy Policy</a>
                 </div>
               </form>
+              <RecoverLink onClick={() => navigate('/login')}>
+                Got an account? Login
+              </RecoverLink>
             </div>
           </div>
         </div>

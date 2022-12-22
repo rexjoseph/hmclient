@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userRequest } from "../requestMethods";
 import "./Checkout.css";
 import "./Information.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { applyDiscount } from "../redux/apiCalls";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
@@ -19,6 +19,12 @@ const Checkout = () => {
   const [code, setCode] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const {pathname} = useLocation();
+  const { isFetching } = useSelector((state) => state.carts);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   const getTotal = () => {
     let totalQuantity = 0;
@@ -77,7 +83,7 @@ const Checkout = () => {
       <Navbar />
 
       <section className="checkout">
-        <main className="main">
+        <main className="main infoc">
           <div className="checkout_col">
             <div className="c_contact">
               <div className="step">
@@ -493,7 +499,11 @@ const Checkout = () => {
                               className="fieldinput"
                             />
                           </div>
-                          <button onClick={handleDiscount}>Apply</button>
+                          <button onClick={handleDiscount}>
+                            {isFetching ? (
+                              <>Loading...</>
+                            ) : (<>Apply</>)}
+                          </button>
                         </div>
                       </div>
                     </div>

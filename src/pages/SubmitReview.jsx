@@ -138,7 +138,7 @@ const SubmitReview = () => {
                           Determine whether you would recommend this product
                         </li>
                         <li>
-                          Describe what activities you use this product for
+                          Describe how you use this product
                         </li>
                         <li>Describe the impact this product helps you make</li>
                         <li>25 characters minimum</li>

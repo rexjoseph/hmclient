@@ -147,8 +147,12 @@ const PostReset = () => {
   });
 
   const handleClick = (e) => {
-    e.preventDefault();
-    newpassword(dispatch, {password, userId: user._id, passwordToken: id})
+    if (password === confirmPassword) {
+      e.preventDefault();
+      newpassword(dispatch, {password, userId: user._id, passwordToken: id})
+    } else {
+      alert('Passwords do not match!')
+    }
   };
 
   return (

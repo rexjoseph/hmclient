@@ -63,6 +63,7 @@ const cartSlice = createSlice({
         state.total = newTotalCost;
         state.discountCode = code.toUpperCase()
         state.success = true;
+        state.isFetching = false;
       } else {
         state.error = true;
         state.isFetching = false;

@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faChevronLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../components/Navbar";
 import {useSelector} from 'react-redux'
-import { useNavigate } from "react-router-dom";
-import { incrementQuantity, decrementQuantity, removeItem, resetCart} from '../redux/cartRedux'
+import { useLocation, useNavigate } from "react-router-dom";
+import { incrementQuantity, decrementQuantity, removeItem } from '../redux/cartRedux'
 import { useDispatch } from 'react-redux'
 import Prefooter from "../components/Prefooter";
 import Footer from "../components/Footer";
@@ -520,6 +520,11 @@ const Cart = () => {
   const discountCode = useSelector((state) => state.carts.discountCode)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const {pathname} = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     document.title = `Your Shopping Cart — Hashingmart`

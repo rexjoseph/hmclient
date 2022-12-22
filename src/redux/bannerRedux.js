@@ -9,7 +9,7 @@ const bannerSlice = createSlice({
     success: false,
   },
   reducers: {
-    //  ADD
+    //  ADD BANNER
     createBannerStart: (state) => {
       state.isFetching = true;
       state.error = false;
@@ -21,7 +21,7 @@ const bannerSlice = createSlice({
     createBannerFailure: (state) => {
       state.isFetching = false;
       state.error = true;
-    },
+    }
   },
 });
 

@@ -18,6 +18,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import announcementReducer from "./announcementReducer"
 
 const persistConfig = {
   key: "root",
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   category: categoryReducer,
   emailMarketing: emailReducer,
   uGCContent: userGeneratedContentReducer,
-  banner: bannerReducer
+  banner: bannerReducer,
+  announcement: announcementReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from "styled-components"
 import CollectionItem from "../components/CollectionItem"
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
@@ -84,7 +84,7 @@ const CollectionsList = () => {
         <CollectionWrappers>
           <Header>
             <Heading>Shop By Collections</Heading>
-            <SubHeader>We create best in class activewear engineered for performance, designed for fun. We focus on developing state-of-the-art materials to ensure comfort in movement and confidence in your gear.</SubHeader>
+            <SubHeader>We create best in class essentials engineered for versatility, designed for the planet. We focus on developing state-of-the-art materials to ensure comfort and confidence in your essentials.</SubHeader>
           </Header>
           {
             loading ? (

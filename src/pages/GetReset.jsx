@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { reset } from "../redux/apiCalls";
 import styled from "styled-components";
@@ -29,6 +29,11 @@ const UserRoot = styled.div`
 const RegisterTitle = styled.h1`
   font-size: 48px;
   margin-bottom: 32px;
+
+  @media (max-width: 769px) {
+    font-size: 28px;
+    margin-bottom: 22px;
+  }
 `;
 
 const Form = styled.form`

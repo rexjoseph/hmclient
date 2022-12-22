@@ -11,7 +11,7 @@
   max-width: 600px;
   width: 100%;
   position: fixed;
-  top: 40%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -108,6 +108,10 @@
   padding: 1rem 1rem;
   justify-content: center;
   font-size: 16px;
+}
+
+.btnContainer a {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 500px) {

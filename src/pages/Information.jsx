@@ -6,7 +6,6 @@ import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import "./Checkout.css";
-import { updateAddress } from "../redux/apiCalls";
 import { publicRequest } from "../requestMethods";
 import { editUserSuccess } from "../redux/userRedux";
 
@@ -14,7 +13,7 @@ const Information = () => {
   const cart = useSelector((state) => state.carts.cart);
   const total = useSelector((state) => state.carts.total);
   const user = useSelector((state) => state.user.currentUser);
-  const { isFetching, error } = useSelector((state) => state.user);
+  // const { isFetching } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [street, setStreet] = useState("");
@@ -24,16 +23,6 @@ const Information = () => {
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [phone, setPhone] = useState("");
-
-  const getTotal = () => {
-    let totalQuantity = 0;
-    let totalPrice = 0;
-    cart.forEach((item) => {
-      totalQuantity += item.quantity;
-      totalPrice += item.price * item.quantity;
-    });
-    return { totalPrice, totalQuantity };
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +40,6 @@ const Information = () => {
             phone: phone
           }
         )
-        // console.log(res);
         if (res.data && res.status === 201 ) {
           dispatch(
             editUserSuccess(res.data)
@@ -93,7 +81,7 @@ const Information = () => {
     <section className="checkout">
       <Announcement />
       <Navbar />
-      <main className="main">
+      <main className="main infoc">
         <div className="checkout_col">
           <div className="c_contact">
             <form onSubmit={handleSubmit}>
@@ -275,11 +263,7 @@ const Information = () => {
               <div className="step_footer">
                 <a href="/checkout">
                   <button type="submit">
-                    {isFetching ? (
-                      <span>Hashing things...</span>
-                    ) : (
-                      <span>Continue to order</span>
-                    )}
+                    <span>Continue to order</span>
                   </button>
                 </a>
                 <div className="step_footer-href">

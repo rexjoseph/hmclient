@@ -62,12 +62,6 @@ const ContentDiv = styled.p`
 const Paragraph = styled.p``;
 
 const Contact = () => {
-  const triggerText = 'Open form';
-  const onSubmit = (event) => {
-    event.preventDefault(event);
-    console.log(event.target.name.value);
-    console.log(event.target.email.value);
-  };
   const {pathname} = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0);

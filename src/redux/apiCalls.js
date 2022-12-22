@@ -62,6 +62,11 @@ import {
   createBannerSuccess,
   createBannerFailure
 } from "./bannerRedux";
+import {
+  createAnnStart,
+  createAnnSuccess,
+  createAnnFailure
+} from "./announcementReducer";
 import { publicRequest, userRequest } from "../requestMethods";
 import { discountFailure, discountStart, discountSuccess } from "./cartRedux";
 // import { useNavigate } from "react-router-dom";
@@ -242,6 +247,17 @@ export const addBanner = async (banner, dispatch) => {
   try {
     const res = await userRequest.post(`/banner/`, banner);
     dispatch(createBannerSuccess(res.data));
+  } catch (err) {
+    dispatch(createBannerFailure());
+  }
+}
+
+// CREATE ANNOUNCEMENT
+export const addAnnouncement = async (announcement, dispatch) => {
+  dispatch(createAnnStart());
+  try {
+    const res = await userRequest.post(`/announcement`, announcement);
+    dispatch(createAnnSuccess(res.data));
   } catch (err) {
     dispatch(createBannerFailure());
   }

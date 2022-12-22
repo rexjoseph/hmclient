@@ -173,7 +173,7 @@ const Footer = () => {
           <Heading>Drive The Impact</Heading>
           <Paragraph>Exclusive offers, a heads up on new things, innovations, and sightings of Hashingmart in the wild. #hashingmart</Paragraph>
           <SocialIconUl>
-            <a href="https://instagram.com/hashingmart" target={"blank"}>
+            <a href="https://instagram.com/wearehashingmart" target={"blank"}>
               <SocialIconLi>
                 <FontAwesomeIcon icon={faInstagram} />
               </SocialIconLi>

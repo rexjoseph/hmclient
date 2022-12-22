@@ -24,10 +24,10 @@ const NewBanner = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    const product = {
+    const banner = {
       ...inputs
     };
-    addBanner(product, dispatch);
+    addBanner(banner, dispatch);
   };
 
   return (
