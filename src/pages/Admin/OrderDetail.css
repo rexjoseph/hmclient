@@ -128,53 +128,67 @@
   border-color: var(--line-divider);
 }
 
-.orders {
+.orders100 {
   margin-bottom: 5rem;
+  width: 100%;
 }
 
-.orders__div {
+.orders100__div {
   padding: 1rem;
 }
 
-.orders__header {
-  font-size: 2.4rem;
+.orders100__header {
   margin: 2rem 0;
 }
 
-.orders__info {
+.orders100__info {
   margin-bottom: 2.5rem;
 }
 
-.orders__info p {
+.orders100__info p {
   font-size: 1.5rem;
   font-weight: 500;
 }
 
-.orders table {
+.orders100 table {
   border-collapse: collapse;
 }
 
-.orders thead td {
+.orders100 thead td {
   font-weight: 400;
   color: var(--color-primary);
 }
 
-.orders tbody tr {
+.orders100 tbody tr {
   border-bottom: 1px solid var(--line-divider);
 }
 
-.orders tbody tr:hover {
+.orders100 tbody tr:hover {
   background: #FBFBFC;
 }
 
-.orders td {
+.orders100 td {
   padding: 2rem 1rem;
 }
 
-.orders .table-responsive {
+.orders100 .table-responsive {
   width: 100%;
   overflow-x: auto;
   margin-bottom: 2rem;
+}
+
+.o-orderinfo__flex {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.imgholder {
+  max-width: 125px;
+}
+
+.imgholder img {
+  width: 100%;
 }
 
 .o-estimates {

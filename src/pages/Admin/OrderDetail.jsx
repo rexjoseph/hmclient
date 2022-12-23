@@ -52,7 +52,7 @@ const OrderDetail = () => {
                 </div>
                 <div className="fl-actions">
                   <li>
-                    <a className="edit" href={`/admin/orders/edit/${order._id}`}></a>
+                    <a className="edit" href={`/admin/orders/edit/${order._id}`}>Edit</a>
                   </li>
                   <a href="#">Delete</a>
                 </div>
@@ -77,7 +77,7 @@ const OrderDetail = () => {
                 </div>
 
                 <div style={{fontSize: "1.4rem"}} className="o__pages">
-                  <section className="orders">
+                  <section className="orders100">
                     <div className="container">
                       <div style={{padding: "0"}} className="orders__div">
                         <div style={{margin: "0"}} className="orders__header">
@@ -93,34 +93,35 @@ const OrderDetail = () => {
                                 </thead>
                                 <tbody>
                                   {
-                                    order.cart.map(item => (
-                                      <tr style={{borderBottom: "1px solid #ddd"}}>
+                                    order.cart.items.map(item => (
+                                      <tr style={{borderBottom: "1px solid #ddd", fontSize: "1.5rem"}}>
                                         <td>
                                           <div className="o-orderinfo__flex">
-                                            <div>
+                                            <div className='imgholder'>
                                               <a href={`/product/${item.productId.slug}`}>
                                                 <img src={item.productId.images[0]} alt="{item.title}" />
                                               </a>
                                             </div>
                                             <div>
                                               <p>
-                                                <a href={`/product/${item.productId.slug}`}>{item.title}</a>
+                                                <b><a href={`/product/${item.productId.slug}`}>{item.title}</a></b>
                                               </p>
-                                              <span>Color:&nbsp;{item.color}</span>
+                                              <span style={{textTransform: "capitalize"}}>Color:&nbsp;{item.color}</span>
                                               <br />
                                               <span>Size:&nbsp;{item.size}</span>
                                             </div>
                                           </div>
                                         </td>
                                         <td>{item.quantity}</td>
+                                        <td>${item.productId.price}</td>
                                       </tr>
                                     ))
                                   }
                                 </tbody>
                               </table>
                               <div className="o-estimates">
-                                <p>Status:&nbsp;<span style={{color: "var(--brand-blue)", fontWeight: "700"}}>{order.status}</span></p>
-                                <p>Total Cost:&nbsp;<span style={{color: "var(--brand-blue)", fontWeight: "700"}}>{order.amount.toFixed(2)}</span></p>
+                                <p>Status:&nbsp;<span style={{color: "var(--brand-blue)", fontWeight: "700", textTransform: "capitalize"}}>{order.status}</span></p>
+                                <p>Total Cost:&nbsp;<span style={{color: "var(--brand-blue)", fontWeight: "700"}}>${order.totalCost.toFixed(2)}</span></p>
                               </div>
                             </div>
                           </div>

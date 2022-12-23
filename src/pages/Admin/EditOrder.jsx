@@ -59,7 +59,7 @@ const EditOrder = () => {
             loading ? (
               <>
                 <div style={{fontSize: "1.4rem"}} className="o__pages">
-                  <section className="orders">
+                  <section className="orders100" style={{marginTop: "8rem"}}>
                     <div className="container">
                       <div style={{padding: "0"}} className="orders__div">
                         <div style={{margin: "0"}} className="orders__header">
@@ -141,7 +141,8 @@ const EditOrder = () => {
                                 <button type='submit' style={{margin: "2.5rem 0 0"}} className="nav-btn" onClick={handleClick}>Save Order</button>
                               </form>
                             </div>
-                            <div className="odt__body-2">
+                          </div>
+                          <div className="odt__body-2">
                               <h3>Order Images</h3>
                               <div className="flex odt__body-2__imgflex">
                                 {
@@ -151,7 +152,7 @@ const EditOrder = () => {
                                         <img src={item.productId.images[0]} alt={item.title} srcset="" />
                                       </div>
                                       {item.size.length > 0 && <><div><span>Size:&nbsp;{item.size}</span></div></>}
-                                      {item.color.length > 0 && <><div><span>Color:&nbsp;{item.color}</span></div></>}
+                                      {item.color.length > 0 && <><div><span style={{textTransform: "capitalize"}}>Color:&nbsp;{item.color}</span></div></>}
                                     </a>
                                   ))
                                 }
@@ -177,9 +178,8 @@ const EditOrder = () => {
                               </p>
                               <br />
                               <p><b>Order Value:</b></p>
-                              <p>{order.amount.toFixed(2)}</p>
+                              <p>${order.totalCost.toFixed(2)}</p>
                             </div>
-                          </div>
                         </div>
                       </div>
                     </div>

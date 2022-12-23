@@ -650,8 +650,12 @@ const Product = () => {
   }, [slug])
 
   const handleClick = () => {
-     dispatch(addToCart({id: product._id, title: product.title, image: product.images[0], price: product.price, color: color, size: size, slug: product.slug}))
-     navigate('/cart')
+    if (product.size?.length > 0 && !size) {
+      alert('Please select a size')
+    } else {
+      dispatch(addToCart({id: product._id, title: product.title, image: product.images[0], price: product.price, color: color, size: size, slug: product.slug}))
+      navigate('/cart')
+    }
   }
 
   useEffect(() => {
@@ -799,6 +803,7 @@ const Product = () => {
                           Select Size
                         </SizeWrapper>
                         <FilterSize onChange={(e) => setSize(e.target.value)}>
+                          <SizeOption>Select your size</SizeOption>
                         {product.size?.map((s) => (
                           <SizeOption key={s}>{s}</SizeOption>
                         ))}

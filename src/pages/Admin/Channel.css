@@ -1,5 +1,35 @@
 .channel {
   flex: 1;
-  /* background: #F5F5F7; */
+  background: #F5F5F7;
   padding: 3rem;
+}
+
+.channelWrapper {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.channelFlex {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.itemFlex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.itemFlex .flexend {
+  margin-left: auto;
+}
+
+.avatar-div {
+  max-width: 50px;
+}
+
+.avatar-div svg {
+  width: 100%;
 }

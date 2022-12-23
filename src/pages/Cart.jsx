@@ -4,12 +4,14 @@ import { faMinus, faPlus, faChevronLeft, faArrowRight } from '@fortawesome/free-
 import Navbar from "../components/Navbar";
 import {useSelector} from 'react-redux'
 import { useLocation, useNavigate } from "react-router-dom";
-import { incrementQuantity, decrementQuantity, removeItem } from '../redux/cartRedux'
+import { incrementQuantity, decrementQuantity, removeItem, resetCart } from '../redux/cartRedux'
 import { useDispatch } from 'react-redux'
 import Prefooter from "../components/Prefooter";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import Announcement from "../components/Announcement";
+import { useState } from "react";
+import axios from "axios";
 
 const CartPageWrapper = styled.div`
 
@@ -469,7 +471,7 @@ const CartHeaderOne = styled.h1`
 const CartHeaderTwo = styled.h2`
   margin-bottom: 24px;
   text-align: center;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 400;
   line-height: normal;
 
@@ -479,38 +481,154 @@ const CartHeaderTwo = styled.h2`
 `
 
 const CartEmptyLinksDiv = styled.div`
-  width: 70%;
-  margin: 0px auto;
-
-  @media (min-width: 769px) {
-    width: 30%;
-  }
+  width: 100%;
 `
 
 const CartEmptyA = styled.a`
-  margin-bottom: 12px;
-  text-transform: uppercase;
-  width: 100%;
   display: block;
-  background-color: transparent;
-  border: 2px solid var(--color-primary);
-  color: var(--color-primary);
-  font-size: 14px;
-  padding: 13px 18px;
-  cursor: pointer;
-  transition: all 100ms ease 0s;
-  letter-spacing: 2px;
-  text-align: center;
-  text-decoration: none;
-  opacity: 1;
   position: relative;
-  border-radius: 2px;
-  font-weight: 400;
+  width: 100%;
+  // margin-bottom: 12px;
+  // text-transform: uppercase;
+  // width: 100%;
+  // display: block;
+  // background-color: transparent;
+  // border: 2px solid var(--color-primary);
+  // color: var(--color-primary);
+  // font-size: 14px;
+  // padding: 13px 18px;
+  // cursor: pointer;
+  // transition: all 100ms ease 0s;
+  // letter-spacing: 2px;
+  // text-align: center;
+  // text-decoration: none;
+  // opacity: 1;
+  // position: relative;
+  // border-radius: 2px;
+  // font-weight: 400;
+
+  // &:hover {
+  //   background: var(--brand-blue);
+  //   border: 2px solid var(--brand-blue);
+  //   color: var(--color-secondary);
+  // }
+`
+
+const Ulist = styled.ul`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1250px;
+  padding-left: 108px;
+  padding-right: 108px;
+  width: 100%;
+
+  @media (max-width: 1420px) {
+    padding-left: 78px;
+    padding-right: 78px;
+  }
+
+  @media (max-width: 769px) {
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 1.5rem;
+  }
+`
+
+const ListItem = styled.li`
+  align-items: center;
+  background-color: #f1f1f1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0 3px;
+
+  &:nth-child(odd) {
+    margin-left: 0;
+  }
+
+  @media (max-width: 769px) {
+    width: 100%;
+  }
+`
+
+const ListItemDivWrapper1 = styled.div`
+  display: block;
+  height: 0;
+  margin: 0;
+  padding-bottom: 57.14286%;
+  position: relative;
+  width: 100%;
+`
+
+const ListItemDivWrapper2 = styled.div`
+`
+
+const ListItemDivWrapper3 = styled.div`
+  background: #f1f1f1;
+`
+
+const ListItemImage = styled.img`
+  display: block;
+  height: auto;
+  width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  position: absolute;
+  transform: scaleX(-1);
+  aspect-ratio: 1920 / 1080;
+  object-position: top center;
+`
+
+const ListItemShopDiv = styled.div`
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+`
+
+const ListItemShopDiv1 = styled.div`
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  text-decoration: none;
+  background: #fff;
+  border: 0;
+  border-radius: 18px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: capitalize;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 24px;
+  position: relative;
+  transition: background .2s ease-in-out,color .2s ease-in-out;
+  white-space: nowrap;
 
   &:hover {
-    background: var(--brand-blue);
-    border: 2px solid var(--brand-blue);
+    background: var(--color-primary);
     color: var(--color-secondary);
+  }
+`
+
+const EmptyCartButtonDiv = styled.div`
+
+`
+
+const EmptyCartButton = styled.button`
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  color: var(--color-primary);
+
+  &:hover {
+    color: var(--color-danger);
   }
 `
 
@@ -518,13 +636,26 @@ const Cart = () => {
   const cart = useSelector((state) => state.carts.cart)
   const total = useSelector((state) => state.carts.total)
   const discountCode = useSelector((state) => state.carts.discountCode)
+  const [categories, setCategories] = useState({});
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {pathname} = useLocation()
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  useEffect(() => {
+    const getCategories = async () => {
+      try {
+        const res = await axios.get("http://localhost:4000/api/category/all")
+        setCategories(res.data)
+        setLoading(true)
+      } catch (err) {}
+    };
+     getCategories()
+  }, [])
 
   useEffect(() => {
     document.title = `Your Shopping Cart — Hashingmart`
@@ -565,7 +696,6 @@ const Cart = () => {
                   </Shipping>
                 </ShippingNotification>
                 <CartHeader>
-                  {/* <button onClick={() => dispatch(resetCart())}>Clear cart</button> */}
                   <CartHeaderColumn>
                     <CartHeaderH1>Your Bag</CartHeaderH1>
                     <CartHeaderSpan>
@@ -602,13 +732,16 @@ const Cart = () => {
                             <CartListLi>
                               <CartListLiSpanBlack>{item.size}</CartListLiSpanBlack>
                             </CartListLi>
+                            <CartListLi>
+                              <CartListLiSpan>${item.price}</CartListLiSpan>
+                            </CartListLi>
                           </CartListUl>
                           <CartListQuantity>
                             <CartListQuantityActions>
                               <AmountContainer>
-                                <FontAwesomeIcon icon={faMinus} onClick={() => dispatch(decrementQuantity(item.id))}/>
+                                <FontAwesomeIcon icon={faMinus} onClick={() => dispatch(decrementQuantity({id: item.id, color: item.color, size: item.size}))}/>
                                   <ProductAmount>{item.quantity}</ProductAmount>
-                                <FontAwesomeIcon icon={faPlus} onClick={() => dispatch(incrementQuantity(item.id))}/>
+                                <FontAwesomeIcon icon={faPlus} onClick={() => dispatch(incrementQuantity({id: item.id, color: item.color, size: item.size}))}/>
                               </AmountContainer>
                             </CartListQuantityActions>
                           </CartListQuantity>
@@ -617,12 +750,15 @@ const Cart = () => {
                           </CartListPrice>
                         </CartListDetail>
                       </CartListItem>
-                      <CartListButton onClick={() => dispatch(removeItem(item.id))}>
+                      <CartListButton onClick={() => dispatch(removeItem({id: item.id, title: item.title, image: item.image, price: item.price, color: item.color, size: item.size, slug: item.slug}))}>
                         <svg aria-hidden="true" height="36" viewBox="0 0 36 36" width="36" role="presentation"><path d="M19.414 18l4.243 4.243a1 1 0 0 1-1.414 1.414L18 19.414l-4.243 4.243a1 1 0 0 1-1.414-1.414L16.586 18l-4.243-4.243a1 1 0 0 1 1.414-1.414L18 16.586l4.243-4.243a1 1 0 0 1 1.414 1.414L19.414 18z" fillRule="evenodd"></path></svg>
                       </CartListButton>
                     </CartList>
                   )).reverse()}
                 </CartUl>
+                <EmptyCartButtonDiv>
+                  <EmptyCartButton onClick={() => dispatch(resetCart())}>Empty cart</EmptyCartButton>
+                </EmptyCartButtonDiv>
               </CartColumn1>
               <CartColumn2>
                 <CartSummaryWrapper>
@@ -677,10 +813,38 @@ const Cart = () => {
               <CartEmpty>
                 <CartEmptyFlex>
                   <CartHeaderOne>Your Cart Is Empty.</CartHeaderOne>
-                  <CartHeaderTwo>Not sure where to start?</CartHeaderTwo>
+                  <CartHeaderTwo>
+                    Not sure where to start?
+                    <br />
+                    Check out our collections
+                  </CartHeaderTwo>
                   <CartEmptyLinksDiv>
-                    <CartEmptyA onClick={() => navigate('/products')}>Shop Arrivals</CartEmptyA>
-                    <CartEmptyA onClick={() => navigate('/collections')}>Shop Collections</CartEmptyA>
+                    <Ulist>
+                      {
+                        loading ? (
+                          categories?.map((item) => (
+                            <ListItem key={item._id}>
+                              <CartEmptyA onClick={() => navigate(`/products/${item.name}`)}>
+                                <ListItemDivWrapper1>
+                                  <ListItemDivWrapper2>
+                                    <ListItemDivWrapper3>
+                                      <ListItemImage src={item.banner}></ListItemImage>
+                                    </ListItemDivWrapper3>
+                                  </ListItemDivWrapper2>
+                                </ListItemDivWrapper1>
+                                <ListItemShopDiv>
+                                  <ListItemShopDiv1 onClick={() => navigate(`/products/${item.name}`)}>
+                                    Shop {item.name}
+                                  </ListItemShopDiv1>
+                                </ListItemShopDiv>
+                              </CartEmptyA>
+                            </ListItem>
+                          ))
+                        ) : (<></>)
+                      }
+                    </Ulist>
+                    {/* <CartEmptyA onClick={() => navigate('/products')}>Shop Arrivals</CartEmptyA>
+                    <CartEmptyA onClick={() => navigate('/collections')}>Shop Collections</CartEmptyA> */}
                   </CartEmptyLinksDiv>
                 </CartEmptyFlex>
               </CartEmpty>

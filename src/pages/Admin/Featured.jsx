@@ -9,6 +9,8 @@ import WidgetOrders from './WidgetOrders';
 const Featured = () => {
   const [income, setIncome] = useState([]);
   const [perc, setPerc] = useState(0);
+  const [orders, setOrders] = useState({});
+  const [users, setUsers] = useState({});
 
   const [userStats, setUserStats] = useState([]);
 
@@ -57,6 +59,26 @@ const Featured = () => {
     getIncome();
   }, []);
 
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const res = await userRequest.get("orders");
+        setOrders(res.data);
+      } catch {}
+    }
+    getOrders();
+  }, []);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const res = await userRequest.get("users");
+        setUsers(res.data);
+      } catch {}
+    }
+    getUsers();
+  }, []);
+
   return (
     <div className='featured'>
       <h3>Activity</h3>
@@ -86,11 +108,11 @@ const Featured = () => {
           <div className="featuredFlex">
             <div></div>
             <div className="featuredFlexcaption">
-              <span className="featuredTitle">Visitors</span>
+              <span className="featuredTitle">All Users</span>
             </div>
           </div>
           <div className="featuredBodyHolder">
-            <span className='bold-text metric'>632,143</span>
+            <span className='bold-text metric'>{users.length}</span>
             <span className='metric-rate metric-rate-bad'>-1.44%&nbsp;</span>
           </div>
           <span className='comparespan'>Compared to last month</span>
@@ -104,7 +126,7 @@ const Featured = () => {
             </div>
           </div>
           <div className="featuredBodyHolder">
-            <span className='bold-text metric'>3,456.888</span>
+            <span className='bold-text metric'>{orders.length}</span>
             <span className='metric-rate metric-rate-good'>+5.44%&nbsp;</span>
           </div>
           <span className='comparespan'>Compared to last month</span>
@@ -118,8 +140,8 @@ const Featured = () => {
             </div>
           </div>
           <div className="featuredBodyHolder">
-            <span className='bold-text metric'>503,812</span>
-            <span className='metric-rate metric-rate-good'>+5.44%&nbsp;</span>
+            <span className='bold-text metric'>0</span>
+            <span className='metric-rate metric-rate-good'>+0%&nbsp;</span>
           </div>
           <span className='comparespan'>Compared to last month</span>
         </div>

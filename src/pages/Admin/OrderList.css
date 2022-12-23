@@ -40,8 +40,37 @@
   border: none;
   background: none;
   font-family: inherit;
+  font-weight: 600;
+  font-size: inherit;
 }
 
 .drop-menu li:hover button {
+  color: var(--color-danger);
+}
+
+.status-div {
+  padding: 0.5rem;
+  border: 1px solid #d9dbe4;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.status-icon--pending {
+  color: #b7b9c3;
+}
+
+.status-icon--canceled {
+  color: var(--color-danger);
+}
+
+.status-icon--sent {
+  color: var(--brand-blue);
+}
+
+.pending-span {
+  color: #b7b9c3;
+}
+
+.canceled-span {
   color: var(--color-danger);
 }
