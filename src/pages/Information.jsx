@@ -8,6 +8,7 @@ import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import "./Checkout.css";
 import { publicRequest } from "../requestMethods";
 import { editUserSuccess } from "../redux/userRedux";
+import data from "../data.json";
 
 const Information = () => {
   const cart = useSelector((state) => state.carts.cart);
@@ -18,23 +19,38 @@ const Information = () => {
   const dispatch = useDispatch();
   const [street, setStreet] = useState("");
   const [apartment, setApartment] = useState("");
-  const [country, setCountry] = useState("");
-  const [state, setState] = useState("");
+  // const [country, setCountry] = useState("");
+  // const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [zip, setZip] = useState("");
   const [phone, setPhone] = useState("");
+  const [countryId, setCountryId] = useState('');
+  const [state, setState] = useState([]);
+  const [stateId, setStateId] = useState('');
+
+  const handleCountry = (e) => {
+    const countryId = e.target.value;
+    const stateData = data.find(country => country.country_name === countryId).states
+    setState(stateData);
+    setCountryId(countryId);
+  }
+
+  const handleState = (e) => {
+    const stateId = e.target.value;
+    setStateId(stateId);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (street && country && state && city && zip) {
+    if (street && countryId && stateId && city && zip) {
       try {
         const res = await publicRequest.post(
           `/users/${user._id}/edit-address`,
           {
             street: street,
             apartment: apartment,
-            country: country,
-            state: state,
+            country: countryId,
+            state: stateId,
             city: city,
             zip: zip,
             phone: phone
@@ -123,14 +139,14 @@ const Information = () => {
                             <label htmlFor="country" className="fieldlabel">
                               Country/region
                             </label>
-                            <input
-                              type="text"
-                              id="country"
-                              value={country}
-                              className="fieldinput"
-                              onChange={(e) => setCountry(e.target.value)}
-                              required
-                            />
+                            <select name="country" id="country" className="fieldinput" onChange={handleCountry}>
+                              <option value="">Select country</option> 
+                              {
+                                data.map((country, index) => (
+                                  <option key={index} value={country.country_name}>{country.country_name}</option>
+                                ))
+                              }
+                            </select>
                           </div>
                         </div>
                         <div className="datafield datafield-half">
@@ -213,15 +229,14 @@ const Information = () => {
                             <label htmlFor="state" className="fieldlabel">
                               State
                             </label>
-                            <input
-                              type="text"
-                              name="state"
-                              id="state"
-                              value={state}
-                              className="fieldinput"
-                              onChange={(e) => setState(e.target.value)}
-                              required
-                            />
+                            <select name="state" id="state" className="fieldinput" onChange={(e) => handleState(e)}>
+                              <option value="">Select state/province</option>
+                              {
+                                state.map((getState, index) => (
+                                  <option key={index} value={getState.state_name}>{getState.state_name}</option>
+                                ))
+                              }
+                            </select>
                           </div>
                         </div>
                         <div className="datafield datafield-third">

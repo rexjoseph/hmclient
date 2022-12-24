@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { applyDiscount } from "../redux/apiCalls";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
+import data from "../data.json";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.carts.cart);
@@ -16,6 +17,9 @@ const Checkout = () => {
   const discountCode = useSelector((state) => state.carts.discountCode);
   const user = useSelector((state) => state.user.currentUser);
   const [inputs, setInputs] = useState({});
+  const [countryId, setCountryId] = useState('');
+  const [state, setState] = useState([]);
+  const [stateId, setStateId] = useState('');
   const [code, setCode] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,6 +51,18 @@ const Checkout = () => {
     });
   };
 
+  const handleCountry = (e) => {
+    const countryId = e.target.value;
+    const stateData = data.find(country => country.country_name === countryId).states
+    setState(stateData);
+    setCountryId(countryId);
+  }
+
+  const handleState = (e) => {
+    const stateId = e.target.value;
+    setStateId(stateId);
+  }
+
   const handleDiscount = (e) => {
     e.preventDefault();
     applyDiscount(code, dispatch);
@@ -56,6 +72,8 @@ const Checkout = () => {
     e.preventDefault();
     const data = {
       ...inputs,
+      billCountry: countryId,
+      billState: stateId
     };
     // Dispatch CC Data to Authorize.net and receive payment nonce for use on the server
     try {
@@ -67,7 +85,6 @@ const Checkout = () => {
         shipAddress: user.address,
         email: user.email,
       });
-      console.log(res)
       if (res.status === 200) {
         navigate("/payment/success", {
           state: {
@@ -272,14 +289,14 @@ const Checkout = () => {
                                     >
                                       Country/region
                                     </label>
-                                    <input
-                                      type="text"
-                                      id="billCountry"
-                                      name="billCountry"
-                                      className="fieldinput"
-                                      onChange={handleChange}
-                                      required
-                                    />
+                                    <select name="billCountry" id="billCountry" className="fieldinput" onChange={handleCountry}>
+                                      <option value="">Select country</option> 
+                                      {
+                                        data.map((country, index) => (
+                                          <option key={index} value={country.country_name}>{country.country_name}</option>
+                                        ))
+                                      }
+                                    </select>
                                   </div>
                                 </div>
                                 <div className="datafield datafield-half">
@@ -379,14 +396,14 @@ const Checkout = () => {
                                     >
                                       State
                                     </label>
-                                    <input
-                                      type="text"
-                                      name="billState"
-                                      id="billState"
-                                      className="fieldinput"
-                                      onChange={handleChange}
-                                      required
-                                    />
+                                    <select name="billState" id="billState" className="fieldinput" onChange={(e) => handleState(e)}>
+                                      <option value="">Select state/province</option>
+                                      {
+                                        state.map((getState, index) => (
+                                          <option key={index} value={getState.state_name}>{getState.state_name}</option>
+                                        ))
+                                      }
+                                    </select>
                                   </div>
                                 </div>
                                 <div className="datafield datafield-third">
