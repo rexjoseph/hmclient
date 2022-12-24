@@ -54,13 +54,13 @@ const EditOrder = () => {
       <Announcement />
       <Navbar />
       <section>
-        <div className="container">
+        <div className="container pad15">
           {
             loading ? (
               <>
                 <div style={{fontSize: "1.4rem"}} className="o__pages">
                   <section className="orders100" style={{marginTop: "8rem"}}>
-                    <div className="container">
+                    <div className="container pad15">
                       <div style={{padding: "0"}} className="orders__div">
                         <div style={{margin: "0"}} className="orders__header">
                           <div className="orders__info">

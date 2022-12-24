@@ -317,6 +317,7 @@ const FilterSize = styled.select`
   outline: none;
   background: transparent;
   color: var(--color-primary);
+  font-size: inherit;
 `
 
 const SizeOption = styled.option`
