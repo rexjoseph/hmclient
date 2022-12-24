@@ -74,3 +74,35 @@
 .canceled-span {
   color: var(--color-danger);
 }
+
+.search__holder-admin {
+  background: #FBFBFC;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+form .search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search__input {
+  font-family: inherit;
+  background: #fff;
+  border: 1px solid var(--line-divider);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 90%;
+  transition: all 0.2s;
+}
+
+.search__input:focus {
+  outline: none;
+  width: 100%;
+}
+
+.search__input::-webkit-input-placeholder {
+  font-weight: 400;
+  color: #333;
+}

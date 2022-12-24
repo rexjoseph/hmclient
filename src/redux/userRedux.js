@@ -87,6 +87,19 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+
+    // DELETE
+    deleteUserStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    deleteUserSuccess: (state, action) => {
+      state.isFetching = false;
+    },
+    deleteUserFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    }
   },
 });
 
@@ -109,6 +122,9 @@ export const {
   newPasswordFailure,
   postSubscribeStart,
   postSubscribeSuccess,
-  postSubscribeFailure
+  postSubscribeFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure
 } = userSlice.actions;
 export default userSlice.reducer;

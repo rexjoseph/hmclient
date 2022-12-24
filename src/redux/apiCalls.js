@@ -15,6 +15,9 @@ import {
   newPasswordStart,
   newPasswordSuccess,
   newPasswordFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure
 } from "./userRedux";
 import {
   createReviewStart,
@@ -197,6 +200,17 @@ export const deleteProduct = async (id, dispatch) => {
     dispatch(deleteProductFailure());
   }
 };
+
+// DELETE USER
+export const deleteUser = async (id, dispatch) => {
+  dispatch(deleteUserStart());
+  try {
+    const res = await userRequest.delete(`/users/${id}`);
+    dispatch(deleteUserSuccess());
+  } catch (err) {
+    dispatch(deleteUserFailure());
+  }
+}
 
 export const updateOrder = async (id, order, dispatch) => {
   dispatch(updateOrderStart());
