@@ -21,6 +21,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const {pathname} = useLocation();
   const { isFetching } = useSelector((state) => state.carts);
+  const [resMessage, setResMessage] = useState('');
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -66,15 +67,21 @@ const Checkout = () => {
         shipAddress: user.address,
         email: user.email,
       });
-      navigate("/payment/success", {
-        state: {
-          authData: res.data,
-          cart: cart,
-          amount: total,
-          totalQty: getTotal().totalQuantity,
-        },
-      });
-    } catch {}
+      console.log(res)
+      if (res.status === 200) {
+        navigate("/payment/success", {
+          state: {
+            authData: res.data,
+            cart: cart,
+            amount: total,
+            totalQty: getTotal().totalQuantity,
+          },
+        });
+      }
+    } catch (err) {
+      setResMessage(err.response.data.message)
+      // console.log(err.response.data);
+    }
   };
 
   return (
@@ -421,6 +428,13 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div className="step_footer">
+                      {
+                        resMessage && (
+                          <div className="errorMessageDiv">
+                            {resMessage}
+                          </div>
+                        )
+                      }
                       <button type="submit">
                         <span>Place order</span>
                       </button>

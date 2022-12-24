@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMinus, faPlus, faChevronLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faChevronLeft, faArrowRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../components/Navbar";
 import {useSelector} from 'react-redux'
 import { useLocation, useNavigate } from "react-router-dom";
@@ -622,8 +622,10 @@ const EmptyCartButton = styled.button`
   border: none;
   outline: none;
   background: transparent;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
   font-family: inherit;
-  text-decoration: underline;
   cursor: pointer;
   color: var(--color-primary);
 
@@ -757,7 +759,10 @@ const Cart = () => {
                   )).reverse()}
                 </CartUl>
                 <EmptyCartButtonDiv>
-                  <EmptyCartButton onClick={() => dispatch(resetCart())}>Empty cart</EmptyCartButton>
+                  <EmptyCartButton onClick={() => dispatch(resetCart())}>
+                    <FontAwesomeIcon icon={faTrash} />&nbsp;
+                    Empty cart
+                  </EmptyCartButton>
                 </EmptyCartButtonDiv>
               </CartColumn1>
               <CartColumn2>

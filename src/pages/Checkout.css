@@ -172,3 +172,9 @@
     padding-left: 0;
   }
 } */
+
+.errorMessageDiv {
+  text-align: center;
+  margin: 2rem;
+  color: var(--color-danger);
+}
