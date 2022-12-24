@@ -42,6 +42,7 @@ import FeedForm from './pages/FeedForm';
 import EmailMarketingSuccessV2 from './pages/EmailMarketingSuccessV2';
 import NewAnnouncement from './pages/Admin/NewAnnouncement';
 import UsersList from './pages/Admin/UsersList';
+import EditUser from './pages/Admin/EditUser';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -88,6 +89,7 @@ const App = () => {
       <Route path="/admin/orders/:orderId" element={ user && user.isAdmin ? <OrderDetail /> : <Navigate to="/" />} />
       <Route path="/admin/products/edit/:productId" element={ user && user.isAdmin ? <EditProduct /> : <Navigate to="/" />} />
       <Route path="/admin/orders/edit/:orderId" element={ user && user.isAdmin ? <EditOrder /> : <Navigate to="/" />} />
+      <Route path="/admin/users/edit/:userId" element={ user && user.isAdmin ? <EditUser /> : <Navigate to="/" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
