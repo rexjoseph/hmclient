@@ -77,6 +77,7 @@ const Account = () => {
               <h3>{user.firstName}&nbsp;{user.lastName}</h3>
               <div className="address-body">
                 <div className="email">{user.email}</div>
+                {/* <p>Addresses</p> */}
                 {/* <div>{user.address.street}</div>
                 <div>{user.address.apartment}</div>
                 <div className="city-state">{user.address.city},&nbsp;</div>
