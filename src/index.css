@@ -78,6 +78,7 @@ body {
 
 a {
   color: var(--color-primary);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .swiper-button-next,

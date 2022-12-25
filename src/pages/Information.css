@@ -65,8 +65,9 @@
   width: 100%;
 }
 
-.datafield-half {
-  
+.datafield select {
+  color: var(--color-primary);
+  font-size: inherit;
 }
 
 .checkout main .fieldlabel {

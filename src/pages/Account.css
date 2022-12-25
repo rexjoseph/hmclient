@@ -32,6 +32,7 @@
   padding: 0 36px;
   cursor: pointer;
   font-family: inherit;
+  font-size: inherit;
   position: relative;
   transition: background .2s ease-in-out, color .2s ease-in-out;
   white-space: nowrap;

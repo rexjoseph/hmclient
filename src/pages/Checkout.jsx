@@ -191,7 +191,6 @@ const Checkout = () => {
                                         name="cc"
                                         className="fieldinput"
                                         placeholder="Card number"
-                                        // value={cardData.cardNumber}
                                         onChange={handleChange}
                                         required
                                       />
@@ -224,17 +223,16 @@ const Checkout = () => {
                                         htmlFor="expiryMonth"
                                         className="fieldlabel"
                                       >
-                                        Expiration month (MM/YY)
+                                        Expiration (MMYY)
                                       </label>
                                       <input
                                         type="text"
                                         id="expiry"
                                         name="expiry"
                                         className="fieldinput"
-                                        placeholder="MM/YY"
+                                        placeholder="MMYY"
                                         maxLength={4}
                                         required
-                                        // value={cardData.expMonth}
                                         onChange={handleChange}
                                       />
                                     </div>
@@ -255,7 +253,6 @@ const Checkout = () => {
                                         placeholder="Security code"
                                         maxLength={4}
                                         required
-                                        // value={cardData.cardCode}
                                         onChange={handleChange}
                                       />
                                     </div>

@@ -18,7 +18,7 @@ const CartPageWrapper = styled.div`
 `
 
 const PDPContainer = styled.div`
-  margin-top: 100px;
+  margin-top: 60px;
 
   @media (max-width: 769px) {
     margin-top: 80px;
@@ -462,10 +462,6 @@ const CartHeaderOne = styled.h1`
   text-align: center;
   font-size: 24px;
   line-height: normal;
-
-  @media (max-width: 768px) {
-    font-size: 18px;
-  }
 `
 
 const CartHeaderTwo = styled.h2`
@@ -474,10 +470,6 @@ const CartHeaderTwo = styled.h2`
   font-size: 24px;
   font-weight: 400;
   line-height: normal;
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
 `
 
 const CartEmptyLinksDiv = styled.div`
@@ -848,8 +840,6 @@ const Cart = () => {
                         ) : (<></>)
                       }
                     </Ulist>
-                    {/* <CartEmptyA onClick={() => navigate('/products')}>Shop Arrivals</CartEmptyA>
-                    <CartEmptyA onClick={() => navigate('/collections')}>Shop Collections</CartEmptyA> */}
                   </CartEmptyLinksDiv>
                 </CartEmptyFlex>
               </CartEmpty>

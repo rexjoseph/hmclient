@@ -86,7 +86,7 @@ nav .desktop-nav li a:hover {
 }
 
 .account__user .span {
-  font-size: 1.2rem;
+  font-size: inherit;
   font-weight: 400;
 }
 
@@ -219,6 +219,7 @@ nav .desktop-nav li a:hover {
     padding: 0 36px;
     cursor: pointer;
     font-family: inherit;
+    font-size: inherit;
     position: relative;
   }
 
