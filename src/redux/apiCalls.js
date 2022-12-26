@@ -53,7 +53,16 @@ import {
 import {
   addCategoryStart,
   addCategorySuccess,
-  addCategoryFailure
+  addCategoryFailure,
+  editCategoryStart,
+  editCategorySuccess,
+  editCategoryFailure,
+  getCategoriesStart,
+  getCategoriesSuccess,
+  getCategoriesFailure,
+  deleteCategoryStart,
+  deleteCategorySuccess,
+  deleteCategoryFailure
 } from "./categoryRedux";
 import {
   createUGCStart,
@@ -63,7 +72,16 @@ import {
 import {
   createBannerStart,
   createBannerSuccess,
-  createBannerFailure
+  createBannerFailure,
+  updateBannerStart,
+  updateBannerSuccess,
+  updateBannerFailure,
+  getAllBannerStart,
+  getAllBannerSuccess,
+  getAllBannerFailure,
+  deleteBannerStart,
+  deleteBannerSuccess,
+  deleteBannerFailure
 } from "./bannerRedux";
 import {
   createAnnStart,
@@ -233,6 +251,17 @@ export const deleteOrder = async (id, dispatch) => {
   }
 };
 
+// GET CATEGORIES
+export const getCategories = async (dispatch) => {
+  dispatch(getCategoriesStart());
+  try {
+    const res = await userRequest.get('/category/all');
+    dispatch(getCategoriesSuccess(res.data));
+  } catch (err) {
+    dispatch(getCategoriesFailure());
+  }
+}
+
 // ADD CATEGORY
 export const addCategory = async (category, dispatch) => {
   dispatch(addCategoryStart());
@@ -243,6 +272,29 @@ export const addCategory = async (category, dispatch) => {
     dispatch(addCategoryFailure());
   }
 }
+
+// EDIT CATEGORY
+export const updateCategory = async (id, category, dispatch) => {
+  dispatch(editCategoryStart());
+  try {
+    // update
+    const res = await userRequest.put(`/category/${id}`, category);
+    dispatch(editCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(editCategoryFailure());
+  }
+};
+
+// DELETE PRODUCT
+export const deleteCategory = async (id, dispatch) => {
+  dispatch(deleteCategoryStart());
+  try {
+    const res = await userRequest.delete(`/category/${id}`);
+    dispatch(deleteCategorySuccess(id));
+  } catch (err) {
+    dispatch(deleteCategoryFailure());
+  }
+};
 
 // CREATE CONTENT
 export const addUGCContent = async (content, dispatch) => {
@@ -255,6 +307,17 @@ export const addUGCContent = async (content, dispatch) => {
   }
 }
 
+// GET PRODUCT
+export const getBanners = async (dispatch) => {
+  dispatch(getAllBannerStart());
+  try {
+    const res = await userRequest.get("/banner");
+    dispatch(getAllBannerSuccess(res.data));
+  } catch (err) {
+    dispatch(getAllBannerFailure());
+  }
+};
+
 // CREATE BANNER
 export const addBanner = async (banner, dispatch) => {
   dispatch(createBannerStart());
@@ -266,6 +329,28 @@ export const addBanner = async (banner, dispatch) => {
   }
 }
 
+// UPDATE BANNER
+export const updateBanner = async (id, banner, dispatch) => {
+  dispatch(updateBannerStart());
+  try {
+    const res = await userRequest.post(`/banner/edit/${id}`, banner);
+    dispatch(updateBannerSuccess(res.data));
+  } catch (err) {
+    dispatch(updateBannerFailure());
+  }
+}
+
+// DELETE ORDER
+export const deleteBanner = async (id, dispatch) => {
+  dispatch(deleteBannerStart());
+  try {
+    const res = await userRequest.delete(`/banner/${id}`);
+    dispatch(deleteBannerSuccess());
+  } catch (err) {
+    dispatch(deleteBannerFailure());
+  }
+};
+
 // CREATE ANNOUNCEMENT
 export const addAnnouncement = async (announcement, dispatch) => {
   dispatch(createAnnStart());
@@ -273,7 +358,7 @@ export const addAnnouncement = async (announcement, dispatch) => {
     const res = await userRequest.post(`/announcement`, announcement);
     dispatch(createAnnSuccess(res.data));
   } catch (err) {
-    dispatch(createBannerFailure());
+    dispatch(createAnnFailure());
   }
 }
 

@@ -102,7 +102,7 @@ const NewBanner = () => {
                       <label htmlFor="banner">Target Link</label>
                       <input name='target' className='npi-div-input' onChange={handleChange} required type="text" placeholder="https://hashingmart.com/productpage" />
                     </div>
-                    <button type="button" onClick={handleClick}>Add Category</button>
+                    <button type="button" onClick={handleClick}>Add Banner</button>
                   </div>
                 </div>
               </form>

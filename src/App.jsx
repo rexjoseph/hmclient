@@ -43,6 +43,10 @@ import EmailMarketingSuccessV2 from './pages/EmailMarketingSuccessV2';
 import NewAnnouncement from './pages/Admin/NewAnnouncement';
 import UsersList from './pages/Admin/UsersList';
 import EditUser from './pages/Admin/EditUser';
+import EditBanner from './pages/Admin/EditBanner';
+import BannerList from './pages/Admin/BannerList';
+import EditCategory from './pages/Admin/EditCategory';
+import CategoryList from './pages/Admin/CategoryList';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -84,12 +88,16 @@ const App = () => {
       <Route path="/admin/newannouncement" element={ user && user.isAdmin ? <NewAnnouncement /> : <Navigate to="/" />} />
       <Route path="/admin/newdiscount" element={ user && user.isAdmin ? <NewDiscount /> : <Navigate to="/" />} />
       <Route path="/admin/products" element={ user && user.isAdmin ? <AdminProductList /> : <Navigate to="/" />} />
+      <Route path="/admin/categories" element={ user && user.isAdmin ? <CategoryList /> : <Navigate to="/" />} />
+      <Route path="/admin/banners" element={ user && user.isAdmin ? <BannerList /> : <Navigate to="/" />} />
       <Route path="/admin/users" element={ user && user.isAdmin ? <UsersList /> : <Navigate to="/" />} />
       <Route path="/admin/orders" element={ user && user.isAdmin ? <OrderList /> : <Navigate to="/" />} />
       <Route path="/admin/orders/:orderId" element={ user && user.isAdmin ? <OrderDetail /> : <Navigate to="/" />} />
       <Route path="/admin/products/edit/:productId" element={ user && user.isAdmin ? <EditProduct /> : <Navigate to="/" />} />
       <Route path="/admin/orders/edit/:orderId" element={ user && user.isAdmin ? <EditOrder /> : <Navigate to="/" />} />
       <Route path="/admin/users/edit/:userId" element={ user && user.isAdmin ? <EditUser /> : <Navigate to="/" />} />
+      <Route path="/admin/banners/edit/:bannerId" element={ user && user.isAdmin ? <EditBanner /> : <Navigate to="/" />} />
+      <Route path="/admin/categories/edit/:categoryId" element={ user && user.isAdmin ? <EditCategory /> : <Navigate to="/" />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

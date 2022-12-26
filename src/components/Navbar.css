@@ -98,6 +98,10 @@ nav .desktop-nav li a:hover {
   }
 }
 
+nav .menu-icon-container {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @media (max-width: 768px) {
   .nav-container .desktop-nav {
     flex-direction: column;

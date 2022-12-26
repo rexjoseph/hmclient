@@ -1,17 +1,25 @@
 import React from 'react'
-import { useEffect } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Announcement from '../../components/Announcement';
 import Navbar from '../../components/Navbar';
-import { addCategory } from "../../redux/apiCalls";
+import { updateCategory } from '../../redux/apiCalls';
 import Sidebar from './Sidebar';
 
-const NewCategory = () => {
-  const [name, setName] = useState("");
-  const [icon, setIcon] = useState("");
-  const [banner, setBanner] = useState("");
+const EditCategory = () => {
+  const location = useLocation();
+  const categoryId = location.pathname.split("/")[4];
+  const category = useSelector((state) => state.category.categories.find((category) => category._id === categoryId))
+  const [name, setName] = useState(category.name);
+  const [icon, setIcon] = useState(category.icon);
+  const [banner, setBanner] = useState(category.banner);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = `Admin Edit Category — Hashingmart`;
+  });
 
   const handleName = (e) => {
     setName(e.target.value)
@@ -28,17 +36,13 @@ const NewCategory = () => {
   const handleClick = (e) => {
     e.preventDefault();
     const category = {
-      name,
-      icon, 
-      banner
+      name: name,
+      icon: icon,
+      banner: banner
     };
-    addCategory(category, dispatch);
-  };
-
-  useEffect(() => {
-    document.title = `Admin New Category — Hashingmart`;
-  });
-
+    updateCategory(categoryId, category, dispatch)
+  }
+  
   return (
     <div>
       <Announcement />
@@ -49,13 +53,10 @@ const NewCategory = () => {
             <Sidebar />
             <div className="mainbody">
               <div className="mainbody-header">
-                <h1 className="mainbody-title">Add Category</h1>
+                <h1 className="mainbody-title">Edit Category</h1>
                 <div className="span">
                   <span>
-                    The most important feature in the product addition section.
-                    When adding products here, do not ignore to fill in all the
-                    required fields completely and follow add follow the product
-                    adding rules.
+                    Edit category
                   </span>
                 </div>
               </div>
@@ -64,19 +65,19 @@ const NewCategory = () => {
                   <div className="flex-1">
                     <div className="npi-div">
                       <label htmlFor="title">Category Name</label>
-                      <input name='name' className="npi-div-input" onChange={handleName} required type="text" placeholder="Men" />
+                      <input name='name' defaultValue={category.name} className="npi-div-input" onChange={handleName} required type="text" placeholder="Men" />
                     </div>
                     <div className="npi-div">
                       <label htmlFor="icon">Category Icon</label>
-                      <input name='icon' className="npi-div-input" onChange={handleIcon} required type="text" placeholder="Image Link" />
+                      <input name='icon' defaultValue={category.icon} className="npi-div-input" onChange={handleIcon} required type="text" placeholder="Image Link" />
                     </div>
                   </div>
                   <div className="flex-1">
                     <div className="npi-div">
                       <label htmlFor="banner">Category Banner</label>
-                      <input name='banner' className='npi-div-input' onChange={handleBanner} required type="text" placeholder="Image Link" />
+                      <input name='banner' defaultValue={category.banner} className='npi-div-input' onChange={handleBanner} required type="text" placeholder="Image Link" />
                     </div>
-                    <button type="button" onClick={handleClick}>Add Category</button>
+                    <button type="button" onClick={handleClick}>Save Category</button>
                   </div>
                 </div>
               </form>
@@ -85,7 +86,7 @@ const NewCategory = () => {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default NewCategory
+export default EditCategory

@@ -164,7 +164,7 @@ const Slider = () => {
   useEffect(() => {
     const getBanners = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/banner/all")
+        const res = await axios.get("http://localhost:4000/api/banner/latest")
         setBanner(res.data)
         setLoading(true)
       } catch (err) {}
