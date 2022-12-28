@@ -106,19 +106,7 @@ const productSlice = createSlice({
     deleteOrderFailure: (state) => {
       state.isFetching = false;
       state.error = true;
-    },
-    // CREATE DISCOUNT
-    createDiscountStart: (state) => {
-      state.isFetching = true;
-    },
-    createDiscountSuccess: (state, action) => {
-      state.isFetching = false;
-      state.success = true;
-    },
-    createDiscountFailure: (state) => {
-      state.isFetching = false;
-      state.error = true;
-    },
+    }
   },
 });
 
@@ -143,9 +131,6 @@ export const {
   updateOrderFailure,
   deleteOrderStart,
   deleteOrderSuccess,
-  deleteOrderFailure,
-  createDiscountStart,
-  createDiscountSuccess,
-  createDiscountFailure
+  deleteOrderFailure
 } = productSlice.actions;
 export default productSlice.reducer;

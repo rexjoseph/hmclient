@@ -4,7 +4,7 @@ import Announcement from '../../components/Announcement';
 import Navbar from '../../components/Navbar';
 import { deleteCategory, getCategories } from '../../redux/apiCalls';
 import Sidebar from './Sidebar';
-import {format} from "timeago.js"
+import {format} from "date-fns"
 
 const CategoryList = () => {
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ const CategoryList = () => {
                                 {item.name}
                               </td>
                               <td>
-                                {format(item.createdAt)}
+                                {format(new Date(item.createdAt), 'yyyy/MM/dd')}
                               </td>
                             </tr>
                           )).reverse()

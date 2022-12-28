@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import './WidgetOrders.css'
-import {format} from "timeago.js"
+import {format} from "date-fns"
 import { userRequest } from '../../requestMethods';
 
 const WidgetOrders = () => {

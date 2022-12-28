@@ -166,6 +166,8 @@ const SocialIconLi = styled.li`
 
 const Footer = () => {
   const navigate = useNavigate()
+  const copy = new Date().getFullYear();
+  
   return (
     <Wrapper>
       <ContentWrap>
@@ -233,7 +235,7 @@ const Footer = () => {
             </LinkBodyOne>
           </LinksWrapper>
           <Copywright>
-            <CopySpan>&copy;2022 Hashingmart</CopySpan>
+            <CopySpan>&copy;{copy} Hashingmart</CopySpan>
           </Copywright>
         </Content>
       </ContentWrap>

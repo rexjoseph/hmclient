@@ -5,7 +5,7 @@ import Navbar from '../../components/Navbar';
 import { userRequest } from '../../requestMethods';
 import Sidebar from './Sidebar';
 import Loading from "../../components/Loading";
-import {format} from "timeago.js"
+import {format} from "date-fns"
 import './OrderList.css'
 import { deleteOrder } from '../../redux/apiCalls';
 
@@ -138,7 +138,7 @@ const OrderList = () => {
                                 }
                                 </div>
                               </td>
-                              <td>{format(item.createdAt)}</td>
+                              <td>{format(new Date(item.createdAt), 'yyyy/MM/dd')}</td>
                               <td>
                                 <i className="fa fa-ellipsis-h actions-ellipsis drop">
                                   <ul className='drop-menu'>

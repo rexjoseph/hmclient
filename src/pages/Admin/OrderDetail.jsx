@@ -6,7 +6,7 @@ import Announcement from '../../components/Announcement'
 import Navbar from '../../components/Navbar'
 import { userRequest } from '../../requestMethods';
 import './OrderDetail.css'
-import {format} from "timeago.js"
+import {format} from "date-fns"
 import Loading from '../../components/Loading';
 
 const OrderDetail = () => {

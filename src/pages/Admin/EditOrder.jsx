@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom'
 import { userRequest } from '../../requestMethods';
 import Loading from '../../components/Loading';
-import {format} from "timeago.js";
+import {format} from "date-fns";
 import Announcement from '../../components/Announcement';
 import Navbar from '../../components/Navbar';
 import './EditOrder.css';
@@ -174,7 +174,7 @@ const EditOrder = () => {
                               </>}
                               <p><b>Tracking Link:</b></p>
                               <p style={{textDecoration: "underline"}}>
-                                <a style={{color: "var(--brand-blue)"}} href={order.trackingLink || ''} target="_blank">{order.trackingLink || ''}</a>
+                                <a style={{color: "var(--brand-blue)"}} href={order.trackingLink || ''} target="_blank" rel="noreferrer">{order.trackingLink || ''}</a>
                               </p>
                               <br />
                               <p><b>Order Value:</b></p>

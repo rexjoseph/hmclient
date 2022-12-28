@@ -74,7 +74,7 @@ const InstaHandle = () => {
   return (
     <HandleSection>
       <InstaText>
-        <InstaButton href="https://instagram.com/wearehashingmart" target="_blank">
+        <InstaButton href="https://instagram.com/wearehashingmart" target="_blank" rel="noreferrer">
           <Marquee>
             <Inner>
               <Text>

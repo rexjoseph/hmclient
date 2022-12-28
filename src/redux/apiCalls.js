@@ -41,10 +41,21 @@ import {
   deleteOrderStart,
   deleteOrderSuccess,
   deleteOrderFailure,
+} from "./productRedux";
+import {
   createDiscountStart,
   createDiscountSuccess,
-  createDiscountFailure
-} from "./productRedux";
+  createDiscountFailure,
+  getDiscountsStart,
+  getDiscountsSuccess,
+  getDiscountsFailure,
+  updateDiscountStart,
+  updateDiscountSuccess,
+  updateDiscountFailure,
+  deleteDiscountStart,
+  deleteDiscountSuccess,
+  deleteDiscountFailure
+} from "./discountRedux";
 import {
   postSubscribeStart,
   postSubscribeSuccess,
@@ -67,7 +78,16 @@ import {
 import {
   createUGCStart,
   createUGCSuccess,
-  createUGCFailure
+  createUGCFailure,
+  getUGCStart,
+  getUGCSuccess,
+  getUGCFailure,
+  updateUGCStart,
+  updateUGCSuccess,
+  updateUGCFailure,
+  deleteUGCStart,
+  deleteUGCSuccess,
+  deleteUGCFailure
 } from "./ugcRedux";
 import {
   createBannerStart,
@@ -285,7 +305,7 @@ export const updateCategory = async (id, category, dispatch) => {
   }
 };
 
-// DELETE PRODUCT
+// DELETE CATEGORY
 export const deleteCategory = async (id, dispatch) => {
   dispatch(deleteCategoryStart());
   try {
@@ -307,7 +327,41 @@ export const addUGCContent = async (content, dispatch) => {
   }
 }
 
-// GET PRODUCT
+// GET CONTENTS
+export const getUGCContents = async (dispatch) => {
+  dispatch(getUGCStart());
+  try {
+    const res = await userRequest.get("/social/all");
+    dispatch(getUGCSuccess(res.data));
+  } catch (err) {
+    dispatch(getUGCFailure());
+  }
+};
+
+// UPDATE CONTENT
+export const updateUGCContent = async (id, content, dispatch) => {
+  dispatch(updateUGCStart());
+  try {
+    // update
+    const res = await userRequest.put(`/social/${id}`, content);
+    dispatch(updateUGCSuccess(res.data));
+  } catch (err) {
+    dispatch(updateUGCFailure());
+  }
+};
+
+// DELETE CONTENT
+export const deleteUGCContent = async (id, dispatch) => {
+  dispatch(deleteUGCStart());
+  try {
+    const res = await userRequest.delete(`/social/${id}`);
+    dispatch(deleteUGCSuccess(id));
+  } catch (err) {
+    dispatch(deleteUGCFailure());
+  }
+};
+
+// GET BANNERS
 export const getBanners = async (dispatch) => {
   dispatch(getAllBannerStart());
   try {
@@ -373,6 +427,29 @@ export const addDiscount = async (code, dispatch) => {
   }
 }
 
+// GET DISCOUNTS
+export const getDiscounts = async (dispatch) => {
+  dispatch(getDiscountsStart());
+  try {
+    const res = await userRequest.get("/carts/all-discounts");
+    dispatch(getDiscountsSuccess(res.data));
+  } catch (err) {
+    dispatch(getDiscountsFailure());
+  }
+};
+
+// UPDATE DISCOUNT
+export const updateDiscount = async (id, discount, dispatch) => {
+  dispatch(updateDiscountStart());
+  try {
+    // update
+    const res = await userRequest.put(`/carts/discount/${id}`, discount);
+    dispatch(updateDiscountSuccess(res.data));
+  } catch (err) {
+    dispatch(updateDiscountFailure());
+  }
+};
+
 // APPLY DISCOUNT
 export const applyDiscount = async (code, dispatch) => {
   dispatch(discountStart());
@@ -383,3 +460,14 @@ export const applyDiscount = async (code, dispatch) => {
     dispatch(discountFailure());
   }
 }
+
+// DELETE DISCOUNT
+export const deleteDiscount = async (id, dispatch) => {
+  dispatch(deleteDiscountStart());
+  try {
+    const res = await userRequest.delete(`/carts/discount/${id}`);
+    dispatch(deleteDiscountSuccess(id));
+  } catch (err) {
+    dispatch(deleteDiscountFailure());
+  }
+};

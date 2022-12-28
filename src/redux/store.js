@@ -6,6 +6,7 @@ import productReducer from "./productRedux"
 import categoryReducer from "./categoryRedux"
 import userGeneratedContentReducer from "./ugcRedux"
 import bannerReducer from "./bannerRedux"
+import discountReducer from "./discountRedux"
 
 import {
   persistStore,
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   uGCContent: userGeneratedContentReducer,
   banner: bannerReducer,
   announcement: announcementReducer,
+  discount: discountReducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
