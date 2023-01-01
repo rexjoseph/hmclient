@@ -1,0 +1,154 @@
+.success {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10rem;
+  margin-bottom: 8rem;
+  max-width: 500px;
+}
+
+.col-divider {
+  border: solid 1px;
+  display: block;
+  width: 100%;
+  height: 1px;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 3rem;
+  border-color: var(--line-divider);
+}
+
+.success-1 {
+  margin: 1.5rem 0;
+}
+
+.success-flex, .success-flex1 {
+  align-items: center;
+  gap: 3rem;
+}
+
+.success-flex1 span {
+  color: gray;
+}
+
+.success-flex1 p {
+  padding: .5rem 0;
+}
+
+.success-checkdiv {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.success-oinfo span {
+  color: grey;
+}
+
+.success-oinfo p {
+  font-size: 2.8rem;
+}
+
+.s-cartUl {
+  padding: 0;
+  width: 100%;
+}
+
+.s-cartList {
+  border-bottom: 1px solid rgba(32,32,32,.07);
+  list-style: none;
+  margin: 0;
+  padding: 24px 0;
+  position: relative;
+}
+
+.s-cartListItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.s-cartListImageLink {
+  text-decoration: none;
+}
+
+.s-cartListImageWrapper {
+  background-color: #f1f1f1;
+  margin-right: 12px;
+  width: 100px;
+}
+
+.s-cartListImageHolder {
+  cursor: pointer;
+}
+
+.s-cartListImageHolder img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+  opacity: 1;
+}
+
+.s-cartListDetail {
+  display: flex;
+  flex-direction: column;
+}
+
+.s-cartListDetail h3 {
+  font-size: 14px;
+  letter-spacing: -.57px;
+  margin-bottom: 0;
+}
+
+.s-cartListDetail a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.s-cartListUl {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.s-cartListLi {
+  list-style-type: none;
+}
+
+.s-flex2 {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  width: 100%;
+}
+
+.s-shipping {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 12px 0;
+  padding-bottom: 0;
+  width: 100%;
+}
+
+.s-shipping h3 {
+  font-size: 16px;
+  letter-spacing: -.65px;
+}
+
+.s-shipping span {
+  font-weight: 500;
+  letter-spacing: .1px;
+  font-size: 16px;
+}
+
+@media (max-width: 769px) {
+  .success {
+    padding: 0 15px;
+  }
+}

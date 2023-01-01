@@ -10,6 +10,7 @@ import { applyDiscount } from "../redux/apiCalls";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import data from "../data.json";
+import { resetCart } from "../redux/cartRedux";
 
 const Checkout = () => {
   const cart = useSelector((state) => state.carts.cart);
@@ -23,9 +24,11 @@ const Checkout = () => {
   const [code, setCode] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentUser = useSelector((state) => state.user.currentUser);
   const {pathname} = useLocation();
   const { isFetching } = useSelector((state) => state.carts);
   const [resMessage, setResMessage] = useState('');
+  let authData;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -85,19 +88,42 @@ const Checkout = () => {
         shipAddress: user.address,
         email: user.email,
       });
+      authData = res.data;
       if (res.status === 200) {
-        navigate("/payment/success", {
-          state: {
-            authData: res.data,
-            cart: cart,
-            amount: total,
+        try {
+          const payRes = await userRequest.post("/orders", {
+            user: {
+              email: currentUser.email,
+              firstName: currentUser.firstName,
+              lastName: currentUser.lastName,
+              userId: currentUser._id
+            },
+            cart: {
+              items: cart?.map((item) => ({
+                productId: item.id,
+                quantity: item.quantity,
+                title: item.title,
+                color: item.color,
+                size: item.size,
+                price: item.price
+              }))
+            },
+            totalCost: total,
             totalQty: getTotal().totalQuantity,
-          },
-        });
+            address: currentUser.address,
+            paymentId: authData,
+          })
+          navigate("/payment/success", {
+            state: {
+              order: payRes.data,
+              orderItems: cart
+            },
+          });
+          dispatch(resetCart())
+        } catch {}
       }
     } catch (err) {
       setResMessage(err.response.data.message)
-      // console.log(err.response.data);
     }
   };
 

@@ -139,7 +139,6 @@ const Register = () => {
                 <button className="registerFormButton" disabled={isFetching}>
                   Register
                 </button>
-                {/* {error && <span className="invalid-span">Invalid login credentials</span>} */}
                 <div className="registerLabel">
                   By creating an account, you agree to our&nbsp;
                   <a href="/terms-of-use" className="registerLabelLink">Terms of Use</a>

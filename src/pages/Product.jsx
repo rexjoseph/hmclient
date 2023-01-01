@@ -549,12 +549,6 @@ const BigSup = styled.h1`
   }
 `
 
-const NoReviewFlex = styled.div`
-  display: flex;
-  align-items: center;
-  gape: 1rem;
-`
-
 const ReviewsFlex = styled.div`
   display: flex;
   justify-content: space-between;
@@ -781,7 +775,9 @@ const Product = () => {
                               </HeaderRatingRow>
                             </HeaderRatingColumn>
                           </HeaderRatingDiv>
-                          <HeaderReviewDiv>({product.numReviews})</HeaderReviewDiv>
+                          <HeaderReviewDiv>
+                            <a style={{textDecoration: "underline"}} href='#p-reviews'>({product.numReviews})</a>
+                          </HeaderReviewDiv>
                         </HeaderReviewWrapper>
                       </ProductHeader>
                       <ProductColors>
@@ -898,40 +894,15 @@ const Product = () => {
                     </RelatedContainer>
                   )
                 }
-                <Reviews>
+                <Reviews id='p-reviews'>
                   <ReviewsFlex>
                     <ReviewsHeader>Reviews</ReviewsHeader>
                     <CreateReviewLink onClick={() => navigate(`/submit-review/${product.slug}`)}>Write review</CreateReviewLink>
                   </ReviewsFlex>
                   {product.reviews?.length === 0 && (
                     <>
-                      <NoReviewFlex>
-                      <BigSup>{product.rating.toFixed(1)}</BigSup>
-                        <>
-                          <i className={
-                            product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                            }>
-                          </i>
-                          <i className={
-                            product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                            }>
-                          </i>
-                          <i className={
-                            product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                            }>
-                          </i>
-                          <i className={
-                            product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                            }>
-                          </i>
-                          <i className={
-                            product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                            }>
-                          </i>
-                        </>
-                      </NoReviewFlex>
-                      <p>No product review yet</p>
-                      <p>Be the first to review this product</p>
+                      <p>{product.numReviews}&nbsp;Reviews</p>
+                      <p>No Reviews Yet. Be the first to <a style={{textDecoration: "underline"}} href={`/submit-review/${product.slug}`}>write a review.</a></p>
                     </>
                   )}
                   {
