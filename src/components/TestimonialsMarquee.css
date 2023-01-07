@@ -53,6 +53,7 @@
 .w-nowrap {
   white-space: nowrap;
   margin-right: 5rem;
+  font-size: 1.8rem;
 }
 
 @media (min-width: 768px) {
@@ -60,6 +61,12 @@
     gap: 2.5rem;
     padding-bottom: 80px;
     padding-top: 80px;
+  }
+}
+
+@media (max-width: 769px) {
+  .w-nowrap {
+    font-size: 1.4rem;
   }
 }
 

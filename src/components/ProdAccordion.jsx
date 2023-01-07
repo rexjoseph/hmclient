@@ -20,7 +20,6 @@ const ProdAccordion = ({title, active, setActive, content}) => {
           <div dangerouslySetInnerHTML={{__html: content}} />
         </div>
       </div>
-
     </div>
   );
 };
