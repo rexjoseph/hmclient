@@ -13,6 +13,7 @@ import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 import USP from '../components/USP'
 import Modal from '../components/Modal'
+import TestimonialsMarquee from '../components/TestimonialsMarquee'
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false)
@@ -36,10 +37,10 @@ const Home = () => {
       <Announcement />
       <Navbar />
       <Slider />
-      <Testimonial />
+      {/* <Testimonial /> */}
+      <TestimonialsMarquee />
       <USP />
-        {/* <button onClick={() => setOpenModal(true)}>Modal</button> */}
-        <Modal open={openModal} onClose={() => setOpenModal(false)}/>
+      <Modal open={openModal} onClose={() => setOpenModal(false)}/>
       <Products />
       <Collections />
       <Ethos />

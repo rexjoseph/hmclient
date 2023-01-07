@@ -27,6 +27,9 @@
   --main-image-height: 400px;
   --thumbnail-track-width: 90px;
   --thumbnail-height: 79px;
+  --marquee-direction: reverse;
+  --marquee-play-state: running;
+  --marquee-normal: normal;
 }
 
 * {
