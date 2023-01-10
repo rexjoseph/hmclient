@@ -95,8 +95,8 @@ const EditOrder = () => {
                             </div>
                             <h3 style={{marginTop: "2rem"}}>Order Model</h3>
                             <div className="clear-pad">
-                              <p><b>Order ID:</b><span style={{textTransform: "uppercase"}}>{order._id}</span></p>
-                              <p><b>Payment ID:</b><span style={{textTransform: "uppercase"}}>{order.paymentId}</span></p>
+                              <p><b>Order ID: </b><span style={{textTransform: "uppercase"}}>{order._id}</span></p>
+                              <p><b>Payment ID: </b><span style={{textTransform: "uppercase"}}>{order.paymentId}</span></p>
 
                               <form>
                                 <p><b>Order Status:&nbsp;</b>{order.status}</p>

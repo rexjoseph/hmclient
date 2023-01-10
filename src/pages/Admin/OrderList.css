@@ -106,3 +106,35 @@ form .search {
   font-weight: 400;
   color: #333;
 }
+
+.tabs-container {
+  margin-bottom: 10px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  font-family: sans-serif;
+}
+
+.tabs__label {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+.tabs__label:not(:first-of-type) {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.tabs__radio {
+  display: none;
+}
+
+.tabs__radio:checked+.tabs__label {
+  font-weight: bold;
+  color: var(--brand-blue);
+  border-bottom: 2px solid var(--brand-blue);
+}
