@@ -41,7 +41,12 @@ const Success = () => {
                     <FontAwesomeIcon icon={faCircleCheck} style={{width: "100%", height: "100%"}} />
                 </div>
                 <div className='success-oinfo'>
-                  <span>Order&nbsp;#{order._id.toUpperCase()}</span>
+                  <span>
+                    Order&nbsp;#
+                    {order.unitNumber ? (
+                      <>{order.unitNumber}</>
+                    ): (<>{order._id.toUpperCase()}</>)}
+                  </span>
                   <p>Thank you {currentUser.firstName}!</p>
                 </div>
               </div>
@@ -59,7 +64,7 @@ const Success = () => {
                 <p>Credit/debit card</p>
               </div>
               <div className='success-colspan'>
-                <span>Address</span>
+                <span>Shipping address</span>
                 <p>
                   {address.street}, 
                   {address.apartment ? (
@@ -77,7 +82,7 @@ const Success = () => {
                     <li className='s-cartList' key={item._id}>
                       <div className='s-cartListItem'>
                         <div className='flex'>
-                          <a className='s-cartListImageLink'>
+                          <a href={`/product/${item.slug}`} className='s-cartListImageLink'>
                             <div className='s-cartListImageWrapper'>
                               <div className='s-cartListImageHolder'>
                                 <img src={item.image} alt={item.title} />

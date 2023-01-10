@@ -67,7 +67,7 @@ const EditOrder = () => {
                             <div className="tp-flex">
                               <h1>Edit Order</h1>
                             </div>
-                            <div class="dash-disclaimer">
+                            <div className="dash-disclaimer">
                               <p>
                                 The most important feature in the order editing section is the order status part. When editing
                                 order here, fill in the required field completely.
@@ -147,9 +147,9 @@ const EditOrder = () => {
                               <div className="flex odt__body-2__imgflex">
                                 {
                                   order.cart.items.map(item => (
-                                    <a href={`/product/${item.productId.slug}`}>
+                                    <a href={`/product/${item.productId.slug}`} key={item._id}>
                                       <div className="img-div">
-                                        <img src={item.productId.images[0]} alt={item.title} srcset="" />
+                                        <img src={item.productId.images[0]} alt={item.title} />
                                       </div>
                                       {item.size.length > 0 && <><div><span>Size:&nbsp;{item.size}</span></div></>}
                                       {item.color.length > 0 && <><div><span style={{textTransform: "capitalize"}}>Color:&nbsp;{item.color}</span></div></>}
@@ -164,12 +164,12 @@ const EditOrder = () => {
                                 </p>
                               </div>
                               <p><b>Order Date:</b></p>
-                              <p>{format(order.createdAt)}</p>
+                              <p>{format(new Date(order.createdAt), 'yyyy/MM/dd')}</p>
                               <br />
                               {order.status === 'completed' && 
                               <>
                                 <p>Delivery Date:</p>
-                                <p>{format(order.updatedAt)}</p>
+                                <p>{format(new Date(order.createdAt), 'yyyy/MM/dd')}</p>
                                 <br />
                               </>}
                               <p><b>Tracking Link:</b></p>

@@ -3,6 +3,7 @@ import {cartReducer} from "./cartRedux"
 import userReducer from "./userRedux"
 import emailReducer from "./emailRedux"
 import productReducer from "./productRedux"
+import orderReducer from "./orderRedux"
 import categoryReducer from "./categoryRedux"
 import userGeneratedContentReducer from "./ugcRedux"
 import bannerReducer from "./bannerRedux"
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   carts: cartReducer,
   user: userReducer,
   product: productReducer,
+  order: orderReducer,
   category: categoryReducer,
   emailMarketing: emailReducer,
   uGCContent: userGeneratedContentReducer,

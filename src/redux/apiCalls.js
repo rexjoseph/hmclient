@@ -35,13 +35,18 @@ import {
   deleteProductStart,
   deleteProductSuccess,
   deleteProductFailure,
+} from "./productRedux";
+import {
+  getOrdersStart,
+  getOrdersSuccess,
+  getOrdersFailure,
   updateOrderStart,
   updateOrderSuccess,
   updateOrderFailure,
   deleteOrderStart,
   deleteOrderSuccess,
   deleteOrderFailure,
-} from "./productRedux";
+} from "./orderRedux";
 import {
   createDiscountStart,
   createDiscountSuccess,
@@ -250,6 +255,18 @@ export const deleteUser = async (id, dispatch) => {
   }
 }
 
+// GET ALL ORDERS
+export const getOrders = async (dispatch) => {
+  dispatch(getOrdersStart());
+  try {
+    const res = await userRequest.get("/orders");
+    dispatch(getOrdersSuccess(res.data));
+  } catch (err) {
+    dispatch(getOrdersFailure());
+  }
+};
+
+// UPDATE ORDER
 export const updateOrder = async (id, order, dispatch) => {
   dispatch(updateOrderStart());
   try {

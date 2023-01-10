@@ -211,7 +211,7 @@ const EmailMarketing = () => {
               <SignupForm onSubmit={handleSubmit}>
                 <SignupFormRow>
                   <SignupFormInput>
-                    <Input placeholder="Enter Your Email Address" required onChange={(e) => setEmail(e.target.value)} />
+                    <Input type='email' placeholder="Enter Your Email Address" required onChange={(e) => setEmail(e.target.value)} />
                   </SignupFormInput>
                   <SignupFormButton>
                     <Button>Sign Up Now</Button>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Announcement from '../../components/Announcement';
 import Navbar from '../../components/Navbar';
 import { userRequest } from '../../requestMethods';
@@ -7,28 +7,20 @@ import Sidebar from './Sidebar';
 import Loading from "../../components/Loading";
 import {format} from "date-fns"
 import './OrderList.css'
-import { deleteOrder } from '../../redux/apiCalls';
+import { deleteOrder, getOrders } from '../../redux/apiCalls';
 
 const OrderList = () => {
-  const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const orders = useSelector((state) => state.order.orders);
   const dispatch = useDispatch()
   const totalOrders = orders.length;
 
   useEffect(() => {
-    document.title = `Admin Orders List — Hashingmart`;
-  });
+    getOrders(dispatch);
+  }, [dispatch])
 
   useEffect(() => {
-    const getOrders = async () => {
-      try {
-        const res = await userRequest.get('/orders')
-        setOrders(res.data);
-        setLoading(true)
-      } catch (err) {}
-    }
-    getOrders()
-  }, [])
+    document.title = `Admin Orders List — Hashingmart`;
+  });
 
   const handleDelete = (id) => {
     deleteOrder(id, dispatch)
@@ -56,8 +48,7 @@ const OrderList = () => {
               </div>
             </div>
             <div className="productList">
-              {loading ? (
-                orders.length > 0 ? (
+            { orders.length > 0 ? (
                   <div className='listable' style={{margin: "4rem 0"}}>
                     <div className="listable-responsive">
                       <table width="100%">
@@ -165,11 +156,8 @@ const OrderList = () => {
                     <h1>No orders yet!</h1>
                     <p>Seems we don't have orders at the moment</p>
                   </div>
-                )
-              ) : (
-                <Loading />
-              )}
-              
+                ) 
+              }
             </div>
           </div>
         </div>

@@ -65,7 +65,7 @@ const OrderDetail = () => {
                       <h2>Invoice #<span style={{textTransform: "uppercase"}}>{order._id.substring(0, 8)}</span></h2>
                       <div style={{marginTop: "2rem", marginBottom: "2rem"}} className="col-divider"></div>
                       <p>Order Date</p>
-                      <span className='o-personalinfo'>{format(order.createdAt)}</span>
+                      <span className='o-personalinfo'>{format(new Date(order.createdAt), 'yyyy/MM/dd')}</span>
                       <p>{order.updatedAt}</p>
                       <div style={{marginTop: "2rem", marginBottom: "2rem"}} className="col-divider"></div>
                       <p><span className='o-personalinfo'>Contact:&nbsp;</span>{order.user.firstName}&nbsp;{order.user.lastName}</p>
@@ -94,7 +94,7 @@ const OrderDetail = () => {
                                 <tbody>
                                   {
                                     order.cart.items.map(item => (
-                                      <tr style={{borderBottom: "1px solid #ddd", fontSize: "1.5rem"}}>
+                                      <tr style={{borderBottom: "1px solid #ddd", fontSize: "1.5rem"}} key={item._id}>
                                         <td>
                                           <div className="o-orderinfo__flex">
                                             <div className='imgholder'>

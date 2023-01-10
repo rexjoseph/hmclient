@@ -17,7 +17,7 @@ const DiscountsList = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    document.title = `Admin UGC Discounts List - Hashingmart`;
+    document.title = `Admin Discounts List - Hashingmart`;
   });
 
   const handleDelete = (id) => {
