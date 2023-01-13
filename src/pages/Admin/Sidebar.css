@@ -4,7 +4,7 @@
   border-right: 1px solid var(--line-divider);
   position: sticky;
   top: 50px;
-  padding: 3rem 0;
+  padding: 0;
 }
 
 .sidebar ul {

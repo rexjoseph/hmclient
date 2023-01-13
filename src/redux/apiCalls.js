@@ -111,8 +111,17 @@ import {
 import {
   createAnnStart,
   createAnnSuccess,
-  createAnnFailure
-} from "./announcementReducer";
+  createAnnFailure,
+  getAnnouncementsStart,
+  getAnnouncementsSuccess,
+  getAnnouncementsFailure,
+  editAnnouncementStart,
+  editAnnouncementSuccess,
+  editAnnouncementFailure,
+  deleteAnnouncementStart,
+  deleteAnnouncementSuccess,
+  deleteAnnouncementFailure
+} from "./announcementRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import { discountFailure, discountStart, discountSuccess } from "./cartRedux";
 // import { useNavigate } from "react-router-dom";
@@ -432,6 +441,40 @@ export const addAnnouncement = async (announcement, dispatch) => {
     dispatch(createAnnFailure());
   }
 }
+
+// GET ALL ANNOUNCEMENTS
+export const getAnnouncements = async (dispatch) => {
+  dispatch(getAnnouncementsStart());
+  try {
+    const res = await userRequest.get("/announcement/admin-all");
+    dispatch(getAnnouncementsSuccess(res.data));
+  } catch (err) {
+    dispatch(getAnnouncementsFailure());
+  }
+};
+
+// UPDATE ANNOUNCEMENT
+export const updateAnnouncement = async (id, announcement, dispatch) => {
+  dispatch(editAnnouncementStart());
+  try {
+    // update
+    const res = await userRequest.put(`/announcement/${id}`, announcement);
+    dispatch(editAnnouncementSuccess(res.data));
+  } catch (err) {
+    dispatch(editAnnouncementFailure());
+  }
+};
+
+// DELETE ANNOUNCEMENT
+export const deleteAnnouncement = async (id, dispatch) => {
+  dispatch(deleteAnnouncementStart());
+  try {
+    const res = await userRequest.delete(`/announcement/${id}`);
+    dispatch(deleteAnnouncementSuccess(id));
+  } catch (err) {
+    dispatch(deleteAnnouncementFailure());
+  }
+};
 
 // CREATE DISCOUNT CODE
 export const addDiscount = async (code, dispatch) => {

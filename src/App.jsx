@@ -51,6 +51,8 @@ import UGCList from './pages/Admin/UGCList';
 import EditUGC from './pages/Admin/EditUGC';
 import DiscountsList from './pages/Admin/DiscountsList';
 import EditDiscount from './pages/Admin/EditDiscount';
+import Announcements from './pages/Admin/Announcements';
+import EditAnnouncement from './pages/Admin/EditAnnouncement';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -94,6 +96,7 @@ const App = () => {
       <Route path="/admin/products" element={ user && user.isAdmin ? <AdminProductList /> : <Navigate to="/" />} />
       <Route path="/admin/categories" element={ user && user.isAdmin ? <CategoryList /> : <Navigate to="/" />} />
       <Route path="/admin/banners" element={ user && user.isAdmin ? <BannerList /> : <Navigate to="/" />} />
+      <Route path="/admin/notifications" element={ user && user.isAdmin ? <Announcements /> : <Navigate to="/" />} />
       <Route path="/admin/users" element={ user && user.isAdmin ? <UsersList /> : <Navigate to="/" />} />
       <Route path="/admin/orders" element={ user && user.isAdmin ? <OrderList /> : <Navigate to="/" />} />
       <Route path="/admin/ugclist" element={ user && user.isAdmin ? <UGCList /> : <Navigate to="/" />} />
@@ -102,6 +105,7 @@ const App = () => {
       <Route path="/admin/products/edit/:productId" element={ user && user.isAdmin ? <EditProduct /> : <Navigate to="/" />} />
       <Route path="/admin/orders/edit/:orderId" element={ user && user.isAdmin ? <EditOrder /> : <Navigate to="/" />} />
       <Route path="/admin/users/edit/:userId" element={ user && user.isAdmin ? <EditUser /> : <Navigate to="/" />} />
+      <Route path="/admin/notification/edit/:notificationId" element={ user && user.isAdmin ? <EditAnnouncement /> : <Navigate to="/" />} />
       <Route path="/admin/banners/edit/:bannerId" element={ user && user.isAdmin ? <EditBanner /> : <Navigate to="/" />} />
       <Route path="/admin/categories/edit/:categoryId" element={ user && user.isAdmin ? <EditCategory /> : <Navigate to="/" />} />
       <Route path="/admin/usercontent/edit/:contentId" element={ user && user.isAdmin ? <EditUGC /> : <Navigate to="/" />} />

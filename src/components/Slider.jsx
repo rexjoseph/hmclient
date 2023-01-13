@@ -340,7 +340,15 @@ const Slider = () => {
               <MobileHeroFigure>
                 <MobileHeroFigureAsset>
                   <MobileHeroAssetImageDiv>
-                    <MobileHeroAssetImage src={item.image} />
+                    <MobileHeroAssetImage 
+                      src={
+                        item.mobileImage ? (
+                          item.mobileImage
+                        ) : (
+                          item.image
+                        )
+                      } 
+                    />
                   </MobileHeroAssetImageDiv>
                 </MobileHeroFigureAsset>
               </MobileHeroFigure>

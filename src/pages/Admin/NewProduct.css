@@ -1,5 +1,5 @@
 .newproduct {
-  margin: 4rem 0;
+  margin: 8rem 0;
 }
 
 .container {
@@ -23,7 +23,8 @@
 
 .mainbody {
   flex: 4;
-  padding: 3rem;
+  padding-left: 3rem;
+  padding-top: 0;
 }
 
 .mainbody-header .span {

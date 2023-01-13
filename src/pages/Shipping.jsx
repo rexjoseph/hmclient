@@ -272,7 +272,7 @@ const Shipping = () => {
         </Container>
         <Container>
           <CallParagraph>
-            Need help? <a href="tel:7609355809">(760) 935-5809</a>
+            Need help? <a href="tel:2068091704">(206) 809-1704</a>
           </CallParagraph>
         </Container>
       </EstDelDate>

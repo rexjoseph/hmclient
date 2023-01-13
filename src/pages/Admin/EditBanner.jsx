@@ -94,7 +94,7 @@ const EditBanner = () => {
                       />
                     </div>
                     <div className="npi-div">
-                      <label htmlFor="image">Banner Image</label>
+                      <label htmlFor="image">Banner Desktop Image</label>
                       <input
                         name="image"
                         defaultValue={banner.image}
@@ -102,7 +102,7 @@ const EditBanner = () => {
                         onChange={handleChange}
                         required
                         type="text"
-                        placeholder="Drop a link..."
+                        placeholder="Drop an image link..."
                       />
                     </div>
                     <div className="npi-div">
@@ -126,6 +126,16 @@ const EditBanner = () => {
                     </div>
                   </div>
                   <div className="flex-1">
+                    <div className="npi-div">
+                      <label htmlFor="icon">Banner Mobile Image</label>
+                      <input 
+                      name='mobileImage' 
+                      className="npi-div-input" 
+                      onChange={handleChange} 
+                      defaultValue={banner.mobileImage} 
+                      type="text" 
+                      placeholder="Drop an image link for mobile..." />
+                    </div>
                     <div className="npi-div">
                       <label htmlFor="poster">Banner Poster</label>
                       <input

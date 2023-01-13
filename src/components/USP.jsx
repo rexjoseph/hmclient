@@ -18,7 +18,6 @@ const Body = styled.div``
 const Heading = styled.h1`
   font-size: 4rem;
   font-weight: 400;
-  font-style: italic;
 
   @media (max-width: 769px) {
     font-size: 2rem;

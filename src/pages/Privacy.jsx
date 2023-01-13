@@ -377,7 +377,7 @@ const Privacy = () => {
                 If you would like to: access, correct, amend or delete any personal
                 information we have about you, register a complaint, or simply want
                 more information, contact our Privacy Compliance at
-                help@hashingmart.com, or call us on 1-760-935-5809
+                help@hashingmart.com, or call us on 1-206-809-1704
               </p>
               <br />
               <p>

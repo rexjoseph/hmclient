@@ -20,7 +20,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import announcementReducer from "./announcementReducer"
+import announcementReducer from "./announcementRedux"
 
 const persistConfig = {
   key: "root",

@@ -410,7 +410,7 @@ const Terms = () => {
               <p>HASHINGMART</p>
               <p>1629 K Street NW, Suite 300</p>
               <p>Washington, DC 20006</p>
-              <p>US: Tel: +1 (760) 935-5809</p>
+              <p>US: Tel: +1 (206) 809-1704</p>
               <p>Email: help@hashingmart.com</p>
               <br />
               <p>
@@ -434,7 +434,7 @@ const Terms = () => {
               <p>HASHINGMART</p>
               <p>1629 K Street NW, Suite 300,</p>
               <p>Washington, DC 20006</p>
-              <p>US: Tel: +1 (760) 935-5809</p>
+              <p>US: Tel: +1 (206) 809-1704</p>
               <p>Email: help@hashingmart.com</p>
               <br />
               <br />

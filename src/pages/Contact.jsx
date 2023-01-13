@@ -100,7 +100,7 @@ const Contact = () => {
                 live chat
               </Paragraph>
               <Paragraph>
-                Calls?&nbsp;<a href="tel:7609355809">(760) 935-5809</a>
+                Calls?&nbsp;<a href="tel:2068091704">(206) 809-1704</a>
               </Paragraph>
               <Paragraph>
                 Monday - Friday 5AM - 5PM CST

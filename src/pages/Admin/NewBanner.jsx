@@ -66,8 +66,8 @@ const NewBanner = () => {
                       <input name='actionText' className="npi-div-input" onChange={handleChange} required type="text" placeholder="Go, Go, Go" />
                     </div>
                     <div className="npi-div">
-                      <label htmlFor="icon">Banner Image</label>
-                      <input name='image' className="npi-div-input" onChange={handleChange} required type="text" placeholder="Drop a link..." />
+                      <label htmlFor="icon">Banner Desktop Image</label>
+                      <input name='image' className="npi-div-input" onChange={handleChange} required type="text" placeholder="Drop an image link..." />
                     </div>
                     <div className="npi-div">
                       <label htmlFor="icon">Is this a video?</label>
@@ -82,6 +82,10 @@ const NewBanner = () => {
                     </div>
                   </div>
                   <div className="flex-1">
+                    <div className="npi-div">
+                      <label htmlFor="icon">Banner Mobile Image</label>
+                      <input name='mobileImage' className="npi-div-input" onChange={handleChange} required type="text" placeholder="Drop an image link for mobile..." />
+                    </div>
                     <div className="npi-div">
                       <label htmlFor="banner">Banner Poster</label>
                       <input name='poster' className='npi-div-input' onChange={handleChange} required type="text" placeholder="Poster" />
