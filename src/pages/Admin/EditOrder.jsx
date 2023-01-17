@@ -105,7 +105,7 @@ const EditOrder = () => {
                                   <div className="stsl-div">
                                     <p><b>Update Status:</b></p>
                                     <select name="status" id="status" onChange={handleChange}>
-                                      <option>{order.status || 'Select'}</option>
+                                      <option>{order.status.charAt(0).toUpperCase() + order.status.slice(1) || 'Select'}</option>
                                       <option value="pending">Pending</option>
                                       <option value="processing">Processing</option>
                                       <option value="sent">Sent</option>

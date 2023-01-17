@@ -22,7 +22,7 @@
 
 .drop-menu li {
   padding: 1rem 3rem;
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: "Market Sans", sans-serif;
   font-weight: 600;
   font-size: 1.4rem;
 }
@@ -122,6 +122,7 @@ form .search {
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
+  font-family: "Market Sans", sans-serif;
 }
 
 .tabs__label:not(:first-of-type) {

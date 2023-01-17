@@ -106,7 +106,7 @@
   display: flex;
   font-family: inherit;
   font-size: 13px;
-  height: 48px;
+  height: 40px;
   justify-content: space-between;
   padding: 0 0 0 12px;
   text-align: left;
@@ -169,8 +169,8 @@
   margin-top: 26px;
   width: 180px;
   border-radius: 24px;
-  height: 48px;
-  line-height: 48px;
+  height: 40px;
+  line-height: 40px;
   padding: 0 36px;
   background: var(--color-primary);
   border: 0;
@@ -178,6 +178,7 @@
   cursor: pointer;
   display: inline-block;
   font-size: 14px;
+  font-family: inherit;
   position: relative;
   text-decoration: none;
   transition: background .2s ease-in-out,color .2s ease-in-out;

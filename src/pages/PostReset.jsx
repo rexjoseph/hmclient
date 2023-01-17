@@ -61,7 +61,7 @@ const Input = styled.input`
   color: var(--color-primary);
   cursor: text;
   font-family: inherit;
-  height: 48px;
+  height: 40px;
   margin: 0;
   padding: 0 12px;
   width: 100%;
@@ -82,8 +82,8 @@ const ButtonWrapper = styled.div``;
 const Button = styled.button`
   border-radius: 24px;
   border: transparent;
-  height: 48px;
-  line-height: 48px;
+  height: 40px;
+  line-height: 40px;
   padding: 0 36px;
   background: var(--color-primary);
   color: #fff;

@@ -11,7 +11,7 @@ const QuickAddDiv = styled.button`
   align-items: center;
   justify-content: center;
   left: 12px;
-  min-height: 48px;
+  min-height: 40px;
   pointer-events: none;
   position: absolute;
   right: 12px;
@@ -103,7 +103,7 @@ const Image = styled.img`
 //   color: #202020;
 //   font-family: inherit;
 //   font-size: 13px;
-//   height: 48px;
+//   height: 40px;
 //   margin: 0;
 //   padding: 0;
 //   width: 100%;
@@ -118,7 +118,7 @@ const InfoHolder = styled.div`
 `
 
 const TitleWrapper = styled.h3`
-  font-size: 16px;
+  font-size: 13px;
   letter-spacing: -.65px;
   line-height: 1.5;
   margin: 10px auto;
@@ -133,7 +133,7 @@ const LinkA = styled.a`
 `
 
 const MoreInfo = styled.div`
-  color: #737373;
+  font-weight: 400;
   font-size: 13px;
   margin: 2px 0 0;
 `
@@ -142,6 +142,7 @@ const PriceDiv = styled.div``
 
 const PriceSpan = styled.span`
   font-size: 13px;
+  font-weight: 400;
 `
 
 const RatingProduct = styled.div`

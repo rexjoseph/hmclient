@@ -143,13 +143,13 @@ const LinkA = styled.a`
   transition: background .2s ease-in-out,color .2s ease-in-out;
   white-space: nowrap;
   border-radius: 24px;
-  height: 48px;
+  height: 40px;
   background: #fff;
   color: var(--color-primary);
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  line-height: 48px;
+  line-height: 40px;
 
   &:hover {
     background: var(--color-primary);
@@ -279,11 +279,11 @@ const MobileHeroLink = styled.a`
   transition: background .2s ease-in-out,color .2s ease-in-out;
   white-space: nowrap;
   border-radius: 24px;
-  height: 48px;
+  height: 40px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  line-height: 48px;
+  line-height: 40px;
 
   &:hover {
     background: var(--brand-blue);

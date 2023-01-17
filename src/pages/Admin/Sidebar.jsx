@@ -8,7 +8,7 @@ const Sidebar = () => {
   return (
     <div className='sidebar'>
       <ul>
-        <li style={{fontWeight: '600'}}>Dashboard</li>
+        <li onClick={() => navigate('/admin')} style={{fontWeight: '600'}}>Dashboard</li>
         <li onClick={() => navigate('/admin/categories')}>Category Management</li>
         <li onClick={() => navigate('/admin/ugclist')}>Social Management</li>
         <li onClick={() => navigate('/admin/notifications')}>Notification Management</li>
@@ -17,7 +17,8 @@ const Sidebar = () => {
         <li>Sales Management</li>
         <li onClick={() => navigate('/admin/orders')}>Order Management</li>
         <li onClick={() => navigate('/admin/discounts')}>Discount Managment</li>
-        <li>Email Marketing</li>
+        <li onClick={() => navigate('/admin/email-v1')}>Email Subscription (form)</li>
+        <li onClick={() => navigate('/admin/email-v2')}>Email Subscription (pop-up)</li>
         <li onClick={() => navigate('/admin/users')}>Customer Statistics</li>
         <li>Supplier Management</li>
       </ul>

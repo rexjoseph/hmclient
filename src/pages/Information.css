@@ -403,6 +403,15 @@
   .order_summary {
     padding-left: 24px;
     padding-right: 24px;
+    transition: all 200ms ease;
+  }
+
+  .order_summary.inactive {
+    display: block;
+  }
+  
+  .order_summary.active {
+    display: none;
   }
 
   .order-product-list {
@@ -461,5 +470,9 @@
 @media screen and (max-width: 769px) {
   .infoc {
     margin-top: 70px;
+  }
+
+  #sidebar_col-h3 {
+    display: none;
   }
 }

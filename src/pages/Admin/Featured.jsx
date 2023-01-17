@@ -107,7 +107,7 @@ const Featured = () => {
           <div className="featuredFlex">
             <div></div>
             <div className="featuredFlexcaption">
-              <span className="featuredTitle">All Users</span>
+              <span className="featuredTitle">All Customers</span>
             </div>
           </div>
           <div className="featuredBodyHolder">

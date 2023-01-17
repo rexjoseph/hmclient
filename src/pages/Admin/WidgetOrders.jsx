@@ -25,6 +25,7 @@ const WidgetOrders = () => {
           <table className='widgetTable'>
           <thead>
             <tr className='widgetTr'>
+              <th className='widgetTh'>No</th>
               <th className='widgetTh'>Order ID</th>
               <th className='widgetTh'>Customer Name</th>
               <th className='widgetTh'>Order Date</th>
@@ -36,6 +37,7 @@ const WidgetOrders = () => {
           {orders.map((order) => (
             <tbody key={order._id}>
               <tr className='widgetTr' key={order._id}>
+                <td>{order.unitNumber || 0}</td>
                 <td className='widgetID'>
                   <span>#{order._id.substring(0, 8).toUpperCase()}</span>
                 </td>

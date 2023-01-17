@@ -53,6 +53,8 @@ import DiscountsList from './pages/Admin/DiscountsList';
 import EditDiscount from './pages/Admin/EditDiscount';
 import Announcements from './pages/Admin/Announcements';
 import EditAnnouncement from './pages/Admin/EditAnnouncement';
+import EmailV1SubscribersList from './pages/Admin/EmailV1SubscribersList';
+import EmailV2SubscribersList from './pages/Admin/EmailV2SubscribersList';
 
 const App = () => {
   const user = useSelector(state => state.user.currentUser);
@@ -101,6 +103,8 @@ const App = () => {
       <Route path="/admin/orders" element={ user && user.isAdmin ? <OrderList /> : <Navigate to="/" />} />
       <Route path="/admin/ugclist" element={ user && user.isAdmin ? <UGCList /> : <Navigate to="/" />} />
       <Route path="/admin/discounts" element={ user && user.isAdmin ? <DiscountsList /> : <Navigate to="/" />} />
+      <Route path="/admin/email-v1" element={ user && user.isAdmin ? <EmailV1SubscribersList /> : <Navigate to="/" />} />
+      <Route path="/admin/email-v2" element={ user && user.isAdmin ? <EmailV2SubscribersList /> : <Navigate to="/" />} />
       <Route path="/admin/orders/:orderId" element={ user && user.isAdmin ? <OrderDetail /> : <Navigate to="/" />} />
       <Route path="/admin/products/edit/:productId" element={ user && user.isAdmin ? <EditProduct /> : <Navigate to="/" />} />
       <Route path="/admin/orders/edit/:orderId" element={ user && user.isAdmin ? <EditOrder /> : <Navigate to="/" />} />

@@ -14,7 +14,10 @@ const AnnouncementContainer = styled.div`
 
 const Paragraph = styled.p`
   color: #${props => props.textColor};
-  font-size: 13px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 17px;
+  text-transform: capitalize;
   height: 100%;
   letter-spacing: .1px;
   text-align: center;
@@ -23,7 +26,7 @@ const Paragraph = styled.p`
 `
 
 const Placeholder = styled.div`
-  background: #0045BD;
+  // background: #0045BD;
   display: flex;
   align-items: center;
   justify-content: center;

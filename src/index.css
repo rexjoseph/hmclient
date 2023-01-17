@@ -94,3 +94,15 @@ select {
   -webkit-appearance: none; 
 	appearance: none;
 }
+
+/* input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+select,
+select:focus,
+textarea,
+textarea:focus {
+  font-size: inherit;
+} */

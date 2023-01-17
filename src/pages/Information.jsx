@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faChevronDown, faChevronLeft, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import "./Checkout.css";
 import { publicRequest } from "../requestMethods";
 import { editUserSuccess } from "../redux/userRedux";
@@ -27,6 +27,11 @@ const Information = () => {
   const [countryId, setCountryId] = useState('');
   const [state, setState] = useState([]);
   const [stateId, setStateId] = useState('');
+  const [accordion, setActiveAccordion] = useState(true);
+
+  function toggleAccordion() {
+    setActiveAccordion(!accordion);
+  }
 
   const handleCountry = (e) => {
     const countryId = e.target.value;
@@ -227,7 +232,7 @@ const Information = () => {
                         <div className="datafield datafield-third">
                           <div className="emaildata_wrapper">
                             <label htmlFor="state" className="fieldlabel">
-                              State
+                              State/province
                             </label>
                             <select name="state" id="state" className="fieldinput" onChange={(e) => handleState(e)}>
                               <option value="">Select state/province</option>
@@ -292,8 +297,8 @@ const Information = () => {
           </div>
         </div>
         <div className="sidebar_col">
-          <h3>Your bag</h3>
-          <div className="order_summary">
+          <h3 id="sidebar_col-h3">Your bag</h3>
+          <div className={accordion === true ? "order_summary active" : "order_summary inactive"}>
             <div className="order_summary-sections">
               <div className="order_summary-section order-product-list">
                 <div className="order-product-content">
@@ -389,6 +394,40 @@ const Information = () => {
               </div>
             </div>
           </div>
+          <aside className="order_summary-asidebtn">
+            <button className="order_summary-toggle" onClick={toggleAccordion}>
+              <span className="wrap">
+                <span className="order_summary-toggle__inner">
+                  <span className="order_summary-toggle_icon-wrapper">
+                    <FontAwesomeIcon icon={faCartShopping} />
+                  </span>
+                  <span className="order_summary-toggle__text">
+                    <span>
+                      {
+                        accordion === true ? (
+                          <>
+                            Show order summary&nbsp;
+                            <FontAwesomeIcon icon={faChevronDown} />
+                          </>
+                        ) : (
+                          <>
+                            Hide order summary&nbsp;
+                            <FontAwesomeIcon icon={faChevronUp} />
+                          </>
+                        )
+                      } 
+                      
+                    </span>
+                  </span>
+                  <dl className="order_summary-toggle__total">
+                    <dd>
+                      <span>${total.toFixed(2)}</span>
+                    </dd>
+                  </dl>
+                </span>
+              </span>
+            </button>
+          </aside>
         </div>
       </main>
     </section>

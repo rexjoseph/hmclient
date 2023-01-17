@@ -142,9 +142,9 @@
 }
 
 .s-shipping span {
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: .1px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 @media (max-width: 769px) {

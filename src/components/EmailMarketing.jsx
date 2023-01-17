@@ -115,7 +115,7 @@ const SignupFormInput = styled.div`
 `
 const Input = styled.input`
   width: 100%;
-  height: 48px;
+  height: 40px;
   font-family: inherit;
   appearance: none;
   font-size: 16px;

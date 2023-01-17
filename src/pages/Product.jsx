@@ -24,6 +24,7 @@ import ReviewItem from '../components/ReviewItem';
 import PlaceholderImage from "../images/imgplaceholder.jpg";
 import Loading from "../components/Loading";
 import Modal from '../components/Modal';
+import PPEmailMarketing from '../components/PPEmailMarketing';
 
 const ProductPageWrapper = styled.div`
 `
@@ -137,7 +138,7 @@ const HeaderDiv = styled.div``
 
 const HeaderTitle = styled.h1`
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 1.32;
   letter-spacing: 0.5px;
   margin-top: 1rem;
@@ -162,7 +163,6 @@ const HeaderPrice = styled.p`
   margin: 0px 0px 18px;
   padding: 0px;
   margin-bottom: 0px;
-}
 `
 
 const HeaderReviewWrapper = styled.a`
@@ -183,9 +183,7 @@ const HeaderReviewWrapper = styled.a`
   }
 `
 
-const HeaderRatingDiv = styled.div`
-  
-`
+const HeaderRatingDiv = styled.div``
 
 const HeaderRatingColumn = styled.div`
   display: flex;
@@ -260,6 +258,18 @@ const ProductColorSwatch = styled.button`
   @media (min-width: 992px) {
     margin: 6px;
   }
+
+  &:active,
+  &:focus {
+    border-radius: 50%;
+    outline: 1px solid var(--color-primary);
+  }
+
+  &::after {
+    $(ProductColorSwatch) {
+      inset: -4px;
+    }
+  }
 `
 
 const ColorSwatch = styled.div`
@@ -270,7 +280,6 @@ const ColorSwatch = styled.div`
   background: ${props => props.color};
   position: relative;
   display: inline-block;
-  border: ${props => props.color};
 
   &:after {
     content: "";
@@ -318,6 +327,7 @@ const FilterSize = styled.select`
   background: transparent;
   color: var(--color-primary);
   font-size: inherit;
+  font-family: inherit;
 `
 
 const SizeOption = styled.option`
@@ -374,7 +384,7 @@ const ButtonAddToBag = styled.button`
   transition: background .2s ease-in-out,color .2s ease-in-out;
   white-space: nowrap;
   border-radius: 24px;
-  height: 48px;
+  height: 40px;
   width: 100%;
 
   &:hover {
@@ -399,7 +409,7 @@ const ButtonAddToBagNull = styled.button`
   white-space: nowrap;
   border-radius: 24px;
   border-color: #DDD;
-  height: 48px;
+  height: 40px;
   width: 100%;
 `
 
@@ -439,7 +449,7 @@ const GuaranteeList = styled.li`
 const PDescripton = styled.div`
   @media (max-width: 769px) {
     background: #f9f9f9;
-    padding: 5px 15px;
+    padding: 5px;
   }
 `
 
@@ -539,15 +549,15 @@ const ReviewsHeader = styled.h1`
   font-size: 2.4rem;
 `
 
-const BigSup = styled.h1`
-  font-size: 5.2rem;
-  font-weight: 700;
-  line-height: 1;
+// const BigSup = styled.h1`
+//   font-size: 5.2rem;
+//   font-weight: 700;
+//   line-height: 1;
 
-  @media (max-width: 769px) {
-    font-size: 3.8rem;
-  }
-`
+//   @media (max-width: 769px) {
+//     font-size: 3.8rem;
+//   }
+// `
 
 const ReviewsFlex = styled.div`
   display: flex;
@@ -927,8 +937,9 @@ const Product = () => {
         </PDP>
       </PDPContainer>
       <Modal open={openModal} onClose={() => setOpenModal(false)}/>
-      <Feedback />
-      <Prefooter />
+      {/* <Feedback /> */}
+      <PPEmailMarketing />
+      {/* <Prefooter /> */}
       <Footer />
     </ProductPageWrapper>
   )

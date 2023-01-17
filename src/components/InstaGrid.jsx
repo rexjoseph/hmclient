@@ -40,13 +40,13 @@ const Title = styled.h1`
 `
 
 const Link = styled.a`
-  line-height: 48px;
+  line-height: 40px;
   display: inline-block;
   text-align: center;
   text-decoration: none;
   width: 249px;
   border-radius: 24px;
-  height: 48px;
+  height: 40px;
   background: var(--color-primary);
   border: 0;
   color: #fff;
@@ -79,13 +79,13 @@ const IGFooter = styled.div`
 `
 
 const IGFooterLink = styled.a`
-  line-height: 48px;
+  line-height: 40px;
   display: inline-block;
   text-align: center;
   text-decoration: none;
   width: 249px;
   border-radius: 24px;
-  height: 48px;
+  height: 40px;
   background: var(--color-primary);
   border: 0;
   color: #fff;

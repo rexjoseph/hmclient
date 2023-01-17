@@ -52,6 +52,7 @@ const Success = () => {
               </div>
               <div style={{marginTop: "2rem", marginBottom: "2rem"}} className="col-divider"></div>
               <p>Your order has been received and will be shipping soon.</p>
+              <p><a href="/account" style={{textDecoration: "underline"}}>Go to order history</a></p>
               <div style={{marginTop: "2rem", marginBottom: "2rem"}} className="col-divider"></div>
             </div>
             <div className='flex success-flex1'>
@@ -61,7 +62,15 @@ const Success = () => {
               </div>
               <div className='success-colspan'>
                 <span>Payment method</span>
-                <p>Credit/debit card</p>
+                <p>
+                  {order.paymentType && order.paymentAccountNumber ? 
+                  (
+                    <>{ order.paymentType + ' ' + order.paymentAccountNumber }</>
+                  ) : 
+                  (
+                    <>Credit card</>
+                  )}
+                </p>
               </div>
               <div className='success-colspan'>
                 <span>Shipping address</span>
@@ -142,6 +151,7 @@ const Success = () => {
               </p>
               <br />
               <p>Thank you!</p>
+              <p><a href="/account" style={{textDecoration: "underline"}}>Go to order history</a></p>
             </div>
           </>
           : 

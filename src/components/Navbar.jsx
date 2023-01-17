@@ -71,39 +71,48 @@ function Navbar() {
             </li>
           </ul>
           <ul className='desktop-nav'>
-            <li>
-              <a href="/" className='link-logo'></a>
-            </li>
-            <li>
-              <a id="sale-link" href="/products">Sale</a>
-            </li>
-            <li>
-              <a href="/collections">Collections</a>
-            </li>
-            <li>
-              <a href="/orders">My Orders</a>
-            </li>
-            <li>
-              <a href="/sustainability">Sustainability</a>
-            </li>
-            <li className="account__user">
-              {currentUser ? (
-                <a href="/account">
-                Hi, <span className="span span-show">{currentUser.firstName}</span>
-              </a>
-              ) : (
-                <a href="/account">
-                Hello, <span className="span span-show">Sign in</span>
-              </a>
-              )}
-            </li>
-            <li className='bag-list'>
-              <a href="/cart" className='link-bag'>
-                <span className='bag-icon'>
-                  {getTotalQuantity() || 0}
-                </span>
-              </a>
-            </li>
+            <div className="desktop-nav__flex1">
+              <li>
+                <a id="sale-link" href="/products">Sale</a>
+              </li>
+              <li>
+                <a href="/collections">Collections</a>
+              </li>
+              <li>
+                <a href="/account">My Orders</a>
+              </li>
+            </div>
+            <div className="desktop-nav__flex2">
+              <li>
+                <a href="/" className='link-logo'></a>
+              </li>
+            </div>
+            <div className="desktop-nav__flex3">
+              <li>
+                <a href="/sustainability">Sustainability</a>
+              </li>
+              <li className="account__user">
+                {currentUser ? (
+                  <a href="/account">
+                  Hi, <span className="span span-show">{currentUser.firstName}</span>
+                </a>
+                ) : (
+                  <a href="/account">
+                  Hello, <span className="span span-show">Sign in</span>
+                </a>
+                )}
+              </li>
+              <li className='bag-list'>
+                <a href="/cart" className='link-bag'>
+                  <span className='bag-icon'>
+                    {getTotalQuantity() || 0}
+                  </span>
+                </a>
+              </li>
+            </div>
+            
+            
+            
             {currentUser && <button className="navLogout" onClick={handleLogout}>Log Out</button>}
           </ul>
         </nav>
