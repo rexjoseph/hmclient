@@ -69,3 +69,9 @@
   letter-spacing: 0.5px;
   padding: 0px;
 }
+
+@media (max-width: 769px) {
+  .accordionContent {
+    padding: 0 1.5rem;
+  }
+}

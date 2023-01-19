@@ -68,21 +68,24 @@ const ImageDiv = styled.div`
 `
 
 const BadgeHolder = styled.div`
-  background-color: var(--color-primary);
-  color: #fff;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
   display: inline-block;
-  font-size: 13px;
-  height: 21px;
-  left: 0;
+  font-size: 9px;
+  height: 20px;
+  left: 2px;
   line-height: 21px;
   margin: 6px;
-  padding: 0 6px;
+  padding: 0 4px;
   position: absolute;
   top: 0;
   z-index: 1;
 `
 const Badge = styled.span`
-  color: rgb(255, 255, 255);
+  color: var(--color-primary);
+  text-align: left;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 `
 
 const Image = styled.img`
@@ -130,6 +133,11 @@ const TitleWrapper = styled.h3`
 const LinkA = styled.a`
   text-decoration: none;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+  justify-content: flex-start;
 `
 
 const MoreInfo = styled.div`
@@ -171,7 +179,7 @@ const  Product = ({item}) => {
       <ListWrapper>
         <ImageHolder>
           <BadgeHolder>
-            <Badge>New</Badge>
+            <Badge>{item.info || 'New'}</Badge>
           </BadgeHolder>
           <ImageDiv onClick={() => navigate(`/product/${item.slug}`)}>
             <Image src={item.images[0]} />

@@ -92,7 +92,7 @@
 
 @media (max-width: 500px) {
   .dropmenu input {
-    top: 8%;
+    /* top: 8%; */
     height: 50px;
     width: 100%;
   }

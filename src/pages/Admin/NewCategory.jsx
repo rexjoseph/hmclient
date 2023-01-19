@@ -11,6 +11,7 @@ const NewCategory = () => {
   const [name, setName] = useState("");
   const [icon, setIcon] = useState("");
   const [banner, setBanner] = useState("");
+  const [info, setInfo] = useState("");
   const dispatch = useDispatch();
 
   const handleName = (e) => {
@@ -25,12 +26,17 @@ const NewCategory = () => {
     setBanner(e.target.value)
   };
 
+  const handleInfo = (e) => {
+    setInfo(e.target.value)
+  }
+
   const handleClick = (e) => {
     e.preventDefault();
     const category = {
       name,
       icon, 
-      banner
+      banner,
+      info
     };
     addCategory(category, dispatch);
   };
@@ -72,6 +78,10 @@ const NewCategory = () => {
                     </div>
                   </div>
                   <div className="flex-1">
+                    <div className="npi-div">
+                      <label htmlFor="title">Category Info</label>
+                      <input name='info' className="npi-div-input" onChange={handleInfo} type="text" placeholder="Introducing new activewear you'll never want to take off..." />
+                    </div>
                     <div className="npi-div">
                       <label htmlFor="banner">Category Banner</label>
                       <input name='banner' className='npi-div-input' onChange={handleBanner} required type="text" placeholder="Image Link" />

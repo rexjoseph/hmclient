@@ -611,13 +611,42 @@ const ProductsUl = styled.ul`
 `
 
 const RelatedDiv = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 2.5rem;
   max-width: 1250px;
   width: 100%;
   padding: 0 18px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  border-color: #ccc !important;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
 `
 
-const RelatedHeader = styled.h3``
+const RelatedDiv1 = styled.div`
+  height: 52px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-color: #ccc !important;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  width: 188px;
+`
+
+const RelatedDiv2 = styled.div``
+
+const RelatedHeader = styled.p`
+  border-color: var(--color-primary);
+  border-bottom: 1px solid;
+  font-size: 13px;
+  line-height: 21px;
+  letter-spacing: 0.2px;
+  text-align: left;
+`
 
 const Product = () => {
   const location = useLocation()
@@ -750,45 +779,47 @@ const Product = () => {
                             </HeaderPriceWrapper>
                           </HeaderDiv>
                         </Header>
-                        <HeaderReviewWrapper>
-                          <HeaderRatingDiv>
-                            <HeaderRatingColumn>
-                              <HeaderRatingRow>
-                                <i className={
-                                  product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                                  }>
-                                </i>
-                              </HeaderRatingRow>
-                              <HeaderRatingRow>
-                                <i className={
-                                  product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                                  }>
-                                </i>
-                              </HeaderRatingRow>
-                              <HeaderRatingRow>
-                                <i className={
-                                  product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                                  }>
-                                </i>
-                              </HeaderRatingRow>
-                              <HeaderRatingRow>
-                                <i className={
-                                  product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                                  }>
-                                </i>
-                              </HeaderRatingRow>
-                              <HeaderRatingRow>
-                                <i className={
-                                  product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                                  }>
-                                </i>
-                              </HeaderRatingRow>
-                            </HeaderRatingColumn>
-                          </HeaderRatingDiv>
-                          <HeaderReviewDiv>
-                            <a style={{textDecoration: "underline"}} href='#p-reviews'>({product.numReviews})</a>
-                          </HeaderReviewDiv>
-                        </HeaderReviewWrapper>
+                        <a href='#p-reviews'>
+                          <HeaderReviewWrapper>
+                            <HeaderRatingDiv>
+                              <HeaderRatingColumn>
+                                <HeaderRatingRow>
+                                  <i className={
+                                    product.rating >= 1 ? 'fa fa-star' : product.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                    }>
+                                  </i>
+                                </HeaderRatingRow>
+                                <HeaderRatingRow>
+                                  <i className={
+                                    product.rating >= 2 ? 'fa fa-star' : product.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                    }>
+                                  </i>
+                                </HeaderRatingRow>
+                                <HeaderRatingRow>
+                                  <i className={
+                                    product.rating >= 3 ? 'fa fa-star' : product.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                    }>
+                                  </i>
+                                </HeaderRatingRow>
+                                <HeaderRatingRow>
+                                  <i className={
+                                    product.rating >= 4 ? 'fa fa-star' : product.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                    }>
+                                  </i>
+                                </HeaderRatingRow>
+                                <HeaderRatingRow>
+                                  <i className={
+                                    product.rating >= 5 ? 'fa fa-star' : product.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                                    }>
+                                  </i>
+                                </HeaderRatingRow>
+                              </HeaderRatingColumn>
+                            </HeaderRatingDiv>
+                            <HeaderReviewDiv>
+                              ({product.numReviews})
+                            </HeaderReviewDiv>
+                          </HeaderReviewWrapper>
+                        </a>
                       </ProductHeader>
                       <ProductColors>
                         <ProductColorsDiv>
@@ -894,7 +925,11 @@ const Product = () => {
                   related.length > 0 && (
                     <RelatedContainer>
                       <RelatedDiv>
-                        <RelatedHeader>Also Consider</RelatedHeader>
+                        <RelatedDiv1>
+                          <RelatedDiv2>
+                            <RelatedHeader>Also Consider</RelatedHeader>
+                          </RelatedDiv2>
+                        </RelatedDiv1>
                       </RelatedDiv>
                       <ProductsUl>
                         {related.slice(0, 8)?.map((item) => 

@@ -117,6 +117,7 @@ const Checkout = () => {
             totalCost: total,
             totalQty: getTotal().totalQuantity,
             address: currentUser.address,
+            discountCode: discountCode || '',
             paymentId: authData.transactionId,
             paymentType: authData.paymentType,
             paymentAccountNumber: authData.accountNumber

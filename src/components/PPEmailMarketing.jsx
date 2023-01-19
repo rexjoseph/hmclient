@@ -47,7 +47,7 @@ const FormDivInner1 = styled.div`
 `
 
 const Paragraph = styled.p`
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
   font-weight: 400;
   letter-spacing: 0.2px;
@@ -113,6 +113,7 @@ const FormInput = styled.input`
   appearance: none;
   display: block;
   font-family: inherit;
+  font-size: 16px;
   font-weight: 400;
   margin: 0;
   transition: all .2s;
@@ -172,9 +173,15 @@ const Button = styled.button`
   }
 `
 
+const ErrorMessageDiv = styled.div`
+  color: var(--color-danger);
+  font-size: 13px;
+`
+
 const PPEmailMarketing = () => {
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const [resMessage, setResMessage] = useState("");
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -185,7 +192,9 @@ const PPEmailMarketing = () => {
     try {
       const res = await axios.post(`http://localhost:4000/api/email/signup/v2`, {email: email})
       navigate(`/email/${res.data}/signup/success`)
-    } catch (err) {}
+    } catch (err) {
+      setResMessage(err.response.data.message);
+    }
   }
 
   return (
@@ -211,6 +220,13 @@ const PPEmailMarketing = () => {
                   <ButtonP>Submit</ButtonP>
                 </Button>
               </FormInnerDiv>
+              {
+                resMessage && (
+                  <ErrorMessageDiv>
+                    {resMessage}
+                  </ErrorMessageDiv>
+                )
+              }
             </FormInputDiv>
           </FormDivInner1>
         </FormDiv>

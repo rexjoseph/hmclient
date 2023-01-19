@@ -10,6 +10,7 @@ import Announcement from "../components/Announcement";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import PPEmailMarketing from "../components/PPEmailMarketing";
+import axios from "axios";
 
 const Container = styled.div``
 
@@ -17,22 +18,35 @@ const Header = styled.header`
   align-items: center;
   display: flex;
   flex-direction: column;
-  max-width: 1250px;
+  max-width: 600px;
   text-align: center;
   margin: 8rem auto 0;
 `
 
 const Title = styled.h1`
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 400;
-  letter-spacing: -1.6px;
+  letter-spacing: 1px;
   line-height: 1.2;
-  margin: 0;
+  margin-bottom: 8px;
   padding: 0;
-  text-transform: capitalize;
+  text-transform: uppercase;
 
   @media (max-width: 769px) {
     font-size: 20px;
+  }
+`
+
+const SubTitle = styled.p`
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  line-height: 21px;
+  text-align: center;
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: inline;
   }
 `
 
@@ -331,8 +345,9 @@ const ShopByColorSpanInner = styled.span`
 const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
-  const [filters, setFilters] = useState({})
-  const [sort, setSort] = useState("newest")
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+  const [bcat, setBCat] = useState([]);
   const {pathname} = useLocation();
   
   const handleFilters = (e) => {
@@ -351,12 +366,29 @@ const ProductList = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  useEffect(() => {
+    const getCat = async () => {
+      try {
+        const res = await axios.get(`http://localhost:4000/api/category/${cat}`)
+        setBCat(res.data)
+      } catch (err) {}
+    };
+     getCat()
+  }, [cat])
+
   return (
     <Container>
       <Announcement />
       <Navbar />
       <Header>
         <Title>{cat}</Title>
+        <SubTitle>
+          {
+            bcat.info ? (
+              bcat.info
+            ) : (<></>)
+          }
+        </SubTitle>
       </Header>
       <FullSectionFilter>
         <FullSectionFilterWrapper>

@@ -15,6 +15,7 @@ const EditCategory = () => {
   const [name, setName] = useState(category.name);
   const [icon, setIcon] = useState(category.icon);
   const [banner, setBanner] = useState(category.banner);
+  const [info, setInfo] = useState(category.info);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,12 +34,17 @@ const EditCategory = () => {
     setBanner(e.target.value)
   };
 
+  const handleInfo = (e) => {
+    setInfo(e.target.value)
+  }
+
   const handleClick = (e) => {
     e.preventDefault();
     const category = {
       name: name,
       icon: icon,
-      banner: banner
+      banner: banner,
+      info: info
     };
     updateCategory(categoryId, category, dispatch)
   }
@@ -73,6 +79,10 @@ const EditCategory = () => {
                     </div>
                   </div>
                   <div className="flex-1">
+                    <div className="npi-div">
+                      <label htmlFor="title">Category Info</label>
+                      <input name='info' defaultValue={category.info} className="npi-div-input" onChange={handleInfo} type="text" placeholder="Introducing new activewear you'll never want to take off..." />
+                    </div>
                     <div className="npi-div">
                       <label htmlFor="banner">Category Banner</label>
                       <input name='banner' defaultValue={category.banner} className='npi-div-input' onChange={handleBanner} required type="text" placeholder="Image Link" />

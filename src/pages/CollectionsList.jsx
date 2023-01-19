@@ -84,7 +84,7 @@ const CollectionsList = () => {
         <CollectionWrappers>
           <Header>
             <Heading>Shop By Collections</Heading>
-            <SubHeader>We create best in class essentials engineered for versatility, designed for the planet. We focus on developing state-of-the-art materials to ensure comfort and confidence in your essentials.</SubHeader>
+            <SubHeader>We create best in class essentials engineered for versatility, designed for the planet.</SubHeader>
           </Header>
           {
             loading ? (

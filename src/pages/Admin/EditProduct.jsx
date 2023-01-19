@@ -220,6 +220,13 @@ const EditProduct = () => {
                 </div>
                 <div className="flex-1">
                   <div className="npi-div">
+                      <label htmlFor="info">Info/Tip</label>
+                      <input className="npi-div-input" name="info" defaultValue={product.info} onChange={handleChange} type="text" placeholder="NEW + IMPROVED" />
+                      <span>
+                        Blazing tip or info about the product
+                      </span>
+                    </div>
+                  <div className="npi-div">
                     <label htmlFor="image">Product Images</label>
                     <div className="tags-input">
                       {img.map((tag, index) => (
