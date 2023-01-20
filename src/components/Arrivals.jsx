@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import InstaHandle from "./InstaHandle";
 import { useLocation } from "react-router-dom";
 import Loading from "./Loading";
+import PPEmailMarketing from "./PPEmailMarketing";
 
 const Page = styled.section``
 
@@ -15,11 +16,11 @@ const Header = styled.h1`
   margin-top: 8rem;
   margin-bottom: 2rem;
   text-align: center;
-  font-size: 6rem;
-
-  @media (max-width: 769px) {
-    font-size: 4rem;
-  }
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  text-transform: uppercase;
 `
 
 const Divider = styled.div`
@@ -107,6 +108,7 @@ const Arrivals = () => {
         </ProductsWrapper>
       </CollectionWrapper>
       <InstaHandle />
+      <PPEmailMarketing />
       <Footer />
     </Page>
   )

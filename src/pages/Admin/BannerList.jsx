@@ -63,9 +63,19 @@ const BannerList = () => {
                                 </div>
                               </td>
                               <td>
-                                <a href={`/banner/${item._id}`}>
-                                  <img style={{maxWidth: "300px"}} src={item.image} alt={item.title} />
-                                </a>
+                                {
+                                  item.video === true ? (
+                                    <>
+                                      <video src={item.video_source} crossOrigin="anonymous" width="300px" height="100%" muted playsInline loop autoPlay />
+                                    </>
+                                  ) : (
+                                    <>
+                                      <a href={`/banner/${item._id}`}>
+                                        <img style={{maxWidth: "300px"}} src={item.image} alt={item.title} />
+                                      </a>
+                                    </>
+                                  )
+                                }
                               </td>
                               <td>
                                 <div style={{maxWidth: "300px"}}>

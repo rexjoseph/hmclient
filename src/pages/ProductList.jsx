@@ -31,10 +31,6 @@ const Title = styled.h1`
   margin-bottom: 8px;
   padding: 0;
   text-transform: uppercase;
-
-  @media (max-width: 769px) {
-    font-size: 20px;
-  }
 `
 
 const SubTitle = styled.p`

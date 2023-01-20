@@ -47,7 +47,26 @@ const Asset = styled.div`
   z-index: 2;
 `
 
+const AssetVideo = styled.div`
+  background-color: #f1f1f1;
+  height: 100%;
+  left: 0;
+  object-fit: cover;
+  object-position: top center;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+`
+
 const Figure = styled.figure`
+  height: calc(100% - 86px);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+`
+
+const VideoHolder = styled.div`
   height: calc(100% - 86px);
   padding: 0;
   margin: 0;
@@ -200,9 +219,24 @@ const MobileHeroFigureAsset = styled.div`
   width: 100%;
 `
 
+const MobileAssetVideo = styled.div`
+  padding-top: 100%;
+  background-color: #f1f1f1;
+  display: flex;
+  position: relative;
+  height: calc(70vh - 50px);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+`
+
 const MobileHeroAssetImageDiv = styled.div`
   width: 100%;
   object-position: center;
+`
+
+const MobileAssetVideoHolder = styled.div`
+  width: 100%;
 `
 
 const MobileHeroAssetImage = styled.img`
@@ -291,6 +325,8 @@ const MobileHeroLink = styled.a`
   }
 `
 
+const Video = styled.video``
+
 const Slider = () => {
   const navigate = useNavigate()
   const [banner, setBanner] = useState([]);
@@ -314,20 +350,35 @@ const Slider = () => {
           banner?.map(item => (
             <Hero key={item._id}>
               <Layout>
-                <Asset>
-                  <Figure>
-                    <AssetImage>
-                      <Image src={item.image} />
-                    </AssetImage>
-                  </Figure>
-                  <Header>
-                    <Heading>{item.title}</Heading>
-                    <SubHeading>{item.caption}</SubHeading>
-                    <Action>
-                      <LinkA onClick={() => navigate(`${item.target}`)}>{item.actionText}</LinkA>
-                    </Action>
-                  </Header>
-                </Asset>
+                {item.video === true ? (
+                  <AssetVideo>
+                    <VideoHolder>
+                    <video src={item.video_source} crossOrigin="anonymous" width="100%" height="auto" muted playsInline loop autoPlay />
+                    </VideoHolder>
+                    <Header>
+                      <Heading>{item.title}</Heading>
+                      <SubHeading>{item.caption}</SubHeading>
+                      <Action>
+                        <LinkA onClick={() => navigate(`${item.target}`)}>{item.actionText}</LinkA>
+                      </Action>
+                    </Header>
+                  </AssetVideo>
+                ) : (
+                  <Asset>
+                    <Figure>
+                      <AssetImage>
+                        <Image src={item.image} />
+                      </AssetImage>
+                    </Figure>
+                    <Header>
+                      <Heading>{item.title}</Heading>
+                      <SubHeading>{item.caption}</SubHeading>
+                      <Action>
+                        <LinkA onClick={() => navigate(`${item.target}`)}>{item.actionText}</LinkA>
+                      </Action>
+                    </Header>
+                  </Asset>
+                )}  
               </Layout>
             </Hero>
           ))
@@ -337,30 +388,53 @@ const Slider = () => {
         banner?.map(item => (
           <MobileHero key={item._id}>
             <MobileHeroDiv>
-              <MobileHeroFigure>
-                <MobileHeroFigureAsset>
-                  <MobileHeroAssetImageDiv>
-                    <MobileHeroAssetImage 
-                      src={
-                        item.mobileImage ? (
-                          item.mobileImage
-                        ) : (
-                          item.image
-                        )
-                      } 
-                    />
-                  </MobileHeroAssetImageDiv>
-                </MobileHeroFigureAsset>
-              </MobileHeroFigure>
-              <MobileHeroHeader>
-                <MobileHeroHeaderDiv>
-                  <MobileHeroH1>{item.title}</MobileHeroH1>
-                  <MobileHeroH2>{item.caption}</MobileHeroH2>
-                  <MobileHeroCtaDiv>
-                    <MobileHeroLink onClick={() => navigate(`${item.target}`)}>{item.actionText}</MobileHeroLink>
-                  </MobileHeroCtaDiv>
-                </MobileHeroHeaderDiv>
-              </MobileHeroHeader>
+              {
+                item.video === true ? (
+                <>
+                  <MobileAssetVideo>
+                    <MobileAssetVideoHolder>
+                      <video src={item.mobile_video_source || item.video_source} crossOrigin="anonymous" width="100%" height="100%" muted playsInline loop autoPlay />
+                    </MobileAssetVideoHolder>
+                  </MobileAssetVideo>
+                  <MobileHeroHeader>
+                    <MobileHeroHeaderDiv>
+                      <MobileHeroH1>{item.title}</MobileHeroH1>
+                      <MobileHeroH2>{item.caption}</MobileHeroH2>
+                      <MobileHeroCtaDiv>
+                        <MobileHeroLink onClick={() => navigate(`${item.target}`)}>{item.actionText}</MobileHeroLink>
+                      </MobileHeroCtaDiv>
+                    </MobileHeroHeaderDiv>
+                  </MobileHeroHeader>
+                </>
+                ) : (
+                <>
+                  <MobileHeroFigure>
+                    <MobileHeroFigureAsset>
+                      <MobileHeroAssetImageDiv>
+                        <MobileHeroAssetImage 
+                          src={
+                            item.mobileImage ? (
+                              item.mobileImage
+                            ) : (
+                              item.image
+                            )
+                          } 
+                        />
+                      </MobileHeroAssetImageDiv>
+                    </MobileHeroFigureAsset>
+                  </MobileHeroFigure>
+                  <MobileHeroHeader>
+                    <MobileHeroHeaderDiv>
+                      <MobileHeroH1>{item.title}</MobileHeroH1>
+                      <MobileHeroH2>{item.caption}</MobileHeroH2>
+                      <MobileHeroCtaDiv>
+                        <MobileHeroLink onClick={() => navigate(`${item.target}`)}>{item.actionText}</MobileHeroLink>
+                      </MobileHeroCtaDiv>
+                    </MobileHeroHeaderDiv>
+                  </MobileHeroHeader>
+                </>
+                ) 
+              }
             </MobileHeroDiv>
           </MobileHero>
         ))

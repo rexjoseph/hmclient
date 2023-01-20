@@ -111,13 +111,10 @@ const FormInnerDiv4 = styled.div`
 
 const FormInput = styled.input`
   appearance: none;
-  display: block;
   font-family: inherit;
   font-size: 16px;
   font-weight: 400;
   margin: 0;
-  transition: all .2s;
-  user-select: none;
   white-space: nowrap;
   width: 100%;
   background: transparent;

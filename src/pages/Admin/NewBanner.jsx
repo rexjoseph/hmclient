@@ -71,7 +71,7 @@ const NewBanner = () => {
                     </div>
                     <div className="npi-div">
                       <label htmlFor="icon">Is this a video?</label>
-                      <select name="video" id="video" className="npi-div-input">
+                      <select name="video" id="video" className="npi-div-input" onChange={handleChange}>
                         <option value="false">No</option>
                         <option value="true">Yes</option>
                       </select>
@@ -79,6 +79,10 @@ const NewBanner = () => {
                     <div className="npi-div">
                       <label htmlFor="icon">Video link</label>
                       <input name='video_source' className="npi-div-input" onChange={handleChange} required type="text" placeholder="Drop the video link..." />
+                    </div>
+                    <div className="npi-div">
+                      <label htmlFor="icon">Mobile video link</label>
+                      <input name='mobile_video_source' className="npi-div-input" onChange={handleChange} required type="text" placeholder="Drop the mobile video link..." />
                     </div>
                   </div>
                   <div className="flex-1">

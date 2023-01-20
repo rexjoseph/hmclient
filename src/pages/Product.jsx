@@ -40,6 +40,10 @@ const PDP = styled.div`
   @media (min-width: 768px) {
     margin-bottom: 162px;
   }
+
+  @media (max-width: 769px) {
+    margin-top: 5rem;
+  }
 `
 
 const Container = styled.div`
@@ -197,6 +201,35 @@ const HeaderRatingRow = styled.div``
 const HeaderReviewDiv = styled.div`
   display: inline;
   margin-left: 6px;
+`
+
+const HeaderReviewButton = styled.button`
+  appearance: none;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  transition: all .2s;
+  user-select: none;
+  white-space: nowrap;
+  background: transparent;
+  padding-right: 0px;
+  padding-left: 0px;
+  border: 0;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  margin-left: 6px;
+`
+
+const HeaderReviewButtonP = styled.p`
+  text-align: left;
+  text-decoration: underline;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+  line-height: 21px;
 `
 
 const ProductColors = styled.div`
@@ -546,7 +579,9 @@ const Reviews = styled.div`
 `
 
 const ReviewsHeader = styled.h1`
-  font-size: 2.4rem;
+  font-size: 1.5rem;
+  letter-spacing: 0.2px;
+  line-height: 21px;
 `
 
 // const BigSup = styled.h1`
@@ -779,9 +814,9 @@ const Product = () => {
                             </HeaderPriceWrapper>
                           </HeaderDiv>
                         </Header>
-                        <a href='#p-reviews'>
-                          <HeaderReviewWrapper>
-                            <HeaderRatingDiv>
+                        <HeaderReviewWrapper>
+                          <HeaderRatingDiv>
+                            <a href="#p-reviews">
                               <HeaderRatingColumn>
                                 <HeaderRatingRow>
                                   <i className={
@@ -814,12 +849,17 @@ const Product = () => {
                                   </i>
                                 </HeaderRatingRow>
                               </HeaderRatingColumn>
-                            </HeaderRatingDiv>
+                            </a>
+                          </HeaderRatingDiv>
+                          <a href="#p-reviews">
                             <HeaderReviewDiv>
                               ({product.numReviews})
                             </HeaderReviewDiv>
-                          </HeaderReviewWrapper>
-                        </a>
+                          </a>
+                          <HeaderReviewButton onClick={() => navigate(`/submit-review/${product.slug}`)}>
+                            <HeaderReviewButtonP>Write a review</HeaderReviewButtonP>
+                          </HeaderReviewButton>
+                        </HeaderReviewWrapper>
                       </ProductHeader>
                       <ProductColors>
                         <ProductColorsDiv>

@@ -107,7 +107,7 @@ const EditBanner = () => {
                     </div>
                     <div className="npi-div">
                       <label htmlFor="video">Is this a video?</label>
-                      <select name="video" id="video" className="npi-div-input">
+                      <select name="video" id="video" className="npi-div-input" onChange={handleChange}>
                         <option value="false">No</option>
                         <option value="true">Yes</option>
                       </select>
@@ -119,10 +119,19 @@ const EditBanner = () => {
                         defaultValue={banner.video_source}
                         className="npi-div-input"
                         onChange={handleChange}
-                        required
                         type="text"
                         placeholder="Drop the video link..."
                       />
+                    </div>
+                    <div className="npi-div">
+                      <label htmlFor="icon">Mobile video link</label>
+                      <input 
+                        name='mobile_video_source' 
+                        defaultValue={banner.mobile_video_source}
+                        className="npi-div-input" 
+                        onChange={handleChange} 
+                        type="text" 
+                        placeholder="Drop the mobile video link..." />
                     </div>
                   </div>
                   <div className="flex-1">
