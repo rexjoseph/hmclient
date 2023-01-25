@@ -7,6 +7,12 @@ const CollectionList = styled.li`
   display: inline-flex;
   margin: 0 1px;
   position: relative;
+
+  @media (max-width: 550px) {
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+  }
 `
 
 const CollectionWrapper = styled.div`

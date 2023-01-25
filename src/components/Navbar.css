@@ -13,8 +13,9 @@
 
 .nav-container {
   background: var(--color-secondary);
-  box-shadow: rgb(0 0 0 / 9%) 0px 2px 24px 0px;
+  /* box-shadow: rgb(0 0 0 / 9%) 0px 2px 24px 0px; */
   /* border-bottom: 1px solid var(--line-divider); */
+  transition: background .1s ease-out,top .5s ease 0s;
   height: 54px;
   z-index: 300;
 }
@@ -214,7 +215,7 @@ nav .menu-icon-container {
     /* padding: 5px 0; */
     display: inline-block;
     width: 100%;
-    font-size: 2.4rem;
+    font-size: 2.1rem;
     font-weight: 700;
     transform: translateY(-80px);
     opacity: 0;
@@ -233,6 +234,7 @@ nav .menu-icon-container {
   .nav-container.active .desktop-nav li a {
     transform: translateY(0);
     opacity: 1;
+    letter-spacing: normal;
   }
 
   /* mobile nav */

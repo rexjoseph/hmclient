@@ -16,7 +16,7 @@ const ProdAccordion = ({title, active, setActive, content}) => {
       </div>
 
       <div className={(active === title ? "show" : "") + " accordionContent"}>
-        <div className="container">
+        <div className="container pad9">
           <div dangerouslySetInnerHTML={{__html: content}} />
         </div>
       </div>

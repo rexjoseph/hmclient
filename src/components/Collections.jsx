@@ -102,11 +102,9 @@ const Collections = () => {
           Shop — Collections
         </HeaderLink>
       </Header>
-      <CollectionRows>
-        {categories?.map(item => (
-          <CollectionItem item={item} key={item._id} />
-        ))}
-      </CollectionRows>
+      {categories?.map(item => (
+        <CollectionItem item={item} key={item._id} />
+      ))}
     </Container>
   )
 }

@@ -141,6 +141,7 @@ const SubHeading = styled.h2`
 
   @media (max-width: 769px) {
     width: 100%;
+    font-size: 16px;
   }
 `
 
@@ -285,7 +286,7 @@ const MobileHeroH1 = styled.h1`
 `
 
 const MobileHeroH2 = styled.h2`
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.54;
   letter-spacing: -.3px;

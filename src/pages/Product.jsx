@@ -544,13 +544,14 @@ const HelpRow = styled.div`
 `
 
 const HelpTitle = styled.div`
-  font-weight: 600;
+  font-weight: 400;
   color: #1d1d1f;
 `
 
 const HelpContent = styled.div`
   padding-top: 0;
   color: var(--brand-blue);
+  font-weight: 300;
 `
 const HelpLink = styled.a`
   text-decoration: none;
@@ -761,12 +762,15 @@ const Product = () => {
                             <ImageButtonWrapper>
                               <ImageButton>
                                 <ImageHolder>
-                                  <LazyLoadImage 
-                                  src={image} 
-                                  width={"100%"} 
-                                  height={"100%"}
-                                  effect="blur"
-                                />
+                                  {
+                                    image.includes('.webm') ? <video src={image} crossOrigin="anonymous" width="100%" height="100%" muted playsInline loop autoPlay /> : image.includes('.mp4') ? <video src={image} crossOrigin="anonymous" width="100%" height="100%" muted playsInline loop autoPlay /> : <LazyLoadImage 
+                                    src={image} 
+                                    width={"100%"} 
+                                    height={"100%"}
+                                    effect="blur"
+                                    placeholderSrc={PlaceholderImage}
+                                  />
+                                  }
                                 </ImageHolder>
                               </ImageButton>
                             </ImageButtonWrapper>
@@ -786,13 +790,15 @@ const Product = () => {
                               <ImageButtonWrapper>
                                 <ImageButton>
                                   <ImageHolder>
-                                    <LazyLoadImage 
-                                    src={image} 
-                                    width={"100%"} 
-                                    height={"100%"}
-                                    effect="blur"
-                                    placeholderSrc={PlaceholderImage}
-                                  />
+                                    {
+                                      image.includes('.webm') ? <video src={image} crossOrigin="anonymous" width="100%" height="100%" muted playsInline loop autoPlay /> : image.includes('.mp4') ? <video src={image} crossOrigin="anonymous" width="100%" height="100%" muted playsInline loop autoPlay /> : <LazyLoadImage 
+                                      src={image} 
+                                      width={"100%"} 
+                                      height={"100%"}
+                                      effect="blur"
+                                      placeholderSrc={PlaceholderImage}
+                                    />
+                                    }
                                   </ImageHolder>
                                 </ImageButton>
                               </ImageButtonWrapper>

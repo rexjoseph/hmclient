@@ -4,10 +4,15 @@
   margin: auto;
 }
 
+.pad9 {
+  padding-top: 9px !important;
+}
+
 .accordion {
   width: 100%;
   max-width: 540px;
-  margin: 18px auto;
+  /* margin: 18px auto; */
+  margin: 9px auto;
   color: var(--color-primary);
 }
 
@@ -68,4 +73,8 @@
   line-height: 1.5;
   letter-spacing: 0.5px;
   padding: 0px;
+}
+
+.pad9 {
+  padding-top: 9px;
 }

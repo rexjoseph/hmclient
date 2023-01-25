@@ -74,14 +74,26 @@ const SubmitReview = () => {
               </h1>
               <div className="submitReview__productImages">
                 {product.images?.slice(0, 4).map((image, key) => (
-                  <div className="imageWrap" key={key}>
-                    <LazyLoadImage
-                      src={image}
-                      width={"100%"}
-                      height={"100%"}
-                      effect="blur"
-                    />
-                  </div>
+                  image.includes('.webm') ? 
+                    <>
+                      <div className="imageWrap" key={key}>
+                        <video src={image} width="100%" height="100%" muted playsInline loop autoPlay />
+                      </div>
+                    </>
+                     : 
+                     image.includes('.mp4') ? 
+                     <div className="imageWrap" key={key}>
+                      <video src={image} width="100%" height="100%" muted playsInline loop autoPlay />
+                     </div> 
+                      : 
+                    <div className="imageWrap" key={key}>
+                      <LazyLoadImage
+                        src={image}
+                        width={"100%"}
+                        height={"100%"}
+                        effect="blur"
+                      />
+                    </div>
                 ))}
               </div>
             </div>

@@ -88,7 +88,7 @@ const Success = () => {
               <ul className='s-cartUl'>
                 {
                   cart?.map((item) => (
-                    <li className='s-cartList' key={item._id}>
+                    <li className='s-cartList' key={item.id}>
                       <div className='s-cartListItem'>
                         <div className='flex'>
                           <a href={`/product/${item.slug}`} className='s-cartListImageLink'>
