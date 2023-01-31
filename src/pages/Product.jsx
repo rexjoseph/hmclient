@@ -313,6 +313,8 @@ const ColorSwatch = styled.div`
   background: ${props => props.color};
   position: relative;
   display: inline-block;
+  border: 1px solid;
+  border-color: #ccc;
 
   &:after {
     content: "";
@@ -684,6 +686,49 @@ const RelatedHeader = styled.p`
   text-align: left;
 `
 
+const LoadMoreReviewDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 2.5rem 0;
+`
+
+const LoadMoreReviewDiv1 = styled.div`
+
+`
+
+const LoadMoreReviewButton = styled.button`
+  appearance: none;
+  background: var(--color-primary);
+  border: 1px solid;
+  border-color: var(--color-primary);
+  border-radius: 0;
+  color: var(--color-secondary);
+  display: inline-block;
+  font-family: inherit;
+  font-weight: inherit;
+  line-height: 21.7143px;
+  font-size: 1.4rem;
+  min-width: 320px;
+  min-height: 0px;
+  max-height: none;
+  max-width: none;
+  height: 50.25px;
+  width: 320px;
+  text-transform: none;
+  padding: 13.7143px 34.2857px;
+  display: inline-block;
+  transition: all .25s;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+`
+
+const reviewPerRow = 8;
+
 const Product = () => {
   const location = useLocation()
   const slug = location.pathname.split("/")[2];
@@ -698,6 +743,7 @@ const Product = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false)
+  const [nextReview, setNextReview] = useState(reviewPerRow);
 
   useEffect(()=>{
     let modalStatus = localStorage.getItem('modal_status');
@@ -726,6 +772,10 @@ const Product = () => {
       dispatch(addToCart({id: product._id, title: product.title, image: product.images[0], price: product.price, color: color, size: size, slug: product.slug}))
       navigate('/cart')
     }
+  }
+
+  const handleMoreReview = () => {
+    setNextReview(nextReview + reviewPerRow);
   }
 
   useEffect(() => {
@@ -980,7 +1030,7 @@ const Product = () => {
                       <ProductsUl>
                         {related.slice(0, 8)?.map((item) => 
                           <ProductItem item={item} key={item._id}/>
-                        ).reverse()}
+                        )}
                       </ProductsUl>
                     </RelatedContainer>
                   )
@@ -997,9 +1047,9 @@ const Product = () => {
                     </>
                   )}
                   {
-                    product.reviews?.map((review) => (
+                    product.reviews?.slice(0, nextReview)?.map((review) => (
                       <>
-                        <ReviewItem 
+                        <ReviewItem key={review._id} 
                           firstName={review.firstName}
                           lastName={review.lastName.substring(0, 1).concat('.')}
                           header={review.header}
@@ -1009,6 +1059,18 @@ const Product = () => {
                         />
                       </>
                     ))
+                  }
+                  
+                  {
+                    nextReview < product.reviews?.length && (
+                      <LoadMoreReviewDiv>
+                        <LoadMoreReviewDiv1>
+                          <LoadMoreReviewButton onClick={handleMoreReview}>
+                            <span>Load More</span>
+                          </LoadMoreReviewButton>
+                        </LoadMoreReviewDiv1>
+                      </LoadMoreReviewDiv>
+                    )
                   }
                 </Reviews>
               </Container>

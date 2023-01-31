@@ -145,7 +145,7 @@ const Login = () => {
       <SignUpWrapper>
         <RegisterWrapper>
           <RegisterTitle>Hello</RegisterTitle>
-          <RegisterParagraph>Old Friends... Welcome back! Let's get you back in.</RegisterParagraph>
+          <RegisterParagraph>Old Friend... Welcome back! Let's get you back in.</RegisterParagraph>
           <RegisterFormDiv>
             <RegisterForm onSubmit={handleClick}>
               <RegisterFormLabel htmlFor="Email">Email</RegisterFormLabel>

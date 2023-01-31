@@ -69,13 +69,13 @@ const Arrivals = () => {
     const getProducts = async () => {
       try {
         
-        const res = await axios.get("http://localhost:4000/api/products")
+        const res = await axios.get(`http://localhost:4000/api/products?latest=true`)
         setProducts(res.data)
         setLoading(true)
       } catch (err) {}
     };
      getProducts()
-  })
+  }, [])
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -98,12 +98,8 @@ const Arrivals = () => {
               products.map(item => <Product 
                 item={item} 
                 key={item._id} 
-                />).reverse()
+                />)
             ) : (<Loading />)}
-            {/* { products.map(item => <Product 
-            item={item} 
-            key={item._id} 
-            />).reverse()} */}
           </ProductsUl>
         </ProductsWrapper>
       </CollectionWrapper>

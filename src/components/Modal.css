@@ -121,14 +121,14 @@
     left: 0;
     right: 0;
     transform: none;
-    width: 95%;
-    height: 80vh;
+    width: 90%;
+    height: 70vh;
     margin: 0 auto;
   }
 
   .closeBtn {
     top: 21%;
-    right: 5%;
+    right: 7%;
   }
 }
 

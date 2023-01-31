@@ -91,7 +91,7 @@ const BannerList = () => {
                                 {item.actionText}
                               </td>
                             </tr>
-                          )).reverse()
+                          ))
                         }
                       </tbody>
                     </table>

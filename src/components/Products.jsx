@@ -81,8 +81,8 @@ const Products = ({cat, filters, sort}) => {
         <ProductsUl>
           {loading ? (
             cat 
-            ? filteredProducts.map(item => <Product item={item} key={item._id}/>).reverse()
-            : products.slice(0, 9).map(item => <Product item={item} key={item._id}/>).reverse()
+            ? filteredProducts.map(item => <Product item={item} key={item._id}/>)
+            : products.slice(0, 9).map(item => <Product item={item} key={item._id}/>)
           ) : (<Loading />)}
         </ProductsUl>
       </ProductsWrapper>
