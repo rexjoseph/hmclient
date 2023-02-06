@@ -5,7 +5,6 @@ import axios from 'axios'
 import Loading from "./Loading";
 
 const Homepage = styled.div`
-  margin-top: 5rem;
 `
 
 const Hero = styled.div`

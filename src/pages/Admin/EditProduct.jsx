@@ -21,6 +21,8 @@ const EditProduct = () => {
   const [sustainability, setSustainability] = useState(product.sustainability);
   const [care_guide, setCareGuide] = useState(product.care_guide);
   const [img, setImage] = useState(product.images);
+  const [onSale, setOnsale] = useState(product.onSale);
+  const [fullPrice, setFullprice] = useState(product.fullPrice);
   const [size, setSize] = useState(product.size);
   const [color, setColor] = useState(product.color);
   const dispatch = useDispatch();
@@ -316,6 +318,30 @@ const EditProduct = () => {
                           defaultValue={product.price}
                           onChange={handleChange}
                           required
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <div className="flex-split">
+                      <div className="npi-div">
+                        <label htmlFor="onSale">On Sale</label>
+                        <select name="onSale" onChange={handleChange} defaultValue={product.onSale}>
+                          <option value="false">No</option>
+                          <option value="true">Yes</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div className="flex-split">
+                      <div className="npi-div">
+                        <label htmlFor="fullPrice">Full Price</label>
+                        <input
+                          className="npi-div-input"
+                          name="fullPrice"
+                          type="number"
+                          placeholder="50"
+                          defaultValue={product.fullPrice}
+                          onChange={handleChange}
                         />
                       </div>
                     </div>

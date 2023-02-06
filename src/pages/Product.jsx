@@ -156,11 +156,38 @@ const HeaderTitle = styled.h1`
 
 const HeaderPriceWrapper = styled.div`
   display: flex;
+  gap: 6px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+`
+
+const HeaderFullPrice = styled.p`
+  font-weight: 400;
+  color: rgb(33, 42, 47);
+  line-height: 1.5;
+  font-size: 16px;
+  text-decoration: line-through;
+  letter-spacing: 0.5px;
+  margin: 0px 0px 18px;
+  padding: 0px;
+  margin-bottom: 0px;
 `
 
 const HeaderPrice = styled.p`
   font-weight: 400;
   color: rgb(33, 42, 47);
+  line-height: 1.5;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin: 0px 0px 18px;
+  padding: 0px;
+  margin-bottom: 0px;
+`
+
+const ColorSpan = styled.span`
+  color: #FF4210;
+  font-weight: 400;
   line-height: 1.5;
   font-size: 16px;
   letter-spacing: 0.5px;
@@ -744,7 +771,6 @@ const Product = () => {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false)
   const [nextReview, setNextReview] = useState(reviewPerRow);
-
   useEffect(()=>{
     let modalStatus = localStorage.getItem('modal_status');
     if(!modalStatus){
@@ -866,7 +892,12 @@ const Product = () => {
                           <HeaderDiv>
                             <HeaderTitle>{product.title}</HeaderTitle>
                             <HeaderPriceWrapper>
-                              <HeaderPrice>${product.price}</HeaderPrice>
+                              {
+                                product.onSale ? <HeaderFullPrice>${product.fullPrice}</HeaderFullPrice> : <></>
+                              }
+                              {
+                                product.onSale ? <ColorSpan>${product.price}</ColorSpan> : <HeaderPrice>${product.price}</HeaderPrice>
+                              }
                             </HeaderPriceWrapper>
                           </HeaderDiv>
                         </Header>

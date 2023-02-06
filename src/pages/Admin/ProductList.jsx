@@ -90,7 +90,7 @@ const ProductList = () => {
                                 )}
                               </td>
                             </tr>
-                          )).reverse()
+                          ))
                         }
                       </tbody>
                     </table>

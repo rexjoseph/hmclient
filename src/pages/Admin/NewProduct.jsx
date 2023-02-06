@@ -294,6 +294,23 @@ const NewProduct = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="flex gap-2">
+                      <div className="flex-split">
+                        <div className="npi-div">
+                          <label htmlFor="onSale">On Sale</label>
+                          <select name="onSale" onChange={handleChange}>
+                            <option value="false">No</option>
+                            <option value="true">Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className="flex-split">
+                        <div className="npi-div">
+                          <label htmlFor="fullPrice">Full Price</label>
+                          <input className="npi-div-input" name="fullPrice" type="number" placeholder="50" onChange={handleChange} />
+                        </div>
+                      </div>
+                    </div>
                     <div className="npi-div">
                       <label htmlFor="sustainability">Care Guide</label>
                       <Editor

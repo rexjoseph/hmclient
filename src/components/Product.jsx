@@ -146,11 +146,29 @@ const MoreInfo = styled.div`
   margin: 2px 0 0;
 `
 
-const PriceDiv = styled.div``
+const PriceDiv = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+`
 
 const PriceSpan = styled.span`
   font-size: 13px;
   font-weight: 400;
+`
+
+const PriceSpanStrike = styled.span`
+  text-decoration: line-through;
+  font-size: 13px;
+  font-weight: 400;
+`
+
+const PriceSpanSale = styled.span`
+  font-size: 13px;
+  font-weight: 400;
+  color: #FF4210;
 `
 
 const RatingProduct = styled.div`
@@ -201,7 +219,12 @@ const  Product = ({item}) => {
             <LinkA>
               <ProductTitle onClick={() => navigate(`/product/${item.slug}`)}>{item.title}</ProductTitle>
               <PriceDiv>
-                <PriceSpan>${item.price}</PriceSpan>
+                {
+                  item.onSale ? <PriceSpanStrike>${item.fullPrice}</PriceSpanStrike> : <PriceSpan>${item.price}</PriceSpan>
+                }
+                {
+                  item.onSale ? <PriceSpanSale>${item.price}</PriceSpanSale> : <></>
+                }
               </PriceDiv>
               <MoreInfo>
                 {item.color.length === 1 && (

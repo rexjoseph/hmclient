@@ -9,6 +9,7 @@ import Prefooter from '../components/Prefooter'
 import Footer from '../components/Footer'
 import Collections from '../components/Collections'
 import Products from '../components/Products'
+import HomeNavbar from '../components/HomeNavbar'
 import Navbar from '../components/Navbar'
 import Announcement from '../components/Announcement'
 import USP from '../components/USP'
@@ -35,7 +36,7 @@ const Home = () => {
   return (
     <div>
       <Announcement />
-      <Navbar />
+      <HomeNavbar />
       <Slider />
       {/* <Testimonial /> */}
       <TestimonialsMarquee />
