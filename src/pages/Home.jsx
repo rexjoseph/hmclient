@@ -22,7 +22,9 @@ const Home = () => {
   useEffect(()=>{
     let modalStatus = localStorage.getItem('modal_status');
     if(!modalStatus){
-      setOpenModal(true);
+      setTimeout(() => {
+        setOpenModal(true)
+      },10000)
       localStorage.setItem('modal_status',1);
     }
   },[])

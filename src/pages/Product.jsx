@@ -142,14 +142,14 @@ const HeaderDiv = styled.div``
 
 const HeaderTitle = styled.h1`
   font-weight: 700;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 1.32;
   letter-spacing: 0.5px;
   margin-top: 1rem;
   padding: 0px;
 
   @media (min-width: 992px) {
-    font-size: 32px;
+    font-size: 20px;
     line-height: 1.31;
   }
 `
@@ -166,7 +166,7 @@ const HeaderFullPrice = styled.p`
   font-weight: 400;
   color: rgb(33, 42, 47);
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 13px;
   text-decoration: line-through;
   letter-spacing: 0.5px;
   margin: 0px 0px 18px;
@@ -388,7 +388,7 @@ const FilterSize = styled.select`
   outline: none;
   background: transparent;
   color: var(--color-primary);
-  font-size: inherit;
+  font-size: 13px;
   font-family: inherit;
 `
 
@@ -505,7 +505,7 @@ const GuaranteeWidget = styled.ul`
 `
 
 const GuaranteeList = styled.li`
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 `
 
 const PDescripton = styled.div`
@@ -568,8 +568,13 @@ const HelpRow1 = styled.div`
 const HelpRow = styled.div`
   line-height: 1.33337;
   font-weight: 400;
+  font-size: 15px;
   letter-spacing: -.12px;
   padding: 6px 12px 0;
+
+  @media (max-width: 769px) {
+    font-size: 14px;
+  }
 `
 
 const HelpTitle = styled.div`
@@ -774,7 +779,9 @@ const Product = () => {
   useEffect(()=>{
     let modalStatus = localStorage.getItem('modal_status');
     if(!modalStatus){
-      setOpenModal(true);
+      setTimeout(() => {
+        setOpenModal(true)
+      },10000)
       localStorage.setItem('modal_status',1);
     }
   },[])
