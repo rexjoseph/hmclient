@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { reset } from "../redux/apiCalls";
+// import { reset } from "../redux/apiCalls";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
+import { publicRequest } from "../requestMethods";
 
 const Page = styled.section``;
 const Container = styled.div`
@@ -120,7 +121,7 @@ cursor: pointer;
 
 const GetReset = () => {
   const [email, setEmail] = useState("");
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   // const {isFetching, error} = useSelector();
 
@@ -128,10 +129,27 @@ const GetReset = () => {
     document.title = `Reset — Hashingmart`;
   });
 
-  const handleClick = (e) => {
+  // const handleClick = (e) => {
+  //   e.preventDefault();
+  //   reset(dispatch, {email})
+  // };
+
+  const handleClick = async (e) => {
     e.preventDefault();
-    reset(dispatch, {email})
-  };
+    if (email) {
+      try {
+        const res = await publicRequest.post("/auth/reset", {
+          email: email
+        });
+        if (res.status === 200) {
+          navigate('/');
+        }
+      } catch (err) {}
+    } else {
+      alert('Please fill out the fields')
+    }
+  }
+
   return (
     <Page>
       <Announcement />

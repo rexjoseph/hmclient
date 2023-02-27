@@ -1,7 +1,7 @@
 import styled from "styled-components";
 // import { useDispatch } from 'react-redux';
 // import {addToCart} from '../redux/cartRedux';
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 const QuickAddDiv = styled.button`
   visibility: hidden;
@@ -190,7 +190,7 @@ const ItemReviewsCount = styled.span`
 
 const  Product = ({item}) => {
   // const dispatch = useDispatch()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   return (
     <List>
@@ -199,9 +199,11 @@ const  Product = ({item}) => {
           <BadgeHolder>
             <Badge>{item.info || 'New'}</Badge>
           </BadgeHolder>
-          <ImageDiv onClick={() => navigate(`/product/${item.slug}`)}>
-            <Image src={item.images[0]} />
-          </ImageDiv>
+          <a href={`/product/${item.slug}`}>
+            <ImageDiv>
+              <Image src={item.images[0]} />
+            </ImageDiv>
+          </a>
           {/* <button onClick={() => dispatch(addToCart({
                 id: item._id, title: item.title, image: item.image[0], price: item.price
               }))}>Add to cart</button> */}
@@ -216,8 +218,8 @@ const  Product = ({item}) => {
 
         <InfoHolder>
           <TitleWrapper>
-            <LinkA>
-              <ProductTitle onClick={() => navigate(`/product/${item.slug}`)}>{item.title}</ProductTitle>
+            <>
+              <LinkA href={`/product/${item.slug}`}><ProductTitle>{item.title}</ProductTitle></LinkA>
               <PriceDiv>
                 {
                   item.onSale ? <PriceSpanStrike>${item.fullPrice}</PriceSpanStrike> : <PriceSpan>${item.price}</PriceSpan>
@@ -241,43 +243,45 @@ const  Product = ({item}) => {
                 }
               </MoreInfo>
               {item.rating > 0 && (
-                <RatingProduct>
-                  <HeaderRatingRow>
-                    <i className={
-                      item.rating >= 1 ? 'fa fa-star' : item.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                      }>
-                    </i>
-                  </HeaderRatingRow>
-                  <HeaderRatingRow>
-                    <i className={
-                      item.rating >= 2 ? 'fa fa-star' : item.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                      }>
-                    </i>
-                  </HeaderRatingRow>
-                  <HeaderRatingRow>
-                    <i className={
-                      item.rating >= 3 ? 'fa fa-star' : item.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                      }>
-                    </i>
-                  </HeaderRatingRow>
-                  <HeaderRatingRow>
-                    <i className={
-                      item.rating >= 4 ? 'fa fa-star' : item.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                      }>
-                    </i>
-                  </HeaderRatingRow>
-                  <HeaderRatingRow>
-                    <i className={
-                      item.rating >= 5 ? 'fa fa-star' : item.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
-                      }>
-                    </i>
-                  </HeaderRatingRow>
-                  <ItemReviewsCount>
-                    &nbsp;({item.numReviews})
-                  </ItemReviewsCount>
-                </RatingProduct>
+                <LinkA href={`/product/${item.slug}`}>
+                  <RatingProduct>
+                    <HeaderRatingRow>
+                      <i className={
+                        item.rating >= 1 ? 'fa fa-star' : item.rating >= 0.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                    </HeaderRatingRow>
+                    <HeaderRatingRow>
+                      <i className={
+                        item.rating >= 2 ? 'fa fa-star' : item.rating >= 1.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                    </HeaderRatingRow>
+                    <HeaderRatingRow>
+                      <i className={
+                        item.rating >= 3 ? 'fa fa-star' : item.rating >= 2.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                    </HeaderRatingRow>
+                    <HeaderRatingRow>
+                      <i className={
+                        item.rating >= 4 ? 'fa fa-star' : item.rating >= 3.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                    </HeaderRatingRow>
+                    <HeaderRatingRow>
+                      <i className={
+                        item.rating >= 5 ? 'fa fa-star' : item.rating >= 4.5 ? 'fa fa-star-half-o' : 'fa fa-star-o'
+                        }>
+                      </i>
+                    </HeaderRatingRow>
+                    <ItemReviewsCount>
+                      &nbsp;({item.numReviews})
+                    </ItemReviewsCount>
+                  </RatingProduct>
+                </LinkA>
               )}
-            </LinkA>
+            </>
           </TitleWrapper>
         </InfoHolder>
       </ListWrapper>

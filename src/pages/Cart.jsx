@@ -13,9 +13,7 @@ import Announcement from "../components/Announcement";
 import { useState } from "react";
 import axios from "axios";
 
-const CartPageWrapper = styled.div`
-
-`
+const CartPageWrapper = styled.div``
 
 const PDPContainer = styled.div`
   margin-top: 80px;
@@ -626,6 +624,11 @@ const EmptyCartButton = styled.button`
   }
 `
 
+const LinkA = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+`
+
 const Cart = () => {
   const cart = useSelector((state) => state.carts.cart)
   const total = useSelector((state) => state.carts.total)
@@ -708,16 +711,20 @@ const Cart = () => {
                       <CartListItem>
                         <CartListImageLink>
                           <CartListImageWrapper>
-                            <CartListImageHolder onClick={() => navigate(`/product/${item.slug}`)}>
-                              <CartListImage src={item.image} />
-                            </CartListImageHolder>
+                            <LinkA href={`/product/${item.slug}`}>
+                              <CartListImageHolder>
+                                <CartListImage src={item.image} />
+                              </CartListImageHolder>
+                            </LinkA>
                           </CartListImageWrapper>
                         </CartListImageLink>
                         <CartListDetail>
                           <CartListH3>
-                            <CartListDetailLink onClick={() => navigate(`/product/${item.slug}`)}>
-                              <CartListDetailSpan>{item.title}</CartListDetailSpan>
-                            </CartListDetailLink>
+                            <LinkA href={`/product/${item.slug}`}>
+                              <CartListDetailLink>
+                                <CartListDetailSpan>{item.title}</CartListDetailSpan>
+                              </CartListDetailLink>
+                            </LinkA>
                           </CartListH3>
                           <CartListUl>
                             <CartListLi>

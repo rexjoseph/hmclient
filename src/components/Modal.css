@@ -49,11 +49,13 @@
 
 .content h1 {
   font-size: 45px;
+  font-weight: 500;
   padding: 20px 0;
 }
 
 .content p {
   font-size: 18px;
+  font-weight: 500;
 }
 
 .content fieldset {
@@ -112,12 +114,13 @@
 
 .btnContainer a {
   text-decoration: underline;
+  font-weight: 500;
 }
 
 @media screen and (max-width: 500px) {
   .modalContainer {
     flex-direction: column;
-    top: 20%;
+    top: 10%;
     left: 0;
     right: 0;
     transform: none;
@@ -127,7 +130,7 @@
   }
 
   .closeBtn {
-    top: 21%;
+    top: 11%;
     right: 7%;
   }
 }

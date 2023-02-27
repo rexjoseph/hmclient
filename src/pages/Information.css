@@ -208,6 +208,7 @@
   min-width: 100%;
   display: block;
   font-weight: 600;
+  font-size: 13px;
 }
 
 .product__description-color, .product__description-size {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Navbar from "../components/Navbar";
 import { publicRequest } from "../requestMethods";
-import { newpassword } from "../redux/apiCalls";
+// import { newpassword } from "../redux/apiCalls";
 
 const Page = styled.section``;
 const Container = styled.div`
@@ -127,7 +127,7 @@ const PostReset = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [user, setUser] = useState({});
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const id = location.pathname.split("/")[2];
   // const {isFetching, error} = useSelector();
@@ -146,14 +146,32 @@ const PostReset = () => {
     document.title = `Set Password — Hashingmart`;
   });
 
-  const handleClick = (e) => {
+  // const handleClick = (e) => {
+  //   if (password === confirmPassword) {
+  //     e.preventDefault();
+  //     newpassword(dispatch, {password, userId: user._id, passwordToken: id})
+  //   } else {
+  //     alert('Passwords do not match!')
+  //   }
+  // };
+
+  const handleClick = async (e) => {
+    e.preventDefault();
     if (password === confirmPassword) {
-      e.preventDefault();
-      newpassword(dispatch, {password, userId: user._id, passwordToken: id})
+      try {
+        const res = await publicRequest.post("/auth/new-password", {
+          password: password,
+          userId: user._id,
+          passwordToken: id
+        })
+        if (res.status === 200) {
+          navigate('/login');
+        }
+      } catch (err) {}
     } else {
       alert('Passwords do not match!')
     }
-  };
+  }
 
   return (
     <Page>
@@ -165,7 +183,7 @@ const PostReset = () => {
           <Form onSubmit={handleClick}>
             <FormFieldset>
               <FormField>
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">New Password</Label>
                 <Input
                   type="password"
                   required

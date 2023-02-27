@@ -120,7 +120,7 @@ a {
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: var(--color-secondary) !important;
+  color: var(--color-primary) !important;
 }
 
 select {

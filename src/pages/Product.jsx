@@ -144,12 +144,12 @@ const HeaderTitle = styled.h1`
   font-weight: 700;
   font-size: 15px;
   line-height: 1.32;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.2px;
   margin-top: 1rem;
   padding: 0px;
 
   @media (min-width: 992px) {
-    font-size: 20px;
+    font-size: 15px;
     line-height: 1.31;
   }
 `
@@ -178,7 +178,7 @@ const HeaderPrice = styled.p`
   font-weight: 400;
   color: rgb(33, 42, 47);
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   margin: 0px 0px 18px;
   padding: 0px;
@@ -189,11 +189,15 @@ const ColorSpan = styled.span`
   color: #FF4210;
   font-weight: 400;
   line-height: 1.5;
-  font-size: 16px;
+  font-size: 13px;
   letter-spacing: 0.5px;
   margin: 0px 0px 18px;
   padding: 0px;
   margin-bottom: 0px;
+
+  @media (max-width: 769px) {
+    font-size: 13px;
+  }
 `
 
 const HeaderReviewWrapper = styled.a`
@@ -759,6 +763,37 @@ const LoadMoreReviewButton = styled.button`
   }
 `
 
+const BreadCrumbDiv = styled.div`
+  margin: 2rem 0;
+  padding: 0 15px;
+
+  @media (max-width: 769px) {
+    padding: 0 8px;
+  }
+`
+
+const BreadCrumbFLex = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+`
+
+const BreadCrumbLink1 = styled.a`
+  transition: color .2s,opacity .2s;
+  text-transform: capitalize;
+  text-align: left;
+  letter-spacing: 0.2px;
+  line-height: 21px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    color: grey;
+  }
+`
+
 const reviewPerRow = 8;
 
 const Product = () => {
@@ -828,6 +863,24 @@ const Product = () => {
           {
             loading ? (
               <Container>
+                {/* Breadcrumb */}
+                <BreadCrumbDiv>
+                  <BreadCrumbFLex>
+                    <BreadCrumbLink1 href="/products">
+                      shop
+                    </BreadCrumbLink1>
+                    <>/</>
+                    <BreadCrumbLink1 href={`/products/${product.categories[0]}`}>
+                      <>{product.categories[0]}</>
+                    </BreadCrumbLink1>
+                    <>/</>
+                    <BreadCrumbLink1>
+                      {
+                        product.title.length > 20 ? <>{product.title.substring(0,20)}...</> : <>{product.title}</>
+                      }
+                    </BreadCrumbLink1>
+                  </BreadCrumbFLex>
+                </BreadCrumbDiv>
                 <CarouselWrapper>
                   <Swiper 
                     modules={[Navigation, EffectFade]}

@@ -275,7 +275,7 @@ nav .menu-icon1-container1 {
     left: 0;
     width: 100%;
     height: 0vh;
-    background: var(--color-secondary);
+    background: #000 !important;
     justify-content: start;
     overflow: hidden;
     z-index: -1;
@@ -319,7 +319,7 @@ nav .menu-icon1-container1 {
 
   .nav-container .desk-nav li {
     width: 100%;
-    padding: 18px 36px;
+    padding: 10px 36px;
   }
 
   nav .desk-nav__flex1,
@@ -347,7 +347,7 @@ nav .menu-icon1-container1 {
   }
 
   .nav-container .desk-nav li {
-    border-bottom: 1px solid rgba(204,211,218,.5);
+    /* border-bottom: 1px solid rgba(204,211,218,.5); */
   }
 
   .nav-container .desk-nav .bag-list {
@@ -360,11 +360,11 @@ nav .menu-icon1-container1 {
   }
 
   .nav-container .desk-nav li a {
-    color: var(--color-primary);
+    color: rgb(232, 232, 237) !important;
     /* padding: 5px 0; */
     display: inline-block;
     width: 100%;
-    font-size: 2.1rem;
+    font-size: 2.5rem;
     font-weight: 700;
     transform: translateY(-80px);
     opacity: 0;
