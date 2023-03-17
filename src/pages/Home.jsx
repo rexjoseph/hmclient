@@ -41,7 +41,7 @@ const Home = () => {
       <HomeNavbar />
       <Slider />
       {/* <Testimonial /> */}
-      <TestimonialsMarquee />
+      {/* <TestimonialsMarquee /> */}
       <USP />
       <Modal open={openModal} onClose={() => setOpenModal(false)}/>
       <Products />

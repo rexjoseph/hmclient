@@ -26,31 +26,40 @@ const Modal = ({open, onClose}) => {
       <div className="modalContainer">
         <div className="modalCenter">
           <p onClick={onClose} className='closeBtn'>
-          <svg className="bx-close-xsvg" viewBox="240 240 20 20" aria-hidden="true">
-            <title>close</title>
-            <g className="bx-close-xstroke bx-close-x-adaptive">
-              <path className="bx-close-x-adaptive-1" d="M255.6 255.6l-11.2-11.2" vectorEffect="non-scaling-stroke">
-              </path>
-              <path className="bx-close-x-adaptive-2" d="M255.6 244.4l-11.2 11.2" vectorEffect="non-scaling-stroke">
-              </path>
-            </g>
-          </svg>
+            <svg className="bx-close-xsvg" viewBox="240 240 20 20" aria-hidden="true">
+              <title>close</title>
+              <g className="bx-close-xstroke bx-close-x-adaptive">
+                <path className="bx-close-x-adaptive-1" d="M255.6 255.6l-11.2-11.2" vectorEffect="non-scaling-stroke">
+                </path>
+                <path className="bx-close-x-adaptive-2" d="M255.6 244.4l-11.2 11.2" vectorEffect="non-scaling-stroke">
+                </path>
+              </g>
+            </svg>
           </p>
-          <div className="content">
-            <h1>Get 10% Off</h1>
-            <p>Your First Order</p>
-            <form onSubmit={handleSubmit}>
-              <fieldset>
-                <input type="email" onChange={handleEmail} required/>
-              </fieldset>
-              <div>
-                <button>Activate 10% Off</button>
+          <div className='modal-flex'>
+            <div className='modal-flex1-img'>
+              <img src="https://assets.bounceexchange.com/assets/uploads/clients/3668/creatives/ea08473b692aa014d260dabd0d5201e0.png" alt="" />
+            </div>
+
+            <div className='modal-flex1-off'>
+              <div className="content">
+                <h1>Get 10% Off</h1>
+                <p>Your First Order</p>
+                <form onSubmit={handleSubmit}>
+                  <fieldset>
+                    <input type="email" onChange={handleEmail} required/>
+                  </fieldset>
+                  <div>
+                    <button>Activate 10% Off</button>
+                  </div>
+                </form>
+                <div className="btnContainer">
+                  <a href='#' onClick={onClose}>No, thanks</a>
+                </div>
               </div>
-            </form>
+            </div>
           </div>
-          <div className="btnContainer">
-            <a href='#' onClick={onClose}>No, thanks</a>
-          </div>
+          
         </div>
       </div>
     </div>
